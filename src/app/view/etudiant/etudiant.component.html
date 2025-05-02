@@ -1,0 +1,669 @@
+<style>
+  .cours-stats {
+    display: flex;
+    gap: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .stat-card {
+    padding: 12px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    min-width: 120px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .stat-icon i {
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  .btn-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px 15px 21px;
+    border-radius: 24px;
+    border: none;
+    background: #3367d6;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-reset::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-reset:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 12px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    background: linear-gradient(to right, #f1f3f5, #e9ecef);
+  }
+
+  .btn-reset:hover::before {
+    opacity: 1;
+  }
+
+  .btn-reset:active {
+    transform: translateY(0);
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .btn-reset i.fas {
+    color: white;
+    background: linear-gradient(135deg, #ff7b00, #ff9500);
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 2px 4px rgba(255, 123, 0, 0.3),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+    z-index: 1;
+  }
+
+  .btn-reset:hover i.fas {
+    background: linear-gradient(135deg, #ff9500, #ffaa00);
+    transform: rotate(90deg);
+  }
+
+  .btn-reset span {
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-reset:hover span {
+    transform: translateX(2px);
+  }
+
+  /* Styles pour la barre de progression */
+  .progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+  }
+  td,th{
+    padding: 10px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .filter-select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    font-size: 14px;
+  }
+
+  /* Styles pour les modales */
+  .modal-container {
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .form-row .form-group {
+    flex: 1;
+  }
+
+  .detail-value {
+    word-break: break-word;
+  }
+
+  .delegue-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background-color: #3367d6;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+  }
+</style>
+<div class="filiere-container">
+  <div class="header-section">
+    <div class="title-container">
+      <h1 class="main-title">Gestion des Étudiants</h1>
+      <p class="subtitle">Gérez et organisez les étudiants de votre université</p>
+    </div>
+    <button class="btn-add-filiere" (click)="openAddForm()">
+      <i class="fas fa-plus-circle"></i>
+      <span>Ajouter un étudiant</span>
+    </button>
+  </div>
+
+  <div class="filter-section">
+    <div class="search-box">
+      <i class="fas fa-search search-icon"></i>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Rechercher un étudiant..."
+        class="search-input"
+      >
+      <button *ngIf="searchText" class="clear-search" (click)="searchText = ''">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="filter-group">
+      <select class="filter-select" [(ngModel)]="selectedSexe">
+        <option value="">Tous les sexes</option>
+        <option *ngFor="let sexe of sexes" [value]="sexe">{{ sexe }}</option>
+      </select>
+
+      <select class="filter-select" [(ngModel)]="selectedClasse">
+        <option value="">Toutes les classes</option>
+        <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.nom }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="cours-stats">
+    <div class="stat-card" style="background-color: #3367d6; color: white;">
+      <div class="stat-icon"><i class="fas fa-user-graduate" style="color: white;"></i></div>
+      <div class="stat-info">
+        <div class="stat-value">{{ etudiants.length }}</div>
+        <div class="stat-label">Étudiants</div>
+      </div>
+    </div>
+
+    <div class="stat-card" style="background-color: #4CAF50; color: white;">
+      <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
+      <div class="stat-info">
+        <div class="stat-value">{{ filteredEtudiants().length }}</div>
+        <div class="stat-label">Résultats</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message d'erreur API -->
+  <div class="error-message-container" *ngIf="errorMessage" [@fadeInOut]>
+    <div class="api-error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+    <button class="btn-retry" (click)="loadEtudiants()">
+      <i class="fas fa-sync-alt"></i>
+      <span>Réessayer</span>
+    </button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="isLoading" [@fadeInOut]>
+    <div class="loading-spinner">
+      <div class="spinner-inner"></div>
+    </div>
+    <p class="loading-text">Chargement des étudiants...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isLoading && filteredEtudiants().length === 0 && !errorMessage" [@fadeInOut]>
+    <div class="empty-illustration">
+      <i class="fas fa-user-graduate"></i>
+    </div>
+    <h3 class="empty-title">Aucun étudiant trouvé</h3>
+    <p class="empty-text">
+      {{ searchText || selectedSexe || selectedClasse ? 'Aucun étudiant ne correspond à vos critères de recherche.' : 'Commencez par ajouter un nouvel étudiant!' }}
+    </p>
+    <button class="btn-add-filiere empty-button" (click)="openAddForm()" *ngIf="!searchText && !selectedSexe && !selectedClasse">
+      <i class="fas fa-plus-circle"></i>
+      <span>Ajouter un étudiant</span>
+    </button>
+    <button class="btn-reset empty-button" (click)="resetFilters()" *ngIf="searchText || selectedSexe || selectedClasse">
+      <i class="fas fa-sync-alt"></i>
+      <span>Réinitialiser les filtres</span>
+    </button>
+  </div>
+
+  <!-- Table View -->
+  <div class="table-container" *ngIf="!isLoading && filteredEtudiants().length > 0" [@fadeInOut]>
+    <table style="width: 100% !important;" class="cours-table">
+      <thead>
+        <tr>
+          <th class="th-matricule">Matricule</th>
+          <th class="th-nom">Nom</th>
+          <th class="th-prenom">Prénom</th>
+          <th class="th-classe">Classe</th>
+          <th class="th-email">Email</th>
+          <th class="th-telephone">Téléphone</th>
+          <th class="th-sexe">Sexe</th>
+          <th class="th-actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etudiant of filteredEtudiants(); let i = index" [ngStyle]="getCardStyle(i)" class="cours-row">
+          <td class="td-matricule">{{ etudiant.matricule }}</td>
+          <td class="td-nom">{{ etudiant.nom }}</td>
+          <td class="td-prenom">{{ etudiant.prenom }}</td>
+          <td class="td-classe">{{ getClasseNom(etudiant.classeId) }}</td>
+          <td class="td-email">{{ etudiant.email }}</td>
+          <td class="td-telephone">{{ etudiant.telephone }}</td>
+          <td class="td-sexe">{{ etudiant.sexe }}</td>
+
+          <td class="td-actions">
+            <button class="btn-view action-btn" (click)="viewEtudiant(etudiant)" title="Voir cet étudiant">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="btn-edit action-btn" (click)="editEtudiant(etudiant)" title="Modifier cet étudiant">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn-delete action-btn" (click)="deleteEtudiant(etudiant)" title="Supprimer cet étudiant">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulaire (Modal) -->
+  <div class="modal-backdrop" *ngIf="showForm" [@fadeInOut]>
+    <div class="modal-wrapper" [@zoomIn]>
+      <div class="modal-container">
+        <div class="modal-header">
+          <div class="header-content">
+            <div class="header-icon">
+              <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
+            </div>
+            <h2 class="modal-title">
+              {{ showViewMode ? 'Détails de l\'étudiant' : (isEditMode ? 'Modifier un étudiant' : 'Ajouter un nouvel étudiant') }}
+            </h2>
+          </div>
+          <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-illustration">
+            <i class="fas fa-user-graduate illustration-icon"></i>
+          </div>
+          <!-- Mode affichage détails -->
+        <div *ngIf="showViewMode" class="view-details">
+          <div class="detail-item">
+            <div class="detail-label">Matricule:</div>
+            <div class="detail-value">{{ selectedEtudiant?.matricule }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Nom:</div>
+            <div class="detail-value">{{ selectedEtudiant?.nom }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Prénom:</div>
+            <div class="detail-value">{{ selectedEtudiant?.prenom }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Email:</div>
+            <div class="detail-value">{{ selectedEtudiant?.email }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Téléphone:</div>
+            <div class="detail-value">{{ selectedEtudiant?.telephone }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Classe:</div>
+            <div class="detail-value">{{ getClasseNom(selectedEtudiant?.classeId || '') }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Sexe:</div>
+            <div class="detail-value">{{ selectedEtudiant?.sexe }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Date de naissance:</div>
+            <div class="detail-value">{{ selectedEtudiant?.dateNaissance | date:'dd/MM/yyyy' }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Lieu de naissance:</div>
+            <div class="detail-value">{{ selectedEtudiant?.lieuNaissance }}</div>
+          </div>
+          <div class="detail-item" *ngIf="selectedEtudiant?.estDelegue">
+            <div class="detail-label">Statut:</div>
+            <div class="detail-value">Délégué de classe</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" (click)="closeForm()">
+              <i class="fas fa-times"></i> Fermer
+            </button>
+            <button type="button" class="btn-submit" (click)="switchToEditMode()">
+              <span class="btn-content">
+                <i class="fas fa-edit"></i>
+                <span>Modifier</span>
+              </span>
+              <span class="btn-effect"></span>
+            </button>
+          </div>
+        </div>
+
+          <!-- Mode édition ou création -->
+          <form [formGroup]="etudiantForm" (ngSubmit)="submitForm()" class="animated-form" *ngIf="!showViewMode">
+            <div class="form-group">
+              <label for="matricule">Matricule</label>
+              <div class="input-wrapper">
+                <div class="input-container" [class.focused]="matriculeFocused">
+                  <i class="fas fa-id-card input-icon"></i>
+                  <input
+                    type="text"
+                    id="matricule"
+                    formControlName="matricule"
+                    placeholder="Entrez le matricule de l'étudiant"
+                    [ngClass]="{'input-error': formSubmitted && etudiantForm.get('matricule')?.invalid}"
+                    (focus)="matriculeFocused = true"
+                    (blur)="matriculeFocused = false"
+                  >
+                  <span class="input-highlight"></span>
+                </div>
+                <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('matricule')?.invalid" [@fadeInOut]>
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span *ngIf="etudiantForm.get('matricule')?.errors?.['required']">Le matricule est obligatoire</span>
+                  <span *ngIf="etudiantForm.get('matricule')?.errors?.['minlength']">Le matricule doit contenir au moins 2 caractères</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nom">Nom</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="nomFocused">
+                    <i class="fas fa-user input-icon"></i>
+                    <input
+                      type="text"
+                      id="nom"
+                      formControlName="nom"
+                      placeholder="Entrez le nom de l'étudiant"
+                      [ngClass]="{'input-error': formSubmitted && etudiantForm.get('nom')?.invalid}"
+                      (focus)="nomFocused = true"
+                      (blur)="nomFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('nom')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="etudiantForm.get('nom')?.errors?.['required']">Le nom est obligatoire</span>
+                    <span *ngIf="etudiantForm.get('nom')?.errors?.['minlength']">Le nom doit contenir au moins 2 caractères</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="prenomFocused">
+                    <i class="fas fa-user input-icon"></i>
+                    <input
+                      type="text"
+                      id="prenom"
+                      formControlName="prenom"
+                      placeholder="Entrez le prénom de l'étudiant"
+                      [ngClass]="{'input-error': formSubmitted && etudiantForm.get('prenom')?.invalid}"
+                      (focus)="prenomFocused = true"
+                      (blur)="prenomFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('prenom')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="etudiantForm.get('prenom')?.errors?.['required']">Le prénom est obligatoire</span>
+                    <span *ngIf="etudiantForm.get('prenom')?.errors?.['minlength']">Le prénom doit contenir au moins 2 caractères</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="emailFocused">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input
+                      type="email"
+                      id="email"
+                      formControlName="email"
+                      placeholder="Entrez l'email de l'étudiant"
+                      [ngClass]="{'input-error': formSubmitted && etudiantForm.get('email')?.invalid}"
+                      (focus)="emailFocused = true"
+                      (blur)="emailFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('email')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="etudiantForm.get('email')?.errors?.['required']">L'email est obligatoire</span>
+                    <span *ngIf="etudiantForm.get('email')?.errors?.['email']">Veuillez entrer un email valide</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="telephone">Téléphone</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="telephoneFocused">
+                    <i class="fas fa-phone input-icon"></i>
+                    <input
+                      type="tel"
+                      id="telephone"
+                      formControlName="telephone"
+                      placeholder="Entrez le téléphone de l'étudiant"
+                      [ngClass]="{'input-error': formSubmitted && etudiantForm.get('telephone')?.invalid}"
+                      (focus)="telephoneFocused = true"
+                      (blur)="telephoneFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('telephone')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="etudiantForm.get('telephone')?.errors?.['required']">Le téléphone est obligatoire</span>
+                    <span *ngIf="etudiantForm.get('telephone')?.errors?.['pattern']">Veuillez entrer un numéro de téléphone valide</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="dateNaissance">Date de naissance</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="dateNaissanceFocused">
+                    <i class="fas fa-calendar-alt input-icon"></i>
+                    <input
+                      type="date"
+                      id="dateNaissance"
+                      formControlName="dateNaissance"
+                      [ngClass]="{'input-error': formSubmitted && etudiantForm.get('dateNaissance')?.invalid}"
+                      (focus)="dateNaissanceFocused = true"
+                      (blur)="dateNaissanceFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('dateNaissance')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>La date de naissance est obligatoire</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lieuNaissance">Lieu de naissance</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="lieuNaissanceFocused">
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                    <input
+                      type="text"
+                      id="lieuNaissance"
+                      formControlName="lieuNaissance"
+                      placeholder="Entrez le lieu de naissance"
+                      [ngClass]="{'input-error': formSubmitted && etudiantForm.get('lieuNaissance')?.invalid}"
+                      (focus)="lieuNaissanceFocused = true"
+                      (blur)="lieuNaissanceFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('lieuNaissance')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Le lieu de naissance est obligatoire</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sexe">Sexe</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="sexeFocused">
+                    <i class="fas fa-venus-mars input-icon"></i>
+                    <select
+                      id="sexe"
+                      formControlName="sexe"
+                      [ngClass]="{'input-error': formSubmitted && etudiantForm.get('sexe')?.invalid}"
+                      (focus)="sexeFocused = true"
+                      (blur)="sexeFocused = false"
+                    >
+                      <option value="">Sélectionnez le sexe</option>
+                      <option *ngFor="let sexe of sexes" [value]="sexe">{{ sexe }}</option>
+                    </select>
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('sexe')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Le sexe est obligatoire</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="classeId">Classe</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="classeFocused">
+                    <i class="fas fa-users input-icon"></i>
+                    <select
+                      id="classeId"
+                      formControlName="classeId"
+                      [ngClass]="{'input-error': formSubmitted && etudiantForm.get('classeId')?.invalid}"
+                      (focus)="classeFocused = true"
+                      (blur)="classeFocused = false"
+                    >
+                      <option value="">Sélectionnez une classe</option>
+                      <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.nom }}</option>
+                    </select>
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && etudiantForm.get('classeId')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>La classe est obligatoire</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="checkbox-container">
+                <input
+                  type="checkbox"
+                  id="estDelegue"
+                  formControlName="estDelegue"
+                  (focus)="estDelegueFocused = true"
+                  (blur)="estDelegueFocused = false"
+                >
+                <label for="estDelegue">
+                  <span class="checkbox-custom" [class.focused]="estDelegueFocused"></span>
+                  <span class="checkbox-label">Délégué de classe</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-cancel" (click)="closeForm()">
+                <i class="fas fa-times"></i> Annuler
+              </button>
+              <button type="submit" class="btn-submit">
+                <span class="btn-content">
+                  <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
+                  <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
+                </span>
+                <span class="btn-effect"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

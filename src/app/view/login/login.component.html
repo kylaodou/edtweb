@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<div style="margin-top: 2%;" class="auth-container">
+  <!-- Effets de lumière -->
+  <div class="light-effect top-right"></div>
+  <div class="light-effect bottom-left"></div>
+
+  <!-- Partie Image -->
+  <div class="image-section">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="wave-effect"></div>
+    <div class="image-column">
+      <div *ngIf="isBrowser" id="login-lottie-container"></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+      <!-- Titre du formulaire avec animation -->
+      <h1 class="form-title" style="text-align: center; align-self: center; margin-bottom: 40px;">Connexion</h1>
+
+
+
+      <!-- Message de succès -->
+      <div *ngIf="registrationSuccess" class="success-message">
+        {{ registrationSuccess }}
+      </div>
+
+      <!-- Formulaire - centré au milieu -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="width: 100%; max-width: 350px; margin: 0 auto; margin-right: 20px;">
+        <!-- Champ Email avec icône -->
+        <div class="input-group">
+          <div class="input-field-wrapper">
+            <div class="input-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <input type="email" id="email" formControlName="email" placeholder="Entrez votre email">
+          </div>
+          <div *ngIf="hasError('email') || formErrors['email']" class="error-msg">
+            <span *ngIf="hasError('email')">{{ getErrorMessage('email') }}</span>
+            <span *ngIf="formErrors['email']">{{ formErrors['email'] }}</span>
+          </div>
+        </div>
+
+        <!-- Champ Mot de passe avec icône et visualisation -->
+        <div class="input-group">
+          <div class="input-field-wrapper">
+            <div class="input-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            <input #passwordInput type="password" id="password" formControlName="password" placeholder="Entrez votre mot de passe">
+            <div class="password-toggle" (click)="togglePasswordVisibility(passwordInput)">
+              <i class="fas" [ngClass]="passwordInput.type === 'password' ? 'fa-eye' : 'fa-eye-slash'"></i>
+            </div>
+          </div>
+          <div *ngIf="hasError('password') || formErrors['password']" class="error-msg">
+            <span *ngIf="hasError('password')">{{ getErrorMessage('password') }}</span>
+            <span *ngIf="formErrors['password']">{{ formErrors['password'] }}</span>
+          </div>
+        </div>
+        <!-- Message d'erreur global -->
+      <div *ngIf="loginError" class="error-msg global-error">
+        {{ loginError }}
+      </div>
+
+        <!-- Bouton Soumettre avec effet d'onde amélioré -->
+        <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">
+          <span class="btn-content">
+            <span *ngIf="!isLoading">Connexion</span>
+            <span *ngIf="isLoading" class="loading-wrapper">
+              <div class="loading-spinner"></div> Connexion en cours...
+            </span>
+          </span>
+        </button>
+      </form>
+
+      <!-- Section de connexion sociale améliorée -->
+      <div class="social-divider" style="width: 100%; max-width: 350px; margin: 25px auto 20px;">
+        <span>Ou connecter avec</span>
+      </div>
+
+      <div class="social-buttons">
+        <button class="social-btn google" (click)="loginWithGoogle()">
+          <i class="fab fa-google"></i>
+        </button>
+        <button class="social-btn facebook" (click)="loginWithFacebook()">
+          <i class="fab fa-facebook-f"></i>
+        </button>
+      </div>
+
+      <!-- Lien Inscription avec animation améliorée -->
+      <div class="form-footer" style="width: 100%; max-width: 350px; margin: 25px auto 0;">
+        <p>Vous n'avez pas un compte ? <a routerLink="/register" class="auth-link">Inscrivez-vous ici</a></p>
+      </div>
+    </div>
+  </div>
+</div>

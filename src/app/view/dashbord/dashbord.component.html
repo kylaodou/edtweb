@@ -1,0 +1,240 @@
+<div class="dashboard-container">
+  <!-- En-tête du dashboard -->
+  <header class="dashboard-header">
+    <div class="header-left">
+      <h1>Tableau de bord</h1>
+      <button class="refresh-btn" (click)="loadStatistics(); loadUpcomingCourses(); loadTimetable()">Actualiser</button>
+    </div>
+    <div class="header-right">
+      <!-- Welcome message displaying user's name and surname -->
+      <div class="welcome-message" *ngIf="userName && userSurname">
+        Bienvenue {{ userName }} {{ userSurname }}
+      </div>
+      <div class="current-date">
+        {{ currentDate | date:'fullDate':'':'fr' }}
+      </div>
+    </div>
+  </header>
+
+  <!-- Cartes de statistiques -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <!-- Carte Cours -->
+      <div class="stat-card" [class.loading]="isLoading.stats">
+        <div class="card-content">
+          <div class="text-content">
+            <span class="stat-number">{{ coursCount }}</span>
+            <span class="stat-label">Cours actifs</span>
+          </div>
+          <div class="icon-circle bg-primary">
+            <i class="fas fa-book"></i>
+          </div>
+        </div>
+        <div class="card-footer trend-up">
+          <i class="fas fa-arrow-up"></i> Semestre en cours
+        </div>
+      </div>
+
+      <!-- Carte Enseignants -->
+      <div class="stat-card" [class.loading]="isLoading.stats">
+        <div class="card-content">
+          <div class="text-content">
+            <span class="stat-number">{{ enseignantsCount }}</span>
+            <span class="stat-label">Enseignants</span>
+          </div>
+          <div class="icon-circle bg-success">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+        </div>
+        <div class="card-footer trend-up">
+          <i class="fas fa-arrow-up"></i> Personnel actif
+        </div>
+      </div>
+
+      <!-- Carte Salles -->
+      <div class="stat-card" [class.loading]="isLoading.stats">
+        <div class="card-content">
+          <div class="text-content">
+            <span class="stat-number">{{ sallesCount }}</span>
+            <span class="stat-label">Salles</span>
+          </div>
+          <div class="icon-circle bg-warning">
+            <i class="fas fa-door-open"></i>
+          </div>
+        </div>
+        <div class="card-footer trend-up">
+          <i class="fas fa-info-circle"></i> Disponibles
+        </div>
+      </div>
+
+      <!-- Carte Étudiants -->
+      <div class="stat-card" [class.loading]="isLoading.stats">
+        <div class="card-content">
+          <div class="text-content">
+            <span class="stat-number">{{ etudiantsCount }}</span>
+            <span class="stat-label">Étudiants</span>
+          </div>
+          <div class="icon-circle bg-info">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+        </div>
+        <div class="card-footer trend-up">
+          <i class="fas fa-info-circle"></i> Inscrits
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Graphiques et tableau -->
+  <section class="analytics-section">
+    <div class="analytics-grid">
+      <!-- Graphique 1 -->
+      <div class="chart-container" [class.loading]="isLoading.charts">
+        <div class="chart-header">
+          <h3>Taux d'occupation des salles</h3>
+          <div class="chart-actions">
+            <button class="chart-filter active">Semaine</button>
+            <button class="chart-filter">Mois</button>
+            <button class="chart-filter">Semestre</button>
+          </div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="roomUsageChart"></canvas>
+          <div class="loading-overlay" *ngIf="isLoading.charts">
+            <div class="spinner"></div>
+            <p>Chargement des données...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graphique 2 -->
+      <div class="chart-container" [class.loading]="isLoading.charts">
+        <div class="chart-header">
+          <h3>Distribution des cours</h3>
+          <div class="chart-actions">
+            <button class="chart-filter active">Tous</button>
+            <button class="chart-filter">Licence</button>
+            <button class="chart-filter">Master</button>
+          </div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="courseDistributionChart"></canvas>
+          <div class="loading-overlay" *ngIf="isLoading.charts">
+            <div class="spinner"></div>
+            <p>Chargement des données...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tableau des prochains cours -->
+      <div class="table-container" [class.loading]="isLoading.upcomingCourses">
+        <div class="table-header">
+          <h3>Prochains cours</h3>
+          <div class="table-actions">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Rechercher...">
+            </div>
+            <button class="export-btn">
+              <i class="fas fa-download"></i> Exporter
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Cours</th>
+                <th>Enseignant</th>
+                <th>Salle</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th>Statut</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="upcomingCourses.length === 0 && !isLoading.upcomingCourses">
+                <td colspan="7" class="empty-state">
+                  <div class="empty-message">
+                    <i class="fas fa-calendar-times"></i>
+                    <p>Aucun cours à venir pour la période sélectionnée</p>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngFor="let course of upcomingCourses">
+                <td>{{ course.name }}</td>
+                <td>{{ course.teacher }}</td>
+                <td>{{ course.room }}</td>
+                <td>{{ course.date | date:'shortDate':'':'fr' }}</td>
+                <td>{{ course.time }}</td>
+                <td>
+                  <span [class]="'status-badge ' + course.statusClass">
+                    {{ course.status }}
+                  </span>
+                </td>
+                <td class="action-buttons">
+                  <button class="btn-icon edit">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-icon delete">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="loading-overlay" *ngIf="isLoading.upcomingCourses">
+            <div class="spinner"></div>
+            <p>Chargement des cours...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timetable-container" [class.loading]="isLoading.timetable">
+        <div class="timetable-header">
+          <h3>Emploi du temps hebdomadaire</h3>
+          <div class="timetable-nav">
+            <button class="nav-btn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <span>{{ currentDate | date:'d' }} - {{ currentDate | date:'d MMMM yyyy':'':'fr' }}</span>
+            <button class="nav-btn">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="timetable-grid">
+          <div class="timetable-cell header">Heure</div>
+          <div class="timetable-cell header">Lundi</div>
+          <div class="timetable-cell header">Mardi</div>
+          <div class="timetable-cell header">Mercredi</div>
+          <div class="timetable-cell header">Jeudi</div>
+          <div class="timetable-cell header">Vendredi</div>
+
+          <!-- Lignes du tableau -->
+          <div *ngFor="let timeSlot of timeSlots" class="timetable-row">
+            <div class="timetable-cell time">
+              <div class="time-slot">{{ timeSlot.time }}</div>
+            </div>
+            <div *ngFor="let day of days"
+                 class="timetable-cell course"
+                 [class]="'course-' + getCourse(day, timeSlot.id)?.type">
+              <div *ngIf="getCourse(day, timeSlot.id) as course" class="course-content">
+                <div class="course-name">{{ course.name }}</div>
+                <div class="course-details">
+                  <span><i class="fas fa-user-tie"></i> {{ course.teacher }}</span>
+                  <span><i class="fas fa-door-open"></i> {{ course.room }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="loading-overlay" *ngIf="isLoading.timetable">
+            <div class="spinner"></div>
+            <p>Chargement de l'emploi du temps...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

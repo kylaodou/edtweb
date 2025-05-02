@@ -1,0 +1,570 @@
+<style>
+  .cours-stats {
+    display: flex;
+    gap: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .stat-card {
+    padding: 12px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    min-width: 120px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .stat-icon i {
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  .btn-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px 15px 21px;
+    border-radius: 24px;
+    border: none;
+    background: #3367d6;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-reset::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-reset:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 12px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    background: linear-gradient(to right, #f1f3f5, #e9ecef);
+  }
+
+  .btn-reset:hover::before {
+    opacity: 1;
+  }
+
+  .btn-reset:active {
+    transform: translateY(0);
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .btn-reset i.fas {
+    color: white;
+    background: linear-gradient(135deg, #ff7b00, #ff9500);
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 2px 4px rgba(255, 123, 0, 0.3),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+    z-index: 1;
+  }
+
+  .btn-reset:hover i.fas {
+    background: linear-gradient(135deg, #ff9500, #ffaa00);
+    transform: rotate(90deg);
+  }
+
+  .btn-reset span {
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-reset:hover span {
+    transform: translateX(2px);
+  }
+
+  /* Styles pour la barre de progression */
+  .progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+  }
+  td,th{
+    padding: 10px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .filter-select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    font-size: 14px;
+  }
+
+  /* Styles pour les modales */
+  .modal-container {
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .form-row .form-group {
+    flex: 1;
+  }
+
+  .detail-value {
+    word-break: break-word;
+  }
+
+  .delegue-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background-color: #3367d6;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+  }
+</style>
+<div class="filiere-container">
+  <div class="header-section">
+    <div class="title-container">
+      <h1 class="main-title">Gestion des Parents</h1>
+      <p class="subtitle">Gérez et organisez les parents des étudiants de votre université</p>
+    </div>
+    <button class="btn-add-filiere" (click)="openAddForm()">
+      <i class="fas fa-plus-circle"></i>
+      <span>Ajouter un parent</span>
+    </button>
+  </div>
+
+  <div class="filter-section">
+    <div class="search-box">
+      <i class="fas fa-search search-icon"></i>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Rechercher un parent..."
+        class="search-input"
+      >
+      <button *ngIf="searchText" class="clear-search" (click)="searchText = ''">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="filter-group">
+      <select class="filter-select" [(ngModel)]="selectedRelation">
+        <option value="" selected>Toutes les relations</option>
+        <option *ngFor="let relation of relations" [value]="relation">{{ relation }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="cours-stats">
+    <div class="stat-card" style="background-color: #3367d6; color: white;">
+      <div class="stat-icon"><i class="fas fa-users" style="color: white;"></i></div>
+      <div class="stat-info">
+        <div class="stat-value">{{ parents.length }}</div>
+        <div class="stat-label">Parents</div>
+      </div>
+    </div>
+
+    <div class="stat-card" style="background-color: #4CAF50; color: white;">
+      <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
+      <div class="stat-info">
+        <div class="stat-value">{{ filteredParents().length }}</div>
+        <div class="stat-label">Résultats</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message d'erreur API -->
+  <div class="error-message-container" *ngIf="errorMessage" [@fadeInOut]>
+    <div class="api-error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+    <button class="btn-retry" (click)="loadParents()">
+      <i class="fas fa-sync-alt"></i>
+      <span>Réessayer</span>
+    </button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="isLoading" [@fadeInOut]>
+    <div class="loading-spinner">
+      <div class="spinner-inner"></div>
+    </div>
+    <p class="loading-text">Chargement des parents...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isLoading && filteredParents().length === 0 && !errorMessage" [@fadeInOut]>
+    <div class="empty-illustration">
+      <i class="fas fa-user-friends"></i>
+    </div>
+    <h3 class="empty-title">Aucun parent trouvé</h3>
+    <p class="empty-text">
+      {{ searchText || selectedRelation ? 'Aucun parent ne correspond à vos critères de recherche.' : 'Commencez par ajouter un nouveau parent!' }}
+    </p>
+    <button class="btn-add-filiere empty-button" (click)="openAddForm()" *ngIf="!searchText && !selectedRelation">
+      <i class="fas fa-plus-circle"></i>
+      <span>Ajouter un parent</span>
+    </button>
+    <button class="btn-reset empty-button" (click)="resetFilters()" *ngIf="searchText || selectedRelation">
+      <i class="fas fa-sync-alt"></i>
+      <span>Réinitialiser les filtres</span>
+    </button>
+  </div>
+
+  <!-- Table View -->
+  <div class="table-container" *ngIf="!isLoading && filteredParents().length > 0" [@fadeInOut]>
+    <table style="width: 100% !important;" class="cours-table">
+      <thead>
+        <tr>
+          <th class="th-tel">Téléphone</th>
+          <th class="th-nom">Nom</th>
+          <th class="th-prenom">Prénom</th>
+          <th class="th-email">Email</th>
+          <th class="th-relation">Relation</th>
+          <th class="th-actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let parent of filteredParents(); let i = index" [ngStyle]="getCardStyle(i)" class="cours-row">
+          <td class="td-tel">{{ parent.telephone }}</td>
+          <td class="td-nom">{{ parent.nom }}</td>
+          <td class="td-prenom">{{ parent.prenom }}</td>
+          <td class="td-email">{{ parent.email }}</td>
+          <td class="td-relation">{{ parent.relationAvecEtudiant }}</td>
+          <td class="td-actions">
+            <button class="btn-view action-btn" (click)="viewParent(parent)" title="Voir ce parent">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="btn-edit action-btn" (click)="editParent(parent)" title="Modifier ce parent">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn-delete action-btn" (click)="deleteParent(parent)" title="Supprimer ce parent">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulaire (Modal) -->
+  <div class="modal-backdrop" *ngIf="showForm" [@fadeInOut]>
+    <div class="modal-wrapper" [@zoomIn]>
+      <div class="modal-container">
+        <div class="modal-header">
+          <div class="header-content">
+            <div class="header-icon">
+              <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
+            </div>
+            <h2 class="modal-title">
+              {{ showViewMode ? 'Détails du parent' : (isEditMode ? 'Modifier un parent' : 'Ajouter un nouveau parent') }}
+            </h2>
+          </div>
+          <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-illustration">
+            <i class="fas fa-user-friends illustration-icon"></i>
+          </div>
+
+          <!-- Mode affichage détails -->
+          <div *ngIf="showViewMode" class="view-details">
+            <div class="detail-item">
+              <div class="detail-label">Téléphone:</div>
+              <div class="detail-value">{{ selectedParent?.telephone }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Nom:</div>
+              <div class="detail-value">{{ selectedParent?.nom }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Prénom:</div>
+              <div class="detail-value">{{ selectedParent?.prenom }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Email:</div>
+              <div class="detail-value">{{ selectedParent?.email }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Relation avec l'étudiant:</div>
+              <div class="detail-value">{{ selectedParent?.relationAvecEtudiant }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Enfants:</div>
+              <div class="detail-value">
+                <ul style="list-style-type: none; padding-left: 0;">
+                  <li *ngFor="let enfantId of selectedParent?.enfantsIds">
+                    {{ getEnfantNom(enfantId) }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-cancel" (click)="closeForm()">
+                <i class="fas fa-times"></i> Fermer
+              </button>
+              <button type="button" class="btn-submit" (click)="switchToEditMode()">
+                <span class="btn-content">
+                  <i class="fas fa-edit"></i>
+                  <span>Modifier</span>
+                </span>
+                <span class="btn-effect"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mode édition ou création -->
+          <form [formGroup]="parentForm" (ngSubmit)="submitForm()" class="animated-form" *ngIf="!showViewMode">
+            <div class="form-group">
+              <label for="telephone">Téléphone</label>
+              <div class="input-wrapper">
+                <div class="input-container" [class.focused]="telFocused">
+                  <i class="fas fa-phone input-icon"></i>
+                  <input
+                    type="text"
+                    id="telephone"
+                    formControlName="telephone"
+                    placeholder="Entrez le numéro de téléphone du parent"
+                    [ngClass]="{'input-error': formSubmitted && parentForm.get('telephone')?.invalid}"
+                    (focus)="telFocused = true"
+                    (blur)="telFocused = false"
+                  >
+                  <span class="input-highlight"></span>
+                </div>
+                <div class="error-message" *ngIf="formSubmitted && parentForm.get('telephone')?.invalid" [@fadeInOut]>
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span *ngIf="parentForm.get('telephone')?.errors?.['required']">Le numéro de téléphone est obligatoire</span>
+                  <span *ngIf="parentForm.get('telephone')?.errors?.['minlength']">Le numéro doit contenir au moins 8 caractères</span>
+                </div>
+                <div class="error-message" *ngIf="formErrors?.uniciteTel" [@fadeInOut]>
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span>Ce numéro de téléphone est déjà utilisé</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nom">Nom</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="nomFocused">
+                    <i class="fas fa-user input-icon"></i>
+                    <input
+                      type="text"
+                      id="nom"
+                      formControlName="nom"
+                      placeholder="Entrez le nom du parent"
+                      [ngClass]="{'input-error': formSubmitted && parentForm.get('nom')?.invalid}"
+                      (focus)="nomFocused = true"
+                      (blur)="nomFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && parentForm.get('nom')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="parentForm.get('nom')?.errors?.['required']">Le nom est obligatoire</span>
+                    <span *ngIf="parentForm.get('nom')?.errors?.['minlength']">Le nom doit contenir au moins 2 caractères</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="prenomFocused">
+                    <i class="fas fa-user input-icon"></i>
+                    <input
+                      type="text"
+                      id="prenom"
+                      formControlName="prenom"
+                      placeholder="Entrez le prénom du parent"
+                      [ngClass]="{'input-error': formSubmitted && parentForm.get('prenom')?.invalid}"
+                      (focus)="prenomFocused = true"
+                      (blur)="prenomFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && parentForm.get('prenom')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="parentForm.get('prenom')?.errors?.['required']">Le prénom est obligatoire</span>
+                    <span *ngIf="parentForm.get('prenom')?.errors?.['minlength']">Le prénom doit contenir au moins 2 caractères</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="emailFocused">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <input
+                      type="email"
+                      id="email"
+                      formControlName="email"
+                      placeholder="Entrez l'email du parent"
+                      [ngClass]="{'input-error': formSubmitted && parentForm.get('email')?.invalid}"
+                      (focus)="emailFocused = true"
+                      (blur)="emailFocused = false"
+                    >
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && parentForm.get('email')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span *ngIf="parentForm.get('email')?.errors?.['required']">L'email est obligatoire</span>
+                    <span *ngIf="parentForm.get('email')?.errors?.['email']">Veuillez entrer un email valide</span>
+                  </div>
+                  <div class="error-message" *ngIf="formErrors?.uniciteEmail" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Cet email est déjà utilisé</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="relationAvecEtudiant">Relation avec l'étudiant</label>
+                <div class="input-wrapper">
+                  <div class="input-container" [class.focused]="relationFocused">
+                    <i class="fas fa-user-friends input-icon"></i>
+                    <select
+                      id="relationAvecEtudiant"
+                      formControlName="relationAvecEtudiant"
+                      [ngClass]="{'input-error': formSubmitted && parentForm.get('relationAvecEtudiant')?.invalid}"
+                      (focus)="relationFocused = true"
+                      (blur)="relationFocused = false"
+                    >
+                      <option value="" disabled>Sélectionnez une relation</option>
+                      <option *ngFor="let relation of relations" [value]="relation">{{ relation }}</option>
+                    </select>
+                    <span class="input-highlight"></span>
+                  </div>
+                  <div class="error-message" *ngIf="formSubmitted && parentForm.get('relationAvecEtudiant')?.invalid" [@fadeInOut]>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>La relation avec l'étudiant est obligatoire</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="enfantsIds">Enfants</label>
+              <div class="input-wrapper">
+                <div class="input-container" [class.focused]="enfantsFocused">
+                  <i class="fas fa-child input-icon"></i>
+                  <select
+                    id="enfantsIds"
+                    formControlName="enfantsIds"
+                    [ngClass]="{'input-error': formSubmitted && parentForm.get('enfantsIds')?.invalid}"
+                    (focus)="enfantsFocused = true"
+                    (blur)="enfantsFocused = false"
+                    multiple
+                  >
+                    <option *ngFor="let etudiant of etudiants" [value]="etudiant.id">{{ etudiant.prenom }} {{ etudiant.nom }}</option>
+                  </select>
+                  <span class="input-highlight"></span>
+                </div>
+                <div class="error-message" *ngIf="formSubmitted && parentForm.get('enfantsIds')?.invalid" [@fadeInOut]>
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span>Veuillez sélectionner au moins un enfant</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-cancel" (click)="closeForm()">
+                <i class="fas fa-times"></i> Annuler
+              </button>
+              <button type="submit" class="btn-submit">
+                <span class="btn-content">
+                  <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
+                  <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
+                </span>
+                <span class="btn-effect"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

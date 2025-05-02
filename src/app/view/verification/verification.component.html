@@ -1,0 +1,88 @@
+<div class="verification-container">
+  <!-- Colonne de gauche avec Lottie -->
+  <div class="image-column">
+    @if (isBrowser) {
+      <div id="lottie-container"></div>
+    }
+  </div>
+
+  <!-- Colonne de droite avec le formulaire -->
+  <div class="form-column">
+    <div class="verification-form">
+      <h1 class="form-title">Code de vérification</h1>
+
+      <p class="info-text">
+        Un code de vérification a été envoyé à votre adresse email:
+        <span class="email">{{ email }}</span>
+      </p>
+
+      <div class="expiration">
+        <span class="timer-icon">⏳</span>
+        <span>Expire dans {{ formatTime(remainingTime) }}</span>
+      </div>
+
+      <!-- Message d'erreur -->
+      @if (verificationError) {
+        <div class="error-message">
+          {{ verificationError }}
+        </div>
+      }
+
+      <!-- Message de succès pour le renvoi -->
+      @if (resendSuccess) {
+        <div class="success-message">
+          {{ resendSuccess }}
+        </div>
+      }
+
+      <div class="code-inputs">
+        @for (digit of verificationCode; track $index; let i = $index) {
+          <input
+            type="text"
+            maxlength="1"
+            [value]="digit"
+            (input)="onDigitInput($event, i)"
+            (keydown)="onKeyDown($event, i)"
+            (paste)="onPaste($event, i)"
+            class="code-input"
+            #codeInput
+          >
+        }
+      </div>
+
+      <!-- Bouton de vérification avec état de chargement -->
+      <button class="verify-button submit-btn" [disabled]="isExpired || isVerifying" (click)="verify()">
+        <span class="btn-content">
+          @if (isVerifying) {
+            <span class="loading-wrapper">
+              <div class="loading-spinner"></div> Vérification...
+            </span>
+          } @else {
+            Vérifier
+          }
+        </span>
+      </button>
+
+      <!-- Option de renvoi avec état de chargement -->
+      <p class="resend" [class.visible]="isExpired">
+        Vous n'avez pas reçu le code?
+        @if (resendingCode) {
+          <span class="loading-text">
+            <span class="loading-dots"></span> Envoi en cours...
+          </span>
+        } @else {
+          <a href="javascript:void(0)" class="auth-link" (click)="resendCode()">Renvoyer</a>
+        }
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Ajout des éléments décoratifs -->
+<div class="floating-bubbles">
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+</div>

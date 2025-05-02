@@ -1,0 +1,506 @@
+<style>
+  .cours-stats {
+    display: flex;
+    gap: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .stat-card {
+    padding: 12px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    min-width: 120px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .stat-icon i {
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  .btn-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px 15px 21px;
+    border-radius: 24px;
+    border: none;
+    background: #3367d6;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-reset::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-reset:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 12px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    background: linear-gradient(to right, #f1f3f5, #e9ecef);
+  }
+
+  .btn-reset:hover::before {
+    opacity: 1;
+  }
+
+  .btn-reset:active {
+    transform: translateY(0);
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .btn-reset i.fas {
+    color: white;
+    background: linear-gradient(135deg, #ff7b00, #ff9500);
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 2px 4px rgba(255, 123, 0, 0.3),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+    z-index: 1;
+  }
+
+  .btn-reset:hover i.fas {
+    background: linear-gradient(135deg, #ff9500, #ffaa00);
+    transform: rotate(90deg);
+  }
+
+  .btn-reset span {
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-reset:hover span {
+    transform: translateX(2px);
+  }
+
+  /* Styles pour la barre de progression */
+  .progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+  }
+  td,th{
+    padding: 10px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .filter-select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    font-size: 14px;
+  }
+
+  /* Styles pour les modales */
+  .modal-container {
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .form-row .form-group {
+    flex: 1;
+  }
+
+  .detail-value {
+    word-break: break-word;
+  }
+
+  .delegue-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background-color: #3367d6;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+  }
+</style>
+<div class="filiere-container">
+  <div class="header-section">
+    <div class="title-container">
+      <h1 class="main-title">Validation des Comptes</h1>
+      <p class="subtitle">Gérez les demandes d'inscription en attente</p>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <div class="search-box">
+      <i class="fas fa-search search-icon"></i>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Rechercher un compte..."
+        class="search-input"
+      >
+      <button *ngIf="searchText" class="clear-search" (click)="searchText = ''">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <div style="display: flex;gap: 10px;" class="stats-section">
+    <div class="stat-card" style="background-color: #3367d6; color: white;">
+      <div class="stat-icon"><i class="fas fa-user-clock" style="color: white;"></i></div>
+      <div class="stat-info">
+        <div class="stat-value">{{ inactiveUsers.length }}</div>
+        <div class="stat-label">Comptes en attente</div>
+      </div>
+    </div>
+
+    <div class="stat-card" style="background-color: #4CAF50; color: white;">
+      <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
+      <div class="stat-info">
+        <div class="stat-value">{{ filteredUsers().length }}</div>
+        <div class="stat-label">Résultats</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="isLoading" [@fadeInOut]>
+    <div class="loading-spinner">
+      <div class="spinner-inner"></div>
+    </div>
+    <p class="loading-text">Chargement des comptes en attente...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isLoading && filteredUsers().length === 0" [@fadeInOut]>
+    <div class="empty-illustration">
+      <i class="fas fa-user-check"></i>
+    </div>
+    <h3 class="empty-title">Aucun compte en attente</h3>
+    <p class="empty-text">
+      {{ searchText ? 'Aucun compte ne correspond à vos critères de recherche.' : 'Tous les comptes ont été traités!' }}
+    </p>
+    <button class="btn-reset empty-button" (click)="resetFilters()" *ngIf="searchText">
+      <i class="fas fa-sync-alt"></i>
+      <span>Réinitialiser les filtres</span>
+    </button>
+  </div>
+
+  <!-- Cards View -->
+  <div class="user-cards-container" *ngIf="!isLoading && filteredUsers().length > 0" [@fadeInOut]>
+    <div class="user-card" *ngFor="let userWithDetails of filteredUsers(); let i = index" [ngStyle]="getCardStyle(i)" [@slideIn]>
+      <div class="user-card-header">
+        <div class="user-avatar">
+          <img *ngIf="userWithDetails.user.photo" [src]="userWithDetails.user.photo" alt="Photo de profil">
+          <i *ngIf="!userWithDetails.user.photo" class="fas fa-user-circle"></i>
+        </div>
+        <div class="user-status">
+          <span class="badge" [ngClass]="getRoleBadgeClass(userWithDetails.user.role)">
+            {{ userWithDetails.user.role || 'Non défini' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="user-card-body">
+        <h3 class="user-email">{{ userWithDetails.user.email }}</h3>
+        <div class="user-details">
+          <p class="user-info-text">
+            <i class="fas fa-calendar-alt"></i>
+            Créé le {{ userWithDetails.user.dateCreation ? (userWithDetails.user.dateCreation | date:'dd/MM/yyyy') : 'N/A' }}
+          </p>
+          <p class="user-system-status" *ngIf="userWithDetails.user.role">
+            <i class="fas fa-check-circle"></i>
+            Cet utilisateur est dans le système
+            <span class="user-role-label">{{ userWithDetails.user.role }}</span>
+          </p>
+          <p class="user-system-status not-in-system" *ngIf="!userWithDetails.user.role">
+            <i class="fas fa-exclamation-circle"></i>
+            Cet utilisateur n'est pas dans le système
+          </p>
+        </div>
+      </div>
+
+      <div class="user-card-footer">
+        <button class="btn-view card-btn" *ngIf="userWithDetails.user.role" (click)="viewUserDetails(userWithDetails)" title="Voir les détails">
+          <i class="fas fa-eye"></i>
+          <span>Voir</span>
+        </button>
+        <button class="btn-validate card-btn" (click)="validateUser(userWithDetails.user)" title="Valider ce compte">
+          <i class="fas fa-check"></i>
+          <span>Valider</span>
+        </button>
+        <button class="btn-reject card-btn" (click)="invalidateUser(userWithDetails.user)" title="Rejeter ce compte">
+          <i class="fas fa-times"></i>
+          <span>Rejeter</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Ajoutez ce code à la fin de votre fichier validation-comptes.component.html -->
+
+<!-- Modal pour afficher les détails de l'utilisateur -->
+<div class="modal-backdrop" *ngIf="showForm" [@fadeInOut]>
+  <div class="modal-wrapper" [@zoomIn]>
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="header-content">
+          <div class="header-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h2 class="modal-title">
+            Détails de l'utilisateur
+          </h2>
+        </div>
+        <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-illustration">
+          <i class="fas fa-user illustration-icon"></i>
+        </div>
+
+        <!-- Mode affichage détails -->
+        <div *ngIf="showViewMode && selectedUserWithDetails" class="view-details">
+          <!-- Détails de l'utilisateur -->
+          <div class="detail-item">
+            <div class="detail-label">Email:</div>
+            <div class="detail-value">{{ selectedUserWithDetails.user.email }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Rôle:</div>
+            <div class="detail-value">{{ selectedUserWithDetails.user.role }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Vérifié:</div>
+            <div class="detail-value">{{ selectedUserWithDetails.user.verified ? 'Oui' : 'Non' }}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Date de création:</div>
+            <div class="detail-value">{{ selectedUserWithDetails.user.dateCreation | date:'dd/MM/yyyy' }}</div>
+          </div>
+
+          <!-- Détails spécifiques en fonction du rôle -->
+          <ng-container *ngIf="selectedUserWithDetails.details">
+            <!-- Étudiant -->
+            <ng-container *ngIf="selectedUserWithDetails.user.role === roles.ETUDIANT || selectedUserWithDetails.user.role === roles.DELEGUE">
+              <hr class="detail-separator">
+              <h3 class="details-subtitle">Informations étudiant</h3>
+              <div class="detail-item">
+                <div class="detail-label">Matricule:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.matricule }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Nom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.nom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Prénom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.prenom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Date de naissance:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.dateNaissance | date:'dd/MM/yyyy' }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Lieu de naissance:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.lieuNaissance }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Téléphone:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.telephone }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Sexe:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.sexe }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Classe:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.classeNom }}</div>
+              </div>
+              <div class="detail-item" *ngIf="selectedUserWithDetails.user.role === roles.DELEGUE">
+                <div class="detail-label">Délégué:</div>
+                <div class="detail-value">Oui</div>
+              </div>
+            </ng-container>
+
+            <!-- Enseignant -->
+            <ng-container *ngIf="selectedUserWithDetails.user.role === roles.ENSEIGNANT">
+              <hr class="detail-separator">
+              <h3 class="details-subtitle">Informations enseignant</h3>
+              <div class="detail-item">
+                <div class="detail-label">Matricule:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.matricule }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Nom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.nom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Prénom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.prenom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Téléphone:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.telephone }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Spécialité:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.specialite }}</div>
+              </div>
+            </ng-container>
+
+            <!-- Administration -->
+            <ng-container *ngIf="selectedUserWithDetails.user.role === roles.ADMINISTRATION">
+              <hr class="detail-separator">
+              <h3 class="details-subtitle">Informations administration</h3>
+              <div class="detail-item">
+                <div class="detail-label">Matricule:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.matricule }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Nom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.nom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Prénom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.prenom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Fonction:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.fonction }}</div>
+              </div>
+            </ng-container>
+
+            <!-- Parent -->
+            <ng-container *ngIf="selectedUserWithDetails.user.role === roles.PARENT">
+              <hr class="detail-separator">
+              <h3 class="details-subtitle">Informations parent</h3>
+              <div class="detail-item">
+                <div class="detail-label">Nom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.nom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Prénom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.prenom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Téléphone:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.telephone }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Relation avec étudiant:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.relationAvecEtudiant }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Enfants:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.enfantsNoms ? selectedUserWithDetails.details.enfantsNoms.join(', ') : 'Non disponible' }}</div>
+              </div>
+            </ng-container>
+
+            <!-- SuperAdmin -->
+            <ng-container *ngIf="selectedUserWithDetails.user.role === roles.SUPERADMIN">
+              <hr class="detail-separator">
+              <h3 class="details-subtitle">Informations Super Admin</h3>
+              <div class="detail-item">
+                <div class="detail-label">Nom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.nom }}</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Prénom:</div>
+                <div class="detail-value">{{ selectedUserWithDetails.details.prenom }}</div>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" (click)="closeForm()">
+              <i class="fas fa-times"></i> Fermer
+            </button>
+            <button type="button" class="btn-submit" (click)="validateUser(selectedUserWithDetails.user)">
+              <span class="btn-content">
+                <i class="fas fa-check"></i>
+                <span>Valider ce compte</span>
+              </span>
+              <span class="btn-effect"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

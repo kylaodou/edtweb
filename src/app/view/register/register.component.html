@@ -1,0 +1,118 @@
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<br>
+<div class="auth-container">
+  <!-- Effets de lumière -->
+  <div class="light-effect top-right"></div>
+  <div class="light-effect bottom-left"></div>
+
+  <!-- Partie Image -->
+  <div class="image-section">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="wave-effect"></div>
+    <div class="image-column">
+      @if (isBrowser) {
+        <div id="register-lottie-container"></div>
+      }
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-wrapper">
+      <!-- Titre du formulaire avec animation -->
+      <h2 class="form-title"  style="text-align: center; align-self: center; ">Inscription</h2>
+<!-- Ajoutez après le titre du formulaire pour les erreurs générales -->
+<div *ngIf="apiErrors.general" class="api-error">
+  {{ apiErrors.general }}
+</div>
+      <!-- Formulaire -->
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" style="width: 100%; max-width: 350px; margin: 0 auto; margin-right: 20px;">
+        <!-- Champ Email avec icône -->
+        <div class="input-group">
+          <div class="input-field-wrapper">
+            <div class="input-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <input type="email" id="email" formControlName="email" placeholder="Entrez votre email">
+          </div>
+          <div *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)" class="error-msg">
+            <span *ngIf="signupForm.get('email')?.errors?.['required']">Email requis</span>
+            <span *ngIf="signupForm.get('email')?.errors?.['pattern']">Format invalide</span>
+          </div>
+          <!-- Ajoutez après chaque validation d'erreur dans les champs -->
+<div *ngIf="apiErrors.email" class="error-msg">
+  <span>{{ apiErrors.email }}</span>
+</div>
+
+<!-- Pour l'erreur d'unicité d'email -->
+<div *ngIf="apiErrors.uniciteEmail" class="error-msg">
+  <span>{{ apiErrors.uniciteEmail }}</span>
+</div>
+        </div>
+
+        <!-- Champ Mot de passe avec icône et visualisation -->
+        <div class="input-group">
+          <div class="input-field-wrapper">
+            <div class="input-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            <input type="password" id="password" formControlName="password" placeholder="Créez un mot de passe sécurisé">
+            <div class="password-toggle">
+              <i class="fas fa-eye"></i>
+            </div>
+          </div>
+          <!-- Indicateur de force du mot de passe amélioré -->
+          <div class="password-strength">
+            <div class="strength-bar"></div>
+          </div>
+          <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)" class="error-msg">
+            <span *ngIf="signupForm.get('password')?.errors?.['required']">Mot de passe requis</span>
+            <span *ngIf="signupForm.get('password')?.errors?.['minlength']">6 caractères minimum</span>
+          </div>
+        </div>
+
+        <!-- Confirmation Mot de passe avec icône -->
+        <div class="input-group">
+          <div class="input-field-wrapper">
+            <div class="input-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirmez votre mot de passe">
+            <div class="password-toggle">
+              <i class="fas fa-eye"></i>
+            </div>
+          </div>
+          <div *ngIf="signupForm.get('confirmPassword')?.invalid && (signupForm.get('confirmPassword')?.dirty || signupForm.get('confirmPassword')?.touched)" class="error-msg">
+            <span *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Confirmation requise</span>
+          </div>
+          <div *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched" class="error-msg">
+            <span>Les mots de passe ne correspondent pas</span>
+          </div>
+        </div>
+
+        <!-- Bouton Soumettre avec effet d'onde amélioré -->
+        <button type="submit" class="submit-btn" [disabled]="signupForm.invalid || isLoading">
+          <span class="btn-content">
+            <span *ngIf="!isLoading">S'inscrire
+            </span>
+            <span *ngIf="isLoading" class="loading-wrapper">
+              <div class="loading-spinner"></div> Création en cours...
+            </span>
+          </span>
+        </button>
+      </form>
+
+
+
+      <!-- Lien Connexion avec animation améliorée -->
+      <div class="form-footer">
+        <p>Vous avez déjà un compte ? <a routerLink="/login" class="auth-link">Connectez-vous ici</a></p>
+      </div>
+    </div>
+  </div>
+</div>

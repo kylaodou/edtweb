@@ -1,0 +1,220 @@
+<div class="filiere-container">
+  <div class="header">
+    <h2>Emploi du Temps</h2>
+    <button class="export-pdf-btn" (click)="exportToPDF()" *ngIf="!isLoading">
+      <i class="fas fa-file-pdf"></i> Exporter en PDF
+    </button>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="!isLoading" #emploiDuTempsContent>
+    <div class="filter-container">
+      <div class="filter-group">
+        <label for="classeSelect" class="filter-label">Classe</label>
+        <select id="classeSelect" class="filter-select" [(ngModel)]="selectedClasseId" (change)="onClasseChange()">
+          <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.nom }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="calendar-controls">
+      <div class="week-navigation">
+        <button class="btn btn-icon btn-primary" (click)="previousWeek()" title="Semaine précédente">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="btn btn-outline" (click)="currentWeek()">
+          <i class="fas fa-calendar-day"></i> Semaine actuelle
+        </button>
+        <button class="btn btn-icon btn-primary" (click)="nextWeek()" title="Semaine suivante">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="week-info">
+        <i class="fas fa-calendar-week"></i> {{ getWeekRange() }}
+      </div>
+    </div>
+
+    <!-- Titre dynamique avec informations de semestre -->
+    <div class="semester-header">
+      <h3 class="semester-title">{{ getSemestreInfo() }} - Année académique {{ getAnneeAcademique() }}</h3>
+      <p class="week-full-info">{{ getFullWeekInfo() }}</p>
+    </div>
+
+    <!-- Cartes de totaux -->
+    <div class="stats-cards">
+      <div class="stat-card ct-card">
+        <div class="stat-icon">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ countCT }}</div>
+          <div class="stat-label">Cours Théoriques</div>
+        </div>
+      </div>
+      <div class="stat-card td-card">
+        <div class="stat-icon">
+          <i class="fas fa-users-class"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ countTD }}</div>
+          <div class="stat-label">Travaux Dirigés</div>
+        </div>
+      </div>
+      <div class="stat-card tp-card">
+        <div class="stat-icon">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ countTP }}</div>
+          <div class="stat-label">Travaux Pratiques</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="type-badges">
+      <div class="type-badge">
+        <div class="badge-color CT"></div>
+        <span>Cours Théorique (CT)</span>
+      </div>
+      <div class="type-badge">
+        <div class="badge-color TD"></div>
+        <span>Travaux Dirigés (TD)</span>
+      </div>
+      <div class="type-badge">
+        <div class="badge-color TP"></div>
+        <span>Travaux Pratiques (TP)</span>
+      </div>
+    </div>
+
+    <div class="calendar-grid">
+      <!-- En-têtes des jours -->
+      <div class="calendar-header time-header"></div>
+      <div class="calendar-header" *ngFor="let jour of jours">
+        {{ jour | titlecase }}
+      </div>
+
+      <!-- Créneau du matin -->
+      <div class="calendar-cell time-cell">
+        8H-12H
+      </div>
+      <div class="calendar-cell" *ngFor="let jour of jours">
+        <div *ngIf="hasSeances(jour, '8H-12H')">
+          <div class="seance-card" *ngFor="let seance of getSeancesForCreneau(jour, '8H-12H')"
+               [ngClass]="'type-' + seance.type"
+               [style.borderLeftColor]="getSeanceColor(seance.type)"
+               (click)="viewSeanceDetails(seance)">
+            <div class="seance-title">{{ getCoursNom(seance.coursId) }}</div>
+            <div class="seance-info">
+              <i class="fas fa-user-tie"></i> {{ getEnseignantNom(seance.coursId) }}
+            </div>
+            <div class="seance-info">
+              <i class="fas fa-users"></i> {{ getClasseNom(seance.classeId) }}
+            </div>
+            <div class="seance-info">
+              <i class="fas fa-building"></i> {{ getSalleNom(seance.salleId) }}
+            </div>
+            <div class="seance-badge" [ngClass]="'badge-' + seance.type">
+              {{ seance.type }}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!hasSeances(jour, '8H-12H')" class="empty-cell-text">
+          Aucune séance
+        </div>
+      </div>
+
+      <!-- Créneau de l'après-midi -->
+      <div class="calendar-cell time-cell">
+        14H-18H
+      </div>
+      <div class="calendar-cell" *ngFor="let jour of jours">
+        <div *ngIf="hasSeances(jour, '14H-18H')">
+          <div class="seance-card" *ngFor="let seance of getSeancesForCreneau(jour, '14H-18H')"
+               [ngClass]="'type-' + seance.type"
+               [style.borderLeftColor]="getSeanceColor(seance.type)"
+               (click)="viewSeanceDetails(seance)">
+            <div class="seance-title">{{ getCoursNom(seance.coursId) }}</div>
+            <div class="seance-info">
+              <i class="fas fa-user-tie"></i> {{ getEnseignantNom(seance.coursId) }}
+            </div>
+            <div class="seance-info">
+              <i class="fas fa-users"></i> {{ getClasseNom(seance.classeId) }}
+            </div>
+            <div class="seance-info">
+              <i class="fas fa-building"></i> {{ getSalleNom(seance.salleId) }}
+            </div>
+            <div class="seance-badge" [ngClass]="'badge-' + seance.type">
+              {{ seance.type }}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!hasSeances(jour, '14H-18H')" class="empty-cell-text">
+          Aucune séance
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal pour afficher les détails d'une séance -->
+  <div class="modal-overlay" *ngIf="showDetails" @fadeInOut>
+    <div class="modal" @zoomIn>
+      <div class="modal-header">
+        <h3 class="modal-title">Détails de la séance</h3>
+        <button class="modal-close" (click)="closeDetails()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body" *ngIf="selectedSeance">
+        <div class="seance-details">
+          <div class="detail-group">
+            <div class="detail-label">Cours</div>
+            <div class="detail-value">{{ getCoursNom(selectedSeance.coursId) }}</div>
+          </div>
+          <div class="detail-group">
+            <div class="detail-label">Enseignant</div>
+            <div class="detail-value">{{ getEnseignantNom(selectedSeance.coursId) }}</div>
+          </div>
+          <div class="detail-group">
+            <div class="detail-label">Classe</div>
+            <div class="detail-value">{{ getClasseNom(selectedSeance.classeId) }}</div>
+          </div>
+          <div class="detail-group">
+            <div class="detail-label">Salle</div>
+            <div class="detail-value">{{ getSalleNom(selectedSeance.salleId) }}</div>
+          </div>
+          <div class="detail-group">
+            <div class="detail-label">Jour</div>
+            <div class="detail-value">{{ selectedSeance.jour | titlecase }}</div>
+          </div>
+          <div class="detail-group">
+            <div class="detail-label">Créneau</div>
+            <div class="detail-value">{{ selectedSeance.creneau }}</div>
+          </div>
+          <div class="detail-group">
+            <div class="detail-label">Type</div>
+            <div class="detail-badge" [ngClass]="'badge-' + selectedSeance.type">
+              {{ selectedSeance.type }}
+            </div>
+          </div>
+          <div class="detail-group" *ngIf="selectedSeance.commentaire">
+            <div class="detail-label">Commentaire</div>
+            <div class="detail-value">{{ selectedSeance.commentaire }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-danger" (click)="selectedSeance && deleteSeance(selectedSeance)">
+          <i class="fas fa-trash"></i> Supprimer
+        </button>
+        <button class="btn btn-outline" (click)="closeDetails()">
+          <i class="fas fa-times"></i> Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

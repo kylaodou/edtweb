@@ -1,0 +1,442 @@
+<style>
+  .filieres-stats {
+    display: flex;
+    gap: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .stat-card {
+    padding: 12px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    min-width: 120px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .stat-icon i {
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  .btn-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px 15px 21px;
+    border-radius: 24px;
+    border: none;
+    background: #3367d6;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-reset::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-reset:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 12px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    background: linear-gradient(to right, #f1f3f5, #e9ecef);
+  }
+
+  td, th{
+    padding: 20px;
+  }
+
+  .btn-reset:hover::before {
+    opacity: 1;
+  }
+
+  .btn-reset:active {
+    transform: translateY(0);
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .btn-reset i.fas {
+    color: white;
+    background: linear-gradient(135deg, #ff7b00, #ff9500);
+    padding: 8px;
+    border-radius: 50%;
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 2px 4px rgba(255, 123, 0, 0.3),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+    z-index: 1;
+  }
+
+  .btn-reset:hover i.fas {
+    background: linear-gradient(135deg, #ff9500, #ffaa00);
+    transform: rotate(90deg);
+  }
+
+  .btn-reset span {
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-reset:hover span {
+    transform: translateX(2px);
+  }
+</style>
+<div class="filiere-container">
+  <div class="header-section">
+    <div class="title-container">
+      <h1 class="main-title">Gestion des Salles</h1>
+      <p class="subtitle">Gérez et organisez les salles de votre université</p>
+    </div>
+    <button class="btn-add-filiere" (click)="openAddForm()">
+      <i class="fas fa-plus-circle"></i>
+      <span>Ajouter une salle</span>
+    </button>
+  </div>
+
+  <div class="filter-section">
+    <div class="search-box">
+      <i class="fas fa-search search-icon"></i>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Rechercher une salle..."
+        class="search-input"
+      >
+      <button *ngIf="searchText" class="clear-search" (click)="searchText = ''">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="filter-options" >
+      <!-- Remplacer la partie select du filtre -->
+<select
+[(ngModel)]="selectedType"
+class="filter-select"
+(change)="loadSalles()"
+>
+<option value="">Tous les types</option>
+<option value="Cours">Cours</option>
+<option value="TP">TP</option>
+<option value="TD">TD</option>
+<option value="Salle Informatique">Salle Informatique</option>
+<option value="Bibliothèque">Bibliothèque</option>
+</select>
+
+      
+    </div>
+
+  </div>
+
+  <div class="filieres-stats">
+    <div class="stat-card" style="background-color: #3367d6; color: white;">
+      <div class="stat-icon"><i class="fas fa-door-open" style="color: white;"></i></div>
+      <div class="stat-info">
+        <div class="stat-value">{{ salles.length }}</div>
+        <div class="stat-label">Salles</div>
+      </div>
+    </div>
+
+    <div class="stat-card" style="background-color: #4CAF50; color: white;">
+      <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
+      <div class="stat-info">
+        <div class="stat-value">{{ filteredSalles.length }}</div>
+        <div class="stat-label">Résultats</div>
+      </div>
+    </div>
+
+    <div class="stat-card" style="background-color: #ff7043; color: white;">
+      <div class="stat-icon"><i class="fas fa-check-circle" style="color: white;"></i></div>
+      <div class="stat-info">
+        <!-- The problematic line has been replaced with a method call -->
+        <div class="stat-value">{{ getDisponibleCount() }}</div>
+        <div class="stat-label">Disponibles</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message d'erreur API -->
+  <div class="error-message-container" *ngIf="errorMessage" [@fadeInOut]>
+    <div class="api-error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>{{ errorMessage }}</span>
+    </div>
+    <button class="btn-retry" (click)="loadSalles()">
+      <i class="fas fa-sync-alt"></i>
+      <span>Réessayer</span>
+    </button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="isLoading" [@fadeInOut]>
+    <div class="loading-spinner">
+      <div class="spinner-inner"></div>
+    </div>
+    <p class="loading-text">Chargement des salles...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isLoading && filteredSalles.length === 0 && !errorMessage" [@fadeInOut]>
+    <div class="empty-illustration">
+      <i class="fas fa-door-closed"></i>
+    </div>
+    <h3 class="empty-title">Aucune salle trouvée</h3>
+    <p class="empty-text">
+      {{ searchText || selectedType || showOnlyDisponible ? 'Aucune salle ne correspond à vos critères de recherche.' : 'Commencez par ajouter une nouvelle salle!' }}
+    </p>
+    <button class="btn-add-filiere empty-button" (click)="openAddForm()" *ngIf="!searchText && !selectedType && !showOnlyDisponible">
+      <i class="fas fa-plus-circle"></i>
+      <span>Ajouter une salle</span>
+    </button>
+    <button class="btn-reset empty-button" (click)="resetFilters()" *ngIf="searchText || selectedType || showOnlyDisponible">
+      <i class="fas fa-sync-alt"></i>
+      <span>Réinitialiser les filtres</span>
+    </button>
+  </div>
+
+  <!-- Table View -->
+  <div class="table-container" *ngIf="!isLoading && filteredSalles.length > 0" [@fadeInOut]>
+    <table style="width: 100% !important;" class="filieres-table">
+      <thead>
+        <tr>
+          <th class="th-code">Numéro</th>
+          <th class="th-nom">Bâtiment</th>
+          <th class="th-type">Type</th>
+          <th class="th-disponible">Disponibilité</th>
+          <th class="th-actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let salle of filteredSalles; let i = index" [ngStyle]="getRowColor(i)" class="filiere-row">
+          <td class="td-code">{{ salle.numero }}</td>
+          <td class="td-nom">{{ salle.batiment }}</td>
+          <td class="td-type">
+            <span class="semestre-badge">{{ salle.type }}</span>
+          </td>
+          <td class="td-disponible">
+            <span class="disponible-badge" [ngClass]="{'disponible': salle.disponible, 'indisponible': !salle.disponible}">
+              {{ salle.disponible ? 'Disponible' : 'Indisponible' }}
+            </span>
+          </td>
+          <td class="td-actions">
+            <button class="btn-view action-btn" (click)="viewSalle(salle)" title="Voir cette salle">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="btn-edit action-btn" (click)="editSalle(salle)" title="Modifier cette salle">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn-delete action-btn" (click)="deleteSalle(salle)" title="Supprimer cette salle">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulaire (Modal) -->
+  <div class="modal-backdrop" *ngIf="showForm || showViewMode" [@fadeInOut]>
+    <div class="modal-wrapper" [@zoomIn]>
+      <div class="modal-container">
+        <div class="modal-header">
+          <div class="header-content">
+            <div class="header-icon">
+              <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
+            </div>
+            <h2 class="modal-title">
+              {{ showViewMode ? 'Détails de la salle' : (isEditMode ? 'Modifier une salle' : 'Ajouter une nouvelle salle') }}
+            </h2>
+          </div>
+          <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-illustration">
+            <i class="fas fa-door-open illustration-icon"></i>
+          </div>
+
+          <!-- Mode affichage détails -->
+          <div *ngIf="showViewMode" class="view-details">
+            <div class="detail-item">
+              <div class="detail-label">Numéro:</div>
+              <div class="detail-value">{{ selectedSalle?.numero }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Bâtiment:</div>
+              <div class="detail-value">{{ selectedSalle?.batiment }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Type:</div>
+              <div class="detail-value">{{ selectedSalle?.type }}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Disponibilité:</div>
+              <div class="detail-value">
+                <span class="disponible-badge" [ngClass]="{'disponible': selectedSalle?.disponible, 'indisponible': !selectedSalle?.disponible}">
+                  {{ selectedSalle?.disponible ? 'Disponible' : 'Indisponible' }}
+                </span>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-cancel" (click)="closeForm()">
+                <i class="fas fa-times"></i> Fermer
+              </button>
+              <button type="button" class="btn-submit" (click)="switchToEditMode()">
+                <span class="btn-content">
+                  <i class="fas fa-edit"></i>
+                  <span>Modifier</span>
+                </span>
+                <span class="btn-effect"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mode édition ou création -->
+          <form [formGroup]="salleForm" (ngSubmit)="submitForm()" class="animated-form" *ngIf="!showViewMode">
+            <div class="form-group">
+              <label for="numero">Numéro</label>
+              <div class="input-wrapper">
+                <div class="input-container" [class.focused]="numeroFocused">
+                  <i class="fas fa-hashtag input-icon"></i>
+                  <input
+                    type="text"
+                    id="numero"
+                    formControlName="numero"
+                    placeholder="Entrez le numéro de la salle"
+                    [ngClass]="{'input-error': formSubmitted && salleForm.get('numero')?.invalid}"
+                    (focus)="numeroFocused = true"
+                    (blur)="numeroFocused = false"
+                  >
+                  <span class="input-highlight"></span>
+                </div>
+                <div class="error-message" *ngIf="formSubmitted && salleForm.get('numero')?.invalid" [@fadeInOut]>
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span *ngIf="salleForm.get('numero')?.errors?.['required']">Le numéro est obligatoire</span>
+                  <span *ngIf="salleForm.get('numero')?.errors?.['minlength']">Le numéro doit contenir au moins 1 caractère</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="batiment">Bâtiment</label>
+              <div class="input-wrapper">
+                <div class="input-container" [class.focused]="batimentFocused">
+                  <i class="fas fa-building input-icon"></i>
+                  <input
+                    type="text"
+                    id="batiment"
+                    formControlName="batiment"
+                    placeholder="Entrez le bâtiment"
+                    [ngClass]="{'input-error': formSubmitted && salleForm.get('batiment')?.invalid}"
+                    (focus)="batimentFocused = true"
+                    (blur)="batimentFocused = false"
+                  >
+                  <span class="input-highlight"></span>
+                </div>
+                <div class="error-message" *ngIf="formSubmitted && salleForm.get('batiment')?.invalid" [@fadeInOut]>
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span *ngIf="salleForm.get('batiment')?.errors?.['required']">Le bâtiment est obligatoire</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Remplacer la div du champ type dans le formulaire -->
+<div class="form-group">
+  <label for="type">Type</label>
+  <div class="input-wrapper">
+    <div class="input-container chevron" [class.focused]="typeFocused">
+      <i class="fas fa-tag input-icon"></i>
+      <select
+        id="type"
+        formControlName="type"
+        [ngClass]="{'input-error': formSubmitted && salleForm.get('type')?.invalid}"
+        (focus)="typeFocused = true"
+        (blur)="typeFocused = false"
+      >
+        <option value="">Sélectionnez un type</option>
+        <option value="Cours">Cours</option>
+        <option value="TP">TP</option>
+        <option value="TD">TD</option>
+        <option value="Salle Informatique">Salle Informatique</option>
+        <option value="Bibliothèque">Bibliothèque</option>
+      </select>
+      <span class="input-highlight"></span>
+    </div>
+    <div class="error-message" *ngIf="formSubmitted && salleForm.get('type')?.invalid" [@fadeInOut]>
+      <i class="fas fa-exclamation-circle"></i>
+      <span *ngIf="salleForm.get('type')?.errors?.['required']">Le type est obligatoire</span>
+    </div>
+  </div>
+</div>
+
+
+
+            <div class="form-actions">
+              <button type="button" class="btn-cancel" (click)="closeForm()">
+                <i class="fas fa-times"></i> Annuler
+              </button>
+              <button type="submit" class="btn-submit">
+                <span class="btn-content">
+                  <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
+                  <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
+                </span>
+                <span class="btn-effect"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

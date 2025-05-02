@@ -1,0 +1,1139 @@
+/* emploi-du-temps.component.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+:root {
+  --primary: #4361ee;
+  --primary-light: #4895ef;
+  --primary-dark: #3a0ca3;
+  --secondary: #4cc9f0;
+  --success: #0acf97;
+  --warning: #ffbc53;
+  --danger: #fa5252;
+  --info: #16baef;
+  --white: #ffffff;
+  --dark: #2f3542;
+  --light: #f4f7fc;
+  --gray: #8a93a6;
+  --light-gray: #edf2f9;
+  --border-radius: 12px;
+  --card-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
+  --card-hover-shadow: 0 12px 30px rgba(149, 157, 165, 0.25);
+  --animation-duration: 0.3s;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+/* Container principal */
+.filiere-container {
+  margin-left: 244px !important;
+  padding-right: 0px !important;
+  margin: 0 auto;
+  padding: 2rem;
+  margin-left: 240px;
+  background: linear-gradient(135deg, rgba(244, 247, 252, 0.8), rgba(255, 255, 255, 0.9));
+  min-height: 100vh;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+.filiere-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  z-index: 1;
+}
+
+/* Section d'en-tête */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(138, 147, 166, 0.2);
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.main-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  border-radius: 2px;
+}
+
+.subtitle {
+  color: var(--gray);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* Conteneur de chargement */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid rgba(67, 97, 238, 0.1);
+  border-top-color: var(--primary);
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  margin-top: 1.5rem;
+  color: var(--gray);
+  font-size: 1rem;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.empty-illustration {
+  font-size: 5rem;
+  color: #3367d6;
+  margin-bottom: 1.5rem;
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.empty-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.empty-description {
+  color: var(--gray);
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+}
+
+.empty-button {
+  margin-top: 1rem;
+}
+
+/* Badges pour les types de séances */
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.badge-CT {
+  background-color: rgba(74, 108, 247, 0.1);
+  color: #4a6cf7;
+}
+
+.badge-TD {
+  background-color: rgba(10, 207, 151, 0.1);
+  color: #0acf97;
+}
+
+.badge-TP {
+  background-color: rgba(250, 103, 103, 0.1);
+  color: #fa6767;
+}
+
+/* Styles pour les boutons d'action */
+.action-btn {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 3px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-view {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-view:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+.btn-edit {
+  background-color: #f39c12;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Calendrier */
+.calendar-controls {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.week-navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(51, 103, 214, 0.1);
+  color: #3367d6;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-icon:hover {
+  background-color: rgba(51, 103, 214, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 1px solid #e0e6ed;
+  color: #4b5563;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: #f8f9fa;
+  border-color: #d1d5db;
+}
+
+.week-info {
+  font-weight: 500;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Sélecteurs de classe et filière */
+.filter-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.select-container {
+  position: relative;
+  min-width: 180px;
+  flex: 1;
+}
+
+.select-filter {
+  width: 100%;
+  padding: 0.8rem 2.5rem 0.8rem 1rem;
+  border: 1px solid #e0e6ed;
+  border-radius: 50px;
+  background-color: var(--white);
+  font-size: 1rem;
+  appearance: none;
+  cursor: pointer;
+  transition: all var(--animation-duration) ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.select-filter:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.15);
+}
+
+.filter-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray);
+}
+
+/* Grille du calendrier */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 100px repeat(7, 1fr);
+  gap: 1px;
+  background-color: rgba(224, 230, 237, 0.5);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 2rem;
+}
+
+.calendar-header {
+  background: linear-gradient(135deg, #3367d6, #4895ef);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-header.time-header {
+  background: linear-gradient(135deg, #2a56c6, #3367d6);
+}
+
+.calendar-cell {
+  background-color: white;
+  min-height: 120px;
+  padding: 0.75rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.calendar-cell.time-cell {
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.calendar-cell.clickable {
+  cursor: pointer;
+}
+
+.calendar-cell.clickable:hover {
+  background-color: #f0f4ff;
+  transform: scale(1.02);
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(74, 108, 247, 0.15);
+}
+
+/* Cartes de séances */
+.seance-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid #4a6cf7;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.seance-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.seance-card.type-CT {
+  border-left-color: #4a6cf7;
+}
+
+.seance-card.type-TD {
+  border-left-color: #0acf97;
+}
+
+.seance-card.type-TP {
+  border-left-color: #fa6767;
+}
+
+.seance-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  color: var(--dark);
+}
+
+.seance-info {
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.seance-info i {
+  font-size: 0.75rem;
+  color: var(--primary);
+}
+
+.seance-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.add-seance-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3367d6, #4895ef);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  box-shadow: 0 2px 8px rgba(51, 103, 214, 0.3);
+}
+
+.calendar-cell:hover .add-seance-btn {
+  opacity: 1;
+}
+
+.add-seance-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(51, 103, 214, 0.4);
+}
+
+.empty-cell-text {
+  color: var(--gray);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 0.7;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.modal-wrapper {
+  width: 100%;
+  max-width: 600px;
+  perspective: 1000px;
+}
+
+.modal-container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transform-origin: center;
+  position: relative;
+  animation: modal-zoom-in 0.3s ease-out forwards;
+}
+
+/* Header du modal */
+.modal-header {
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #3367d6, #5e85e8);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.modal-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* Corps du modal */
+.modal-body {
+  padding: 2rem;
+  position: relative;
+}
+
+/* Styles pour la vue détaillée */
+.view-details {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.detail-item {
+  margin-bottom: 1rem;
+  display: flex;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 0.8rem;
+}
+
+.detail-label {
+  font-weight: bold;
+  min-width: 150px;
+  color: #3367d6;
+}
+
+.detail-value {
+  flex: 1;
+  word-break: break-word;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modal-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) rotateX(2deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateX(0);
+  }
+}
+
+/* Styles pour la réponse aux médias */
+@media (max-width: 768px) {
+  .filiere-container {
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .calendar-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .week-navigation {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .calendar-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendar-row {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+  }
+
+  .calendar-header, .calendar-cell {
+    min-height: 60px;
+    padding: 0.5rem;
+  }
+
+  .seance-card {
+    padding: 0.5rem;
+  }
+
+  .seance-title, .seance-info {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .filiere-container {
+    padding: 1rem;
+  }
+
+  .filter-section {
+    flex-direction: column;
+  }
+
+  .modal-wrapper {
+    margin: 1rem;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+
+  .calendar-row {
+    grid-template-columns: 60px repeat(7, 1fr);
+  }
+
+  .calendar-header, .calendar-cell {
+    padding: 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  .week-info {
+    font-size: 0.9rem;
+  }
+}
+
+/* Pour arrondir les coins du popup */
+.custom-rounded-popup {
+  border-radius: 15px !important;
+}
+
+.delete-confirm-btn {
+  font-weight: bold;
+}
+
+.delete-cancel-btn {
+  font-weight: bold;
+}
+
+.success-popup {
+  border-radius: 15px !important;
+}
+
+/* Styles généraux */
+.filiere-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.export-pdf-btn {
+  background-color: #fa6767;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.export-pdf-btn:hover {
+  background-color: #e55353;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.export-pdf-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.export-pdf-btn i {
+  font-size: 16px;
+}
+
+/* Styles pour le chargement */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #4a6cf7;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Styles pour les filtres */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.filter-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+  font-weight: 500;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  transition: border-color 0.2s;
+}
+
+.filter-select:focus {
+  border-color: #4a6cf7;
+  outline: none;
+}
+
+/* Styles pour les contrôles du calendrier */
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.week-navigation {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
+.btn-icon {
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: #4a6cf7;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3a5bd9;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #4a6cf7;
+  color: #4a6cf7;
+}
+
+.btn-outline:hover {
+  background-color: #f0f4ff;
+}
+
+.btn-danger {
+  background-color: #fa6767;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #e55353;
+}
+
+.week-info {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f0f4ff;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+/* Modal Backdrop */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+}
+
+/* Styles pour les détails de séance */
+.seance-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.detail-group {
+  margin-bottom: 15px;
+}
+
+.detail-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.detail-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calendar-grid {
+    grid-template-columns: 80px repeat(7, 1fr);
+    font-size: 12px;
+  }
+
+  .calendar-cell {
+    min-height: 120px;
+    padding: 8px;
+  }
+
+  .seance-title {
+    font-size: 12px;
+  }
+
+  .seance-info {
+    font-size: 10px;
+  }
+
+  .stats-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendar-header {
+    display: none;
+  }
+
+  .time-cell {
+    margin-top: 15px;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .calendar-cell:not(.time-cell) {
+    border-radius: 0 0 4px 4px;
+    margin-bottom: 10px;
+  }
+
+  .filter-container,
+  .calendar-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .week-navigation {
+    justify-content: space-between;
+  }
+}
+
+/* Styles pour le bouton d'export PDF */
+.export-pdf-btn {
+  background-color: #fa6767;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.export-pdf-btn:hover {
+  background-color: #e55353;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.export-pdf-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.export-pdf-btn i {
+  font-size: 16px;
+}
