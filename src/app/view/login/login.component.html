@@ -14,7 +14,9 @@
     <div class="particle"></div>
     <div class="wave-effect"></div>
     <div class="image-column">
-      <div *ngIf="isBrowser" id="login-lottie-container"></div>
+      @if (isBrowser) {
+        <div id="login-lottie-container"></div>
+      }
     </div>
   </div>
 
@@ -26,9 +28,11 @@
 
 
       <!-- Message de succès -->
-      <div *ngIf="registrationSuccess" class="success-message">
-        {{ registrationSuccess }}
-      </div>
+      @if (registrationSuccess) {
+        <div class="success-message">
+          {{ registrationSuccess }}
+        </div>
+      }
 
       <!-- Formulaire - centré au milieu -->
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="width: 100%; max-width: 350px; margin: 0 auto; margin-right: 20px;">
@@ -40,10 +44,16 @@
             </div>
             <input type="email" id="email" formControlName="email" placeholder="Entrez votre email">
           </div>
-          <div *ngIf="hasError('email') || formErrors['email']" class="error-msg">
-            <span *ngIf="hasError('email')">{{ getErrorMessage('email') }}</span>
-            <span *ngIf="formErrors['email']">{{ formErrors['email'] }}</span>
-          </div>
+          @if (hasError('email') || formErrors['email']) {
+            <div class="error-msg">
+              @if (hasError('email')) {
+                <span>{{ getErrorMessage('email') }}</span>
+              }
+              @if (formErrors['email']) {
+                <span>{{ formErrors['email'] }}</span>
+              }
+            </div>
+          }
         </div>
 
         <!-- Champ Mot de passe avec icône et visualisation -->
@@ -57,23 +67,35 @@
               <i class="fas" [ngClass]="passwordInput.type === 'password' ? 'fa-eye' : 'fa-eye-slash'"></i>
             </div>
           </div>
-          <div *ngIf="hasError('password') || formErrors['password']" class="error-msg">
-            <span *ngIf="hasError('password')">{{ getErrorMessage('password') }}</span>
-            <span *ngIf="formErrors['password']">{{ formErrors['password'] }}</span>
-          </div>
+          @if (hasError('password') || formErrors['password']) {
+            <div class="error-msg">
+              @if (hasError('password')) {
+                <span>{{ getErrorMessage('password') }}</span>
+              }
+              @if (formErrors['password']) {
+                <span>{{ formErrors['password'] }}</span>
+              }
+            </div>
+          }
         </div>
         <!-- Message d'erreur global -->
-      <div *ngIf="loginError" class="error-msg global-error">
-        {{ loginError }}
-      </div>
+        @if (loginError) {
+          <div class="error-msg global-error">
+            {{ loginError }}
+          </div>
+        }
 
         <!-- Bouton Soumettre avec effet d'onde amélioré -->
         <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">
           <span class="btn-content">
-            <span *ngIf="!isLoading">Connexion</span>
-            <span *ngIf="isLoading" class="loading-wrapper">
-              <div class="loading-spinner"></div> Connexion en cours...
-            </span>
+            @if (!isLoading) {
+              <span>Connexion</span>
+            }
+            @if (isLoading) {
+              <span class="loading-wrapper">
+                <div class="loading-spinner"></div> Connexion en cours...
+              </span>
+            }
           </span>
         </button>
       </form>

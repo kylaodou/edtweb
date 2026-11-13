@@ -1,134 +1,134 @@
 <style>
   .filieres-stats {
-    display: flex;
-    gap: 12px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+  display: flex;
+  gap: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  .stat-card {
-    padding: 12px 16px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: white;
-    min-width: 120px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+.stat-card {
+padding: 12px 16px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+gap: 12px;
+color: white;
+min-width: 120px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .stat-icon i {
-    font-size: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.stat-icon i {
+font-size: 20px;
+background: rgba(255, 255, 255, 0.2);
+padding: 10px;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
 
-  .stat-info {
-    display: flex;
-    flex-direction: column;
-  }
+.stat-info {
+display: flex;
+flex-direction: column;
+}
 
-  .stat-value {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.2;
-  }
+.stat-value {
+font-size: 18px;
+font-weight: bold;
+line-height: 1.2;
+}
 
-  .stat-label {
-    font-size: 12px;
-    opacity: 0.9;
-  }
-  .btn-reset {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 25px 15px 21px;
-    border-radius: 24px;
-    border: none;
-    background: #3367d6;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow:
-      0 2px 4px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.4);
-    position: relative;
-    overflow: hidden;
-  }
+.stat-label {
+font-size: 12px;
+opacity: 0.9;
+}
+.btn-reset {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 15px 25px 15px 21px;
+border-radius: 24px;
+border: none;
+background: #3367d6;
+color: #fff;
+font-size: 1.2rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+box-shadow:
+0 2px 4px rgba(0,0,0,0.1),
+inset 0 1px 0 rgba(255,255,255,0.4);
+position: relative;
+overflow: hidden;
+}
 
-  .btn-reset::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+.btn-reset::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+opacity: 0;
+transition: opacity 0.3s ease;
+}
 
-  .btn-reset:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 4px 12px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.4);
-    background: linear-gradient(to right, #f1f3f5, #e9ecef);
-  }
+.btn-reset:hover {
+transform: translateY(-2px);
+box-shadow:
+0 4px 12px rgba(0,0,0,0.15),
+inset 0 1px 0 rgba(255,255,255,0.4);
+background: linear-gradient(to right, #f1f3f5, #e9ecef);
+}
 
-  td, th{
-    padding: 20px;
-  }
+td, th{
+padding: 20px;
+}
 
-  .btn-reset:hover::before {
-    opacity: 1;
-  }
+.btn-reset:hover::before {
+opacity: 1;
+}
 
-  .btn-reset:active {
-    transform: translateY(0);
-    box-shadow:
-      0 1px 3px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-  }
+.btn-reset:active {
+transform: translateY(0);
+box-shadow:
+0 1px 3px rgba(0,0,0,0.1),
+inset 0 1px 0 rgba(255,255,255,0.2);
+}
 
-  .btn-reset i.fas {
-    color: white;
-    background: linear-gradient(135deg, #ff7b00, #ff9500);
-    padding: 8px;
-    border-radius: 50%;
-    font-size: 13px;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-      0 2px 4px rgba(255, 123, 0, 0.3),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-    transition: all 0.4s ease;
-    z-index: 1;
-  }
+.btn-reset i.fas {
+color: white;
+background: linear-gradient(135deg, #ff7b00, #ff9500);
+padding: 8px;
+border-radius: 50%;
+font-size: 13px;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow:
+0 2px 4px rgba(255, 123, 0, 0.3),
+inset 0 1px 0 rgba(255,255,255,0.2);
+transition: all 0.4s ease;
+z-index: 1;
+}
 
-  .btn-reset:hover i.fas {
-    background: linear-gradient(135deg, #ff9500, #ffaa00);
-    transform: rotate(90deg);
-  }
+.btn-reset:hover i.fas {
+background: linear-gradient(135deg, #ff9500, #ffaa00);
+transform: rotate(90deg);
+}
 
-  .btn-reset span {
-    position: relative;
-    transition: transform 0.3s ease;
-  }
+.btn-reset span {
+position: relative;
+transition: transform 0.3s ease;
+}
 
-  .btn-reset:hover span {
-    transform: translateX(2px);
-  }
+.btn-reset:hover span {
+transform: translateX(2px);
+}
 </style>
 <div class="filiere-container">
   <div class="header-section">
@@ -150,302 +150,340 @@
         [(ngModel)]="searchText"
         placeholder="Rechercher une classe..."
         class="search-input"
-      >
-      <button *ngIf="searchText" class="clear-search" (click)="searchText = ''">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-
-    <div style="display: flex; gap: 10px;"  class="filter-options" >
-      <select
-        [(ngModel)]="selectedFiliere"
-        class="filter-select"
-      >
-        <option value="">Toutes les filières</option>
-        <option *ngFor="let filiere of filieres" [value]="filiere.id">{{filiere.code}}</option>
-      </select>
-
-      <select
-        [(ngModel)]="selectedNiveau"
-        class="filter-select"
-      >
-        <option value="">Tous les niveaux</option>
-        <option *ngFor="let niveau of niveaux" [value]="niveau">{{niveau}}</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="filieres-stats">
-    <div class="stat-card" style="background-color: #3367d6; color: white;">
-      <div class="stat-icon"><i class="fas fa-users" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ classes.length }}</div>
-        <div class="stat-label">Classes</div>
-      </div>
-    </div>
-
-    <div class="stat-card" style="background-color: #4CAF50; color: white;">
-      <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ filteredClasses.length }}</div>
-        <div class="stat-label">Résultats</div>
-      </div>
-    </div>
-
-    <div class="stat-card" style="background-color: #ff7043; color: white;">
-      <div class="stat-icon"><i class="fas fa-user-graduate" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ etudiants.length }}</div>
-        <div class="stat-label">Étudiants</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Message d'erreur API -->
-  <div class="error-message-container" *ngIf="errorMessage" [@fadeInOut]>
-    <div class="api-error-message">
-      <i class="fas fa-exclamation-circle"></i>
-      <span>{{ errorMessage }}</span>
-    </div>
-    <button class="btn-retry" (click)="loadClasses()">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réessayer</span>
-    </button>
-  </div>
-
-  <!-- Loading Spinner -->
-  <div class="loading-container" *ngIf="isLoading" [@fadeInOut]>
-    <div class="loading-spinner">
-      <div class="spinner-inner"></div>
-    </div>
-    <p class="loading-text">Chargement des classes...</p>
-  </div>
-
-  <!-- Empty State -->
-  <div class="empty-state" *ngIf="!isLoading && filteredClasses.length === 0 && !errorMessage" [@fadeInOut]>
-    <div class="empty-illustration">
-      <i class="fas fa-users-slash"></i>
-    </div>
-    <h3 class="empty-title">Aucune classe trouvée</h3>
-    <p class="empty-text">
-      {{ searchText || selectedFiliere || selectedNiveau ? 'Aucune classe ne correspond à vos critères de recherche.' : 'Commencez par ajouter une nouvelle classe!' }}
-    </p>
-    <button class="btn-add-filiere empty-button" (click)="openAddForm()" *ngIf="!searchText && !selectedFiliere && !selectedNiveau">
-      <i class="fas fa-plus-circle"></i>
-      <span>Ajouter une classe</span>
-    </button>
-    <button class="btn-reset empty-button" (click)="resetFilters()" *ngIf="searchText || selectedFiliere || selectedNiveau">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réinitialiser les filtres</span>
-    </button>
-  </div>
-
-  <!-- Table View -->
-  <div class="table-container" *ngIf="!isLoading && filteredClasses.length > 0" [@fadeInOut]>
-    <table style="width: 100% !important;" class="filieres-table">
-      <thead>
-        <tr>
-          <th class="th-nom">Nom</th>
-          <th class="th-type">Filière</th>
-          <th class="th-niveau">Niveau</th>
-          <th class="th-effectif">Effectif</th>
-          <th class="th-delegue">Délégué</th>
-          <th class="th-actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let classe of filteredClasses; let i = index" [ngStyle]="getRowColor(i)" class="filiere-row">
-          <td class="td-nom">{{ classe.nom }}</td>
-          <td class="td-type">{{ getFiliereNom(classe.filiereId) }}</td>
-          <td class="td-niveau">
-            <span class="semestre-badge">{{ classe.niveau }}</span>
-          </td>
-          <td class="td-effectif">{{ classe.effectifs }}</td>
-          <td class="td-delegue">{{ getDelegueNom(classe.delegueId) }}</td>
-          <td class="td-actions">
-            <button class="btn-view action-btn" (click)="viewClasse(classe)" title="Voir cette classe">
-              <i class="fas fa-eye"></i>
-            </button>
-            <button class="btn-edit action-btn" (click)="editClasse(classe)" title="Modifier cette classe">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="btn-delete action-btn" (click)="deleteClasse(classe)" title="Supprimer cette classe">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Formulaire (Modal) -->
-  <div class="modal-backdrop" *ngIf="showForm || showViewMode" [@fadeInOut]>
-    <div class="modal-wrapper" [@zoomIn]>
-      <div class="modal-container">
-        <div class="modal-header">
-          <div class="header-content">
-            <div class="header-icon">
-              <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
-            </div>
-            <h2 class="modal-title">
-              {{ showViewMode ? 'Détails de la classe' : (isEditMode ? 'Modifier une classe' : 'Ajouter une nouvelle classe') }}
-            </h2>
-          </div>
-          <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+        >
+        @if (searchText) {
+          <button class="clear-search" (click)="searchText = ''">
             <i class="fas fa-times"></i>
           </button>
+        }
+      </div>
+
+      <div style="display: flex; gap: 10px;"  class="filter-options" >
+        <select
+          [(ngModel)]="selectedFiliere"
+          class="filter-select"
+          >
+          <option value="">Toutes les filières</option>
+          @for (filiere of filieres; track filiere) {
+            <option [value]="filiere.id">{{filiere.code}}</option>
+          }
+        </select>
+
+        <select
+          [(ngModel)]="selectedNiveau"
+          class="filter-select"
+          >
+          <option value="">Tous les niveaux</option>
+          @for (niveau of niveaux; track niveau) {
+            <option [value]="niveau">{{niveau}}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="filieres-stats">
+      <div class="stat-card" style="background-color: #3367d6; color: white;">
+        <div class="stat-icon"><i class="fas fa-users" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ classes.length }}</div>
+          <div class="stat-label">Classes</div>
         </div>
+      </div>
 
-        <div class="modal-body">
-          <div class="form-illustration">
-            <i class="fas fa-users illustration-icon"></i>
-          </div>
+      <div class="stat-card" style="background-color: #4CAF50; color: white;">
+        <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ filteredClasses.length }}</div>
+          <div class="stat-label">Résultats</div>
+        </div>
+      </div>
 
-          <!-- Mode affichage détails -->
-          <div *ngIf="showViewMode" class="view-details">
-            <div class="detail-item">
-              <div class="detail-label">Nom:</div>
-              <div class="detail-value">{{ selectedClasse?.nom }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Filière:</div>
-              <div class="detail-value">{{ getFiliereNom(selectedClasse?.filiereId || '') }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Niveau:</div>
-              <div class="detail-value">{{ selectedClasse?.niveau }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Délégué:</div>
-              <div class="detail-value">{{ getDelegueNom(selectedClasse?.delegueId) }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Effectif:</div>
-              <div class="detail-value">{{ selectedClasse?.effectifs }} étudiants</div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" (click)="closeForm()">
-                <i class="fas fa-times"></i> Fermer
-              </button>
-              <button type="button" class="btn-submit" (click)="switchToEditMode()">
-                <span class="btn-content">
-                  <i class="fas fa-edit"></i>
-                  <span>Modifier</span>
-                </span>
-                <span class="btn-effect"></span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Mode édition ou création -->
-          <form [formGroup]="classeForm" (ngSubmit)="submitForm()" class="animated-form" *ngIf="!showViewMode">
-            <div class="form-group">
-              <label for="nom">Nom de la classe</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="nomFocused">
-                  <i class="fas fa-graduation-cap input-icon"></i>
-                  <input
-                    type="text"
-                    id="nom"
-                    formControlName="nom"
-                    placeholder="Entrez le nom de la classe"
-                    [ngClass]="{'input-error': formSubmitted && classeForm.get('nom')?.invalid}"
-                    (focus)="nomFocused = true"
-                    (blur)="nomFocused = false"
-                  >
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && classeForm.get('nom')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span *ngIf="classeForm.get('nom')?.errors?.['required']">Le nom est obligatoire</span>
-                  <span *ngIf="classeForm.get('nom')?.errors?.['minlength']">Le nom doit contenir au moins 1 caractère</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="filiereId">Filière</label>
-              <div class="input-wrapper">
-                <div class="input-container chevron" [class.focused]="filiereFocused">
-                  <i class="fas fa-bookmark input-icon"></i>
-                  <select
-                    id="filiereId"
-                    formControlName="filiereId"
-                    [ngClass]="{'input-error': formSubmitted && classeForm.get('filiereId')?.invalid}"
-                    (focus)="filiereFocused = true"
-                    (blur)="filiereFocused = false"
-                  >
-                    <option value="">Sélectionnez une filière</option>
-                    <option *ngFor="let filiere of filieres" [value]="filiere.id">{{filiere.code}}</option>
-                  </select>
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && classeForm.get('filiereId')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span *ngIf="classeForm.get('filiereId')?.errors?.['required']">La filière est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="niveau">Niveau</label>
-              <div class="input-wrapper">
-                <div class="input-container chevron" [class.focused]="niveauFocused">
-                  <i class="fas fa-layer-group input-icon"></i>
-                  <select
-                    id="niveau"
-                    formControlName="niveau"
-                    [ngClass]="{'input-error': formSubmitted && classeForm.get('niveau')?.invalid}"
-                    (focus)="niveauFocused = true"
-                    (blur)="niveauFocused = false"
-                  >
-                    <option value="">Sélectionnez un niveau</option>
-                    <option *ngFor="let niveau of niveaux" [value]="niveau">{{niveau}}</option>
-                  </select>
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && classeForm.get('niveau')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span *ngIf="classeForm.get('niveau')?.errors?.['required']">Le niveau est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="delegueId">Délégué</label>
-              <div class="input-wrapper">
-                <div class="input-container chevron" [class.focused]="delegueFocused">
-                  <i class="fas fa-user-tie input-icon"></i>
-                  <select
-                    id="delegueId"
-                    formControlName="delegueId"
-                    (focus)="delegueFocused = true"
-                    (blur)="delegueFocused = false"
-                  >
-                    <option value="">Sélectionnez un délégué</option>
-                    <option *ngFor="let etudiant of etudiants" [value]="etudiant.id">{{etudiant.prenom}} {{etudiant.nom}}</option>
-                  </select>
-                  <span class="input-highlight"></span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" (click)="closeForm()">
-                <i class="fas fa-times"></i> Annuler
-              </button>
-              <button type="submit" class="btn-submit">
-                <span class="btn-content">
-                  <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
-                  <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
-                </span>
-                <span class="btn-effect"></span>
-              </button>
-            </div>
-          </form>
+      <div class="stat-card" style="background-color: #ff7043; color: white;">
+        <div class="stat-icon"><i class="fas fa-user-graduate" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ etudiants.length }}</div>
+          <div class="stat-label">Étudiants</div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- Message d'erreur API -->
+    @if (errorMessage) {
+      <div class="error-message-container" [@fadeInOut]>
+        <div class="api-error-message">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
+        <button class="btn-retry" (click)="loadClasses()">
+          <i class="fas fa-sync-alt"></i>
+          <span>Réessayer</span>
+        </button>
+      </div>
+    }
+
+    <!-- Loading Spinner -->
+    @if (isLoading) {
+      <div class="loading-container" [@fadeInOut]>
+        <div class="loading-spinner">
+          <div class="spinner-inner"></div>
+        </div>
+        <p class="loading-text">Chargement des classes...</p>
+      </div>
+    }
+
+    <!-- Empty State -->
+    @if (!isLoading && filteredClasses.length === 0 && !errorMessage) {
+      <div class="empty-state" [@fadeInOut]>
+        <div class="empty-illustration">
+          <i class="fas fa-users-slash"></i>
+        </div>
+        <h3 class="empty-title">Aucune classe trouvée</h3>
+        <p class="empty-text">
+          {{ searchText || selectedFiliere || selectedNiveau ? 'Aucune classe ne correspond à vos critères de recherche.' : 'Commencez par ajouter une nouvelle classe!' }}
+        </p>
+        @if (!searchText && !selectedFiliere && !selectedNiveau) {
+          <button class="btn-add-filiere empty-button" (click)="openAddForm()">
+            <i class="fas fa-plus-circle"></i>
+            <span>Ajouter une classe</span>
+          </button>
+        }
+        @if (searchText || selectedFiliere || selectedNiveau) {
+          <button class="btn-reset empty-button" (click)="resetFilters()">
+            <i class="fas fa-sync-alt"></i>
+            <span>Réinitialiser les filtres</span>
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Table View -->
+    @if (!isLoading && filteredClasses.length > 0) {
+      <div class="table-container" [@fadeInOut]>
+        <table style="width: 100% !important;" class="filieres-table">
+          <thead>
+            <tr>
+              <th class="th-nom">Nom</th>
+              <th class="th-type">Filière</th>
+              <th class="th-niveau">Niveau</th>
+              <th class="th-effectif">Effectif</th>
+              <th class="th-delegue">Délégué</th>
+              <th class="th-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (classe of filteredClasses; track classe; let i = $index) {
+              <tr [ngStyle]="getRowColor(i)" class="filiere-row">
+                <td class="td-nom">{{ classe.nom }}</td>
+                <td class="td-type">{{ getFiliereNom(classe.filiereId) }}</td>
+                <td class="td-niveau">
+                  <span class="semestre-badge">{{ classe.niveau }}</span>
+                </td>
+                <td class="td-effectif">{{ classe.effectifs }}</td>
+                <td class="td-delegue">{{ getDelegueNom(classe.delegueId) }}</td>
+                <td class="td-actions">
+                  <button class="btn-view action-btn" (click)="viewClasse(classe)" title="Voir cette classe">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn-edit action-btn" (click)="editClasse(classe)" title="Modifier cette classe">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-delete action-btn" (click)="deleteClasse(classe)" title="Supprimer cette classe">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <!-- Formulaire (Modal) -->
+    @if (showForm || showViewMode) {
+      <div class="modal-backdrop" [@fadeInOut]>
+        <div class="modal-wrapper" [@zoomIn]>
+          <div class="modal-container">
+            <div class="modal-header">
+              <div class="header-content">
+                <div class="header-icon">
+                  <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
+                </div>
+                <h2 class="modal-title">
+                  {{ showViewMode ? 'Détails de la classe' : (isEditMode ? 'Modifier une classe' : 'Ajouter une nouvelle classe') }}
+                </h2>
+              </div>
+              <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-illustration">
+                <i class="fas fa-users illustration-icon"></i>
+              </div>
+              <!-- Mode affichage détails -->
+              @if (showViewMode) {
+                <div class="view-details">
+                  <div class="detail-item">
+                    <div class="detail-label">Nom:</div>
+                    <div class="detail-value">{{ selectedClasse?.nom }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Filière:</div>
+                    <div class="detail-value">{{ getFiliereNom(selectedClasse?.filiereId || '') }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Niveau:</div>
+                    <div class="detail-value">{{ selectedClasse?.niveau }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Délégué:</div>
+                    <div class="detail-value">{{ getDelegueNom(selectedClasse?.delegueId) }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Effectif:</div>
+                    <div class="detail-value">{{ selectedClasse?.effectifs }} étudiants</div>
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" class="btn-cancel" (click)="closeForm()">
+                      <i class="fas fa-times"></i> Fermer
+                    </button>
+                    <button type="button" class="btn-submit" (click)="switchToEditMode()">
+                      <span class="btn-content">
+                        <i class="fas fa-edit"></i>
+                        <span>Modifier</span>
+                      </span>
+                      <span class="btn-effect"></span>
+                    </button>
+                  </div>
+                </div>
+              }
+              <!-- Mode édition ou création -->
+              @if (!showViewMode) {
+                <form [formGroup]="classeForm" (ngSubmit)="submitForm()" class="animated-form">
+                  <div class="form-group">
+                    <label for="nom">Nom de la classe</label>
+                    <div class="input-wrapper">
+                      <div class="input-container" [class.focused]="nomFocused">
+                        <i class="fas fa-graduation-cap input-icon"></i>
+                        <input
+                          type="text"
+                          id="nom"
+                          formControlName="nom"
+                          placeholder="Entrez le nom de la classe"
+                          [ngClass]="{'input-error': formSubmitted && classeForm.get('nom')?.invalid}"
+                          (focus)="nomFocused = true"
+                          (blur)="nomFocused = false"
+                          >
+                          <span class="input-highlight"></span>
+                        </div>
+                        @if (formSubmitted && classeForm.get('nom')?.invalid) {
+                          <div class="error-message" [@fadeInOut]>
+                            <i class="fas fa-exclamation-circle"></i>
+                            @if (classeForm.get('nom')?.errors?.['required']) {
+                              <span>Le nom est obligatoire</span>
+                            }
+                            @if (classeForm.get('nom')?.errors?.['minlength']) {
+                              <span>Le nom doit contenir au moins 1 caractère</span>
+                            }
+                          </div>
+                        }
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="filiereId">Filière</label>
+                      <div class="input-wrapper">
+                        <div class="input-container chevron" [class.focused]="filiereFocused">
+                          <i class="fas fa-bookmark input-icon"></i>
+                          <select
+                            id="filiereId"
+                            formControlName="filiereId"
+                            [ngClass]="{'input-error': formSubmitted && classeForm.get('filiereId')?.invalid}"
+                            (focus)="filiereFocused = true"
+                            (blur)="filiereFocused = false"
+                            >
+                            <option value="">Sélectionnez une filière</option>
+                            @for (filiere of filieres; track filiere) {
+                              <option [value]="filiere.id">{{filiere.code}}</option>
+                            }
+                          </select>
+                          <span class="input-highlight"></span>
+                        </div>
+                        @if (formSubmitted && classeForm.get('filiereId')?.invalid) {
+                          <div class="error-message" [@fadeInOut]>
+                            <i class="fas fa-exclamation-circle"></i>
+                            @if (classeForm.get('filiereId')?.errors?.['required']) {
+                              <span>La filière est obligatoire</span>
+                            }
+                          </div>
+                        }
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="niveau">Niveau</label>
+                      <div class="input-wrapper">
+                        <div class="input-container chevron" [class.focused]="niveauFocused">
+                          <i class="fas fa-layer-group input-icon"></i>
+                          <select
+                            id="niveau"
+                            formControlName="niveau"
+                            [ngClass]="{'input-error': formSubmitted && classeForm.get('niveau')?.invalid}"
+                            (focus)="niveauFocused = true"
+                            (blur)="niveauFocused = false"
+                            >
+                            <option value="">Sélectionnez un niveau</option>
+                            @for (niveau of niveaux; track niveau) {
+                              <option [value]="niveau">{{niveau}}</option>
+                            }
+                          </select>
+                          <span class="input-highlight"></span>
+                        </div>
+                        @if (formSubmitted && classeForm.get('niveau')?.invalid) {
+                          <div class="error-message" [@fadeInOut]>
+                            <i class="fas fa-exclamation-circle"></i>
+                            @if (classeForm.get('niveau')?.errors?.['required']) {
+                              <span>Le niveau est obligatoire</span>
+                            }
+                          </div>
+                        }
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="delegueId">Délégué</label>
+                      <div class="input-wrapper">
+                        <div class="input-container chevron" [class.focused]="delegueFocused">
+                          <i class="fas fa-user-tie input-icon"></i>
+                          <select
+                            id="delegueId"
+                            formControlName="delegueId"
+                            (focus)="delegueFocused = true"
+                            (blur)="delegueFocused = false"
+                            >
+                            <option value="">Sélectionnez un délégué</option>
+                            @for (etudiant of etudiants; track etudiant) {
+                              <option [value]="etudiant.id">{{etudiant.prenom}} {{etudiant.nom}}</option>
+                            }
+                          </select>
+                          <span class="input-highlight"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                      <button type="button" class="btn-cancel" (click)="closeForm()">
+                        <i class="fas fa-times"></i> Annuler
+                      </button>
+                      <button type="submit" class="btn-submit">
+                        <span class="btn-content">
+                          <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
+                          <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
+                        </span>
+                        <span class="btn-effect"></span>
+                      </button>
+                    </div>
+                  </form>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>

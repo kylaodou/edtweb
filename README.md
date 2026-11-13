@@ -21,7 +21,7 @@ correspondante est [`modible_edt`](https://github.com/kylaodou/modible_edt).
 
 ## Stack technique
 
-- Angular 19 avec rendu côté serveur (Angular SSR, Express)
+- Angular 21 avec rendu côté serveur (Angular SSR, Express)
 - Bootstrap 5
 - Chart.js
 - Firebase
@@ -29,7 +29,7 @@ correspondante est [`modible_edt`](https://github.com/kylaodou/modible_edt).
 ## Prérequis
 
 - Node.js 20+ et npm
-- Angular CLI 19
+- Angular CLI 21
 - L'API `apiEDT` lancée sur http://localhost:8080
 
 ## Installation et lancement
@@ -59,6 +59,12 @@ npm run serve:ssr:gestion_emploi_temps
 ```
 
 Le serveur Node sert alors l'application pré-rendue sur http://localhost:4000.
+
+## Tests
+
+```bash
+npx ng test --watch=false
+```
 
 ## Auteur
 

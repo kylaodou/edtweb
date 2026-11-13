@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChildren, QueryList, ElementRef, Inject, PLATFORM_ID, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../../service/auth.service';
 @Component({
   selector: 'app-verification',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './verification.component.html',
   styleUrl: './verification.component.css'
 })

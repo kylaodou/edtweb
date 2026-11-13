@@ -1,198 +1,198 @@
 <style>
   .cours-stats {
-    display: flex;
-    gap: 12px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+  display: flex;
+  gap: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  .stat-card {
-    padding: 12px 16px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: white;
-    min-width: 120px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+.stat-card {
+padding: 12px 16px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+gap: 12px;
+color: white;
+min-width: 120px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .stat-icon i {
-    font-size: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.stat-icon i {
+font-size: 20px;
+background: rgba(255, 255, 255, 0.2);
+padding: 10px;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
 
-  .stat-info {
-    display: flex;
-    flex-direction: column;
-  }
+.stat-info {
+display: flex;
+flex-direction: column;
+}
 
-  .stat-value {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.2;
-  }
+.stat-value {
+font-size: 18px;
+font-weight: bold;
+line-height: 1.2;
+}
 
-  .stat-label {
-    font-size: 12px;
-    opacity: 0.9;
-  }
+.stat-label {
+font-size: 12px;
+opacity: 0.9;
+}
 
-  .btn-reset {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 25px 15px 21px;
-    border-radius: 24px;
-    border: none;
-    background: #3367d6;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow:
-      0 2px 4px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.4);
-    position: relative;
-    overflow: hidden;
-  }
+.btn-reset {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 15px 25px 15px 21px;
+border-radius: 24px;
+border: none;
+background: #3367d6;
+color: #fff;
+font-size: 1.2rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+box-shadow:
+0 2px 4px rgba(0,0,0,0.1),
+inset 0 1px 0 rgba(255,255,255,0.4);
+position: relative;
+overflow: hidden;
+}
 
-  .btn-reset::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+.btn-reset::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+opacity: 0;
+transition: opacity 0.3s ease;
+}
 
-  .btn-reset:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 4px 12px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.4);
-    background: linear-gradient(to right, #f1f3f5, #e9ecef);
-  }
+.btn-reset:hover {
+transform: translateY(-2px);
+box-shadow:
+0 4px 12px rgba(0,0,0,0.15),
+inset 0 1px 0 rgba(255,255,255,0.4);
+background: linear-gradient(to right, #f1f3f5, #e9ecef);
+}
 
-  .btn-reset:hover::before {
-    opacity: 1;
-  }
+.btn-reset:hover::before {
+opacity: 1;
+}
 
-  .btn-reset:active {
-    transform: translateY(0);
-    box-shadow:
-      0 1px 3px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-  }
+.btn-reset:active {
+transform: translateY(0);
+box-shadow:
+0 1px 3px rgba(0,0,0,0.1),
+inset 0 1px 0 rgba(255,255,255,0.2);
+}
 
-  .btn-reset i.fas {
-    color: white;
-    background: linear-gradient(135deg, #ff7b00, #ff9500);
-    padding: 8px;
-    border-radius: 50%;
-    font-size: 13px;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-      0 2px 4px rgba(255, 123, 0, 0.3),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-    transition: all 0.4s ease;
-    z-index: 1;
-  }
+.btn-reset i.fas {
+color: white;
+background: linear-gradient(135deg, #ff7b00, #ff9500);
+padding: 8px;
+border-radius: 50%;
+font-size: 13px;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow:
+0 2px 4px rgba(255, 123, 0, 0.3),
+inset 0 1px 0 rgba(255,255,255,0.2);
+transition: all 0.4s ease;
+z-index: 1;
+}
 
-  .btn-reset:hover i.fas {
-    background: linear-gradient(135deg, #ff9500, #ffaa00);
-    transform: rotate(90deg);
-  }
+.btn-reset:hover i.fas {
+background: linear-gradient(135deg, #ff9500, #ffaa00);
+transform: rotate(90deg);
+}
 
-  .btn-reset span {
-    position: relative;
-    transition: transform 0.3s ease;
-  }
+.btn-reset span {
+position: relative;
+transition: transform 0.3s ease;
+}
 
-  .btn-reset:hover span {
-    transform: translateX(2px);
-  }
+.btn-reset:hover span {
+transform: translateX(2px);
+}
 
-  /* Styles pour la barre de progression */
-  .progress-container {
-    width: 100%;
-    height: 10px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 5px;
-  }
-  td,th{
-    padding: 10px;
-  }
+/* Styles pour la barre de progression */
+.progress-container {
+width: 100%;
+height: 10px;
+background-color: #e0e0e0;
+border-radius: 5px;
+overflow: hidden;
+margin-top: 5px;
+}
+td,th{
+padding: 10px;
+}
 
-  .progress-bar {
-    height: 100%;
-    border-radius: 5px;
-    transition: width 0.3s ease;
-  }
+.progress-bar {
+height: 100%;
+border-radius: 5px;
+transition: width 0.3s ease;
+}
 
-  .filter-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
+.filter-group {
+display: flex;
+gap: 10px;
+margin-top: 10px;
+}
 
-  .filter-select {
-    padding: 8px 12px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #f8f9fa;
-    font-size: 14px;
-  }
+.filter-select {
+padding: 8px 12px;
+border-radius: 5px;
+border: 1px solid #ddd;
+background-color: #f8f9fa;
+font-size: 14px;
+}
 
-  /* Styles pour les modales */
-  .modal-container {
-    max-height: 85vh;
-    overflow-y: auto;
-  }
+/* Styles pour les modales */
+.modal-container {
+max-height: 85vh;
+overflow-y: auto;
+}
 
-  .form-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
+.form-row {
+display: flex;
+gap: 10px;
+margin-bottom: 15px;
+}
 
-  .form-row .form-group {
-    flex: 1;
-  }
+.form-row .form-group {
+flex: 1;
+}
 
-  .detail-value {
-    word-break: break-word;
-  }
+.detail-value {
+word-break: break-word;
+}
 
-  .credit-circle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #3367d6;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
+.credit-circle {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background-color: #3367d6;
+color: white;
+font-weight: bold;
+font-size: 16px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 </style>
 <div class="filiere-container">
   <div class="header-section">
@@ -214,475 +214,516 @@
         [(ngModel)]="searchText"
         placeholder="Rechercher un cours..."
         class="search-input"
-      >
-      <button *ngIf="searchText" class="clear-search" (click)="searchText = ''">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-
-    <div class="filter-group">
-      <select class="filter-select" [(ngModel)]="selectedSemestre">
-        <option value="">Tous les semestres</option>
-        <option *ngFor="let semestre of semestres" [value]="semestre">{{ semestre }}</option>
-      </select>
-
-      <select class="filter-select" [(ngModel)]="selectedClasse">
-        <option value="">Toutes les classes</option>
-
-        <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.nom }}</option>
-      </select>
-
-      <select class="filter-select" [(ngModel)]="selectedEnseignant">
-        <option value="">Tous les enseignants</option>
-        <option *ngFor="let enseignant of enseignants" [value]="enseignant.id">{{ enseignant.nom }} {{ enseignant.prenom }}</option>
-      </select>
-    </div>
-
-  </div>
-
-  <div class="cours-stats">
-    <div class="stat-card" style="background-color: #3367d6; color: white;">
-      <div class="stat-icon"><i class="fas fa-book" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ cours.length }}</div>
-        <div class="stat-label">Cours</div>
-      </div>
-    </div>
-
-    <div class="stat-card" style="background-color: #4CAF50; color: white;">
-      <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ filteredCours.length }}</div>
-        <div class="stat-label">Résultats</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Message d'erreur API -->
-  <div class="error-message-container" *ngIf="errorMessage" [@fadeInOut]>
-    <div class="api-error-message">
-      <i class="fas fa-exclamation-circle"></i>
-      <span>{{ errorMessage }}</span>
-    </div>
-    <button class="btn-retry" (click)="loadCours()">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réessayer</span>
-    </button>
-  </div>
-
-  <!-- Loading Spinner -->
-  <div class="loading-container" *ngIf="isLoading" [@fadeInOut]>
-    <div class="loading-spinner">
-      <div class="spinner-inner"></div>
-    </div>
-    <p class="loading-text">Chargement des cours...</p>
-  </div>
-
-  <!-- Empty State -->
-  <div class="empty-state" *ngIf="!isLoading && filteredCours.length === 0 && !errorMessage" [@fadeInOut]>
-    <div class="empty-illustration">
-      <i class="fas fa-book"></i>
-    </div>
-    <h3 class="empty-title">Aucun cours trouvé</h3>
-    <p class="empty-text">
-      {{ searchText || selectedSemestre || selectedClasse || selectedEnseignant ? 'Aucun cours ne correspond à vos critères de recherche.' : 'Commencez par ajouter un nouveau cours!' }}
-    </p>
-    <button class="btn-add-filiere empty-button" (click)="openAddForm()" *ngIf="!searchText && !selectedSemestre && !selectedClasse && !selectedEnseignant">
-      <i class="fas fa-plus-circle"></i>
-      <span>Ajouter un cours</span>
-    </button>
-    <button class="btn-reset empty-button" (click)="resetFilters()" *ngIf="searchText || selectedSemestre || selectedClasse || selectedEnseignant">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réinitialiser les filtres</span>
-    </button>
-  </div>
-
-  <!-- Table View -->
-  <div class="table-container" *ngIf="!isLoading && filteredCours.length > 0" [@fadeInOut]>
-    <table style="width: 100% !important;" class="cours-table">
-      <thead>
-        <tr>
-          <th class="th-code">Code</th>
-          <th class="th-intitule">Intitulé</th>
-          <th class="th-classe">Classe</th>
-          <th class="th-enseignant">Enseignant</th>
-          <th class="th-credit">Crédit</th>
-          <th class="th-progression">Progression</th>
-          <th class="th-semestre">Semestre</th>
-          <th class="th-actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cours of filteredCours; let i = index" [ngStyle]="getRowColor(i)" class="cours-row">
-          <td class="td-code">{{ cours.code }}</td>
-          <td class="td-intitule">{{ truncateText(cours.intitule, 30) }}</td>
-          <td class="td-classe">{{ cours.classeNom || getClasseNom(cours.classeId) }}</td>
-          <td class="td-enseignant">{{ cours.enseignantNom || getEnseignantNom(cours.enseignantId) }}</td>
-          <td class="td-credit">
-            <div class="credit-circle">{{ cours.credit }}</div>
-          </td>
-          <td class="td-progression">
-            <div>{{ getVolumeHoraireEffectue(cours) }}/{{ getVolumeHoraireTotal(cours) }} heures</div>
-            <div class="progress-container">
-              <div class="progress-bar"
-                   [style.width.%]="getProgressPercentage(cours)"
-                   [style.background-color]="getProgressColor(getProgressPercentage(cours))">
-              </div>
-            </div>
-          </td>
-          <td class="td-semestre">
-            <span class="semestre-badge">{{ cours.semestre }}</span>
-          </td>
-          <td class="td-actions">
-            <button class="btn-view action-btn" (click)="viewCours(cours)" title="Voir ce cours">
-              <i class="fas fa-eye"></i>
-            </button>
-            <button class="btn-edit action-btn" (click)="editCours(cours)" title="Modifier ce cours">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="btn-delete action-btn" (click)="deleteCours(cours)" title="Supprimer ce cours">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Formulaire (Modal) -->
-  <div class="modal-backdrop" *ngIf="showForm || showViewMode" [@fadeInOut]>
-    <div class="modal-wrapper" [@zoomIn]>
-      <div class="modal-container">
-        <div class="modal-header">
-          <div class="header-content">
-            <div class="header-icon">
-              <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
-            </div>
-            <h2 class="modal-title">
-              {{ showViewMode ? 'Détails du cours' : (isEditMode ? 'Modifier un cours' : 'Ajouter un nouveau cours') }}
-            </h2>
-          </div>
-          <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+        >
+        @if (searchText) {
+          <button class="clear-search" (click)="searchText = ''">
             <i class="fas fa-times"></i>
           </button>
+        }
+      </div>
+
+      <div class="filter-group">
+        <select class="filter-select" [(ngModel)]="selectedSemestre">
+          <option value="">Tous les semestres</option>
+          @for (semestre of semestres; track semestre) {
+            <option [value]="semestre">{{ semestre }}</option>
+          }
+        </select>
+
+        <select class="filter-select" [(ngModel)]="selectedClasse">
+          <option value="">Toutes les classes</option>
+
+          @for (classe of classes; track classe) {
+            <option [value]="classe.id">{{ classe.nom }}</option>
+          }
+        </select>
+
+        <select class="filter-select" [(ngModel)]="selectedEnseignant">
+          <option value="">Tous les enseignants</option>
+          @for (enseignant of enseignants; track enseignant) {
+            <option [value]="enseignant.id">{{ enseignant.nom }} {{ enseignant.prenom }}</option>
+          }
+        </select>
+      </div>
+
+    </div>
+
+    <div class="cours-stats">
+      <div class="stat-card" style="background-color: #3367d6; color: white;">
+        <div class="stat-icon"><i class="fas fa-book" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ cours.length }}</div>
+          <div class="stat-label">Cours</div>
         </div>
+      </div>
 
-        <div class="modal-body">
-          <div class="form-illustration">
-            <i class="fas fa-book illustration-icon"></i>
-          </div>
-
-          <!-- Mode affichage détails -->
-          <div *ngIf="showViewMode && selectedCours" class="view-details">
-            <div class="detail-item">
-              <div class="detail-label">Code:</div>
-              <div class="detail-value">{{ selectedCours.code }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Intitulé:</div>
-              <div class="detail-value">{{ selectedCours.intitule }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Classe:</div>
-              <div class="detail-value">{{ selectedCours.classeNom || getClasseNom(selectedCours.classeId) }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Enseignant:</div>
-              <div class="detail-value">{{ selectedCours.enseignantNom || getEnseignantNom(selectedCours.enseignantId) }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Volume Horaire CT:</div>
-              <div class="detail-value">{{ selectedCours.vhCT }} heures</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Volume Horaire TD:</div>
-              <div class="detail-value">{{ selectedCours.vhTD }} heures</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Volume Horaire TP:</div>
-              <div class="detail-value">{{ selectedCours.vhTP }} heures</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Volume Horaire Restant CT:</div>
-              <div class="detail-value">{{ selectedCours.restantVhCT }} heures</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Volume Horaire Restant TD:</div>
-              <div class="detail-value">{{ selectedCours.restantVhTD }} heures</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Volume Horaire Restant TP:</div>
-              <div class="detail-value">{{ selectedCours.restantVhTP }} heures</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Crédit:</div>
-              <div class="detail-value">{{ selectedCours.credit }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Semestre:</div>
-              <div class="detail-value">{{ selectedCours.semestre }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Progression:</div>
-              <div class="detail-value">
-                <div class="progress-container">
-                  <div class="progress-bar"
-                       [style.width.%]="getProgressPercentage(selectedCours)"
-                       [style.background-color]="getProgressColor(getProgressPercentage(selectedCours))">
-                  </div>
-                </div>
-                {{ getVolumeHoraireEffectue(selectedCours) }}/{{ getVolumeHoraireTotal(selectedCours) }} heures ({{ getProgressPercentage(selectedCours) | number:'1.0-0' }}%)
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" (click)="closeForm()">
-                <i class="fas fa-times"></i> Fermer
-              </button>
-              <button type="button" class="btn-submit" (click)="switchToEditMode()">
-                <span class="btn-content">
-                  <i class="fas fa-edit"></i>
-                  <span>Modifier</span>
-                </span>
-                <span class="btn-effect"></span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Mode édition ou création -->
-          <form [formGroup]="coursForm" (ngSubmit)="submitForm()" class="animated-form" *ngIf="!showViewMode">
-            <div class="form-group">
-              <label for="code">Code</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="codeFocused">
-                  <i class="fas fa-code input-icon"></i>
-                  <input
-                    type="text"
-                    id="code"
-                    formControlName="code"
-                    placeholder="Entrez le code du cours"
-                    [ngClass]="{'input-error': formSubmitted && coursForm.get('code')?.invalid}"
-                    (focus)="codeFocused = true"
-                    (blur)="codeFocused = false"
-                  >
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && coursForm.get('code')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span *ngIf="coursForm.get('code')?.errors?.['required']">Le code est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="intitule">Intitulé</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="intituleFocused">
-                  <i class="fas fa-tag input-icon"></i>
-                  <input
-                    type="text"
-                    id="intitule"
-                    formControlName="intitule"
-                    placeholder="Entrez l'intitulé du cours"
-                    [ngClass]="{'input-error': formSubmitted && coursForm.get('intitule')?.invalid}"
-                    (focus)="intituleFocused = true"
-                    (blur)="intituleFocused = false"
-                  >
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && coursForm.get('intitule')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span *ngIf="coursForm.get('intitule')?.errors?.['required']">L'intitulé est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="vhCT">Volume Horaire CT</label>
-                <div class="input-wrapper">
-                  <div class="input-container" [class.focused]="vhCTFocused">
-                    <i class="fas fa-clock input-icon"></i>
-                    <input
-                      type="number"
-                      id="vhCT"
-                      formControlName="vhCT"
-                      placeholder="Heures CT"
-                      [ngClass]="{'input-error': formSubmitted && coursForm.get('vhCT')?.invalid}"
-                      (focus)="vhCTFocused = true"
-                      (blur)="vhCTFocused = false"
-                    >
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && coursForm.get('vhCT')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span>Volume horaire CT invalide</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="vhTD">Volume Horaire TD</label>
-                <div class="input-wrapper">
-                  <div class="input-container" [class.focused]="vhTDFocused">
-                    <i class="fas fa-clock input-icon"></i>
-                    <input
-                      type="number"
-                      id="vhTD"
-                      formControlName="vhTD"
-                      placeholder="Heures TD"
-                      [ngClass]="{'input-error': formSubmitted && coursForm.get('vhTD')?.invalid}"
-                      (focus)="vhTDFocused = true"
-                      (blur)="vhTDFocused = false"
-                    >
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && coursForm.get('vhTD')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span>Volume horaire TD invalide</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="vhTP">Volume Horaire TP</label>
-                <div class="input-wrapper">
-                  <div class="input-container" [class.focused]="vhTPFocused">
-                    <i class="fas fa-clock input-icon"></i>
-                    <input
-                      type="number"
-                      id="vhTP"
-                      formControlName="vhTP"
-                      placeholder="Heures TP"
-                      [ngClass]="{'input-error': formSubmitted && coursForm.get('vhTP')?.invalid}"
-                      (focus)="vhTPFocused = true"
-                      (blur)="vhTPFocused = false"
-                    >
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && coursForm.get('vhTP')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span>Volume horaire TP invalide</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="credit">Crédit</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="creditFocused">
-                  <i class="fas fa-star input-icon"></i>
-                  <input
-                    type="number"
-                    id="credit"
-                    formControlName="credit"
-                    placeholder="Nombre de crédits"
-                    [ngClass]="{'input-error': formSubmitted && coursForm.get('credit')?.invalid}"
-                    (focus)="creditFocused = true"
-                    (blur)="creditFocused = false"
-                  >
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && coursForm.get('credit')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span>Crédit invalide</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="classeId">Classe</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="classeFocused">
-                  <i class="fas fa-users input-icon"></i>
-                  <select
-                    id="classeId"
-                    formControlName="classeId"
-                    [ngClass]="{'input-error': formSubmitted && coursForm.get('classeId')?.invalid}"
-                    (focus)="classeFocused = true"
-                    (blur)="classeFocused = false"
-                  >
-                    <option value="">Sélectionnez une classe</option>
-                    <option *ngFor="let classe of classes" [value]="classe.id">{{ classe.nom }}</option>
-                  </select>
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && coursForm.get('classeId')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span>La classe est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="enseignantId">Enseignant</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="enseignantFocused">
-                  <i class="fas fa-chalkboard-teacher input-icon"></i>
-                  <select
-                    id="enseignantId"
-                    formControlName="enseignantId"
-                    [ngClass]="{'input-error': formSubmitted && coursForm.get('enseignantId')?.invalid}"
-                    (focus)="enseignantFocused = true"
-                    (blur)="enseignantFocused = false"
-                  >
-                    <option value="">Sélectionnez un enseignant</option>
-                    <option *ngFor="let enseignant of enseignants" [value]="enseignant.id">{{ enseignant.nom }} {{ enseignant.prenom }}</option>
-                  </select>
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && coursForm.get('enseignantId')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span>L'enseignant est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="semestre">Semestre</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="semestreFocused">
-                  <i class="fas fa-calendar-alt input-icon"></i>
-                  <select
-                    id="semestre"
-                    formControlName="semestre"
-                    [ngClass]="{'input-error': formSubmitted && coursForm.get('semestre')?.invalid}"
-                    (focus)="semestreFocused = true"
-                    (blur)="semestreFocused = false"
-                  >
-                    <option value="">Sélectionnez un semestre</option>
-                    <option value="Semestre 1">Semestre 1</option>
-                    <option value="Semestre 2">Semestre 2</option>
-                    <option value="Semestre 3">Semestre 3</option>
-                    <option value="Semestre 4">Semestre 4</option>
-                    <option value="Semestre 5">Semestre 5</option>
-                    <option value="Semestre 6">Semestre 6</option>
-                  </select>
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && coursForm.get('semestre')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span>Le semestre est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" (click)="closeForm()">
-                <i class="fas fa-times"></i> Annuler
-              </button>
-              <button type="submit" class="btn-submit">
-                <span class="btn-content">
-                  <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
-                  <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
-                </span>
-                <span class="btn-effect"></span>
-              </button>
-            </div>
-          </form>
+      <div class="stat-card" style="background-color: #4CAF50; color: white;">
+        <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ filteredCours.length }}</div>
+          <div class="stat-label">Résultats</div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- Message d'erreur API -->
+    @if (errorMessage) {
+      <div class="error-message-container" [@fadeInOut]>
+        <div class="api-error-message">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
+        <button class="btn-retry" (click)="loadCours()">
+          <i class="fas fa-sync-alt"></i>
+          <span>Réessayer</span>
+        </button>
+      </div>
+    }
+
+    <!-- Loading Spinner -->
+    @if (isLoading) {
+      <div class="loading-container" [@fadeInOut]>
+        <div class="loading-spinner">
+          <div class="spinner-inner"></div>
+        </div>
+        <p class="loading-text">Chargement des cours...</p>
+      </div>
+    }
+
+    <!-- Empty State -->
+    @if (!isLoading && filteredCours.length === 0 && !errorMessage) {
+      <div class="empty-state" [@fadeInOut]>
+        <div class="empty-illustration">
+          <i class="fas fa-book"></i>
+        </div>
+        <h3 class="empty-title">Aucun cours trouvé</h3>
+        <p class="empty-text">
+          {{ searchText || selectedSemestre || selectedClasse || selectedEnseignant ? 'Aucun cours ne correspond à vos critères de recherche.' : 'Commencez par ajouter un nouveau cours!' }}
+        </p>
+        @if (!searchText && !selectedSemestre && !selectedClasse && !selectedEnseignant) {
+          <button class="btn-add-filiere empty-button" (click)="openAddForm()">
+            <i class="fas fa-plus-circle"></i>
+            <span>Ajouter un cours</span>
+          </button>
+        }
+        @if (searchText || selectedSemestre || selectedClasse || selectedEnseignant) {
+          <button class="btn-reset empty-button" (click)="resetFilters()">
+            <i class="fas fa-sync-alt"></i>
+            <span>Réinitialiser les filtres</span>
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Table View -->
+    @if (!isLoading && filteredCours.length > 0) {
+      <div class="table-container" [@fadeInOut]>
+        <table style="width: 100% !important;" class="cours-table">
+          <thead>
+            <tr>
+              <th class="th-code">Code</th>
+              <th class="th-intitule">Intitulé</th>
+              <th class="th-classe">Classe</th>
+              <th class="th-enseignant">Enseignant</th>
+              <th class="th-credit">Crédit</th>
+              <th class="th-progression">Progression</th>
+              <th class="th-semestre">Semestre</th>
+              <th class="th-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (cours of filteredCours; track cours; let i = $index) {
+              <tr [ngStyle]="getRowColor(i)" class="cours-row">
+                <td class="td-code">{{ cours.code }}</td>
+                <td class="td-intitule">{{ truncateText(cours.intitule, 30) }}</td>
+                <td class="td-classe">{{ cours.classeNom || getClasseNom(cours.classeId) }}</td>
+                <td class="td-enseignant">{{ cours.enseignantNom || getEnseignantNom(cours.enseignantId) }}</td>
+                <td class="td-credit">
+                  <div class="credit-circle">{{ cours.credit }}</div>
+                </td>
+                <td class="td-progression">
+                  <div>{{ getVolumeHoraireEffectue(cours) }}/{{ getVolumeHoraireTotal(cours) }} heures</div>
+                  <div class="progress-container">
+                    <div class="progress-bar"
+                      [style.width.%]="getProgressPercentage(cours)"
+                      [style.background-color]="getProgressColor(getProgressPercentage(cours))">
+                    </div>
+                  </div>
+                </td>
+                <td class="td-semestre">
+                  <span class="semestre-badge">{{ cours.semestre }}</span>
+                </td>
+                <td class="td-actions">
+                  <button class="btn-view action-btn" (click)="viewCours(cours)" title="Voir ce cours">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn-edit action-btn" (click)="editCours(cours)" title="Modifier ce cours">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-delete action-btn" (click)="deleteCours(cours)" title="Supprimer ce cours">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <!-- Formulaire (Modal) -->
+    @if (showForm || showViewMode) {
+      <div class="modal-backdrop" [@fadeInOut]>
+        <div class="modal-wrapper" [@zoomIn]>
+          <div class="modal-container">
+            <div class="modal-header">
+              <div class="header-content">
+                <div class="header-icon">
+                  <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
+                </div>
+                <h2 class="modal-title">
+                  {{ showViewMode ? 'Détails du cours' : (isEditMode ? 'Modifier un cours' : 'Ajouter un nouveau cours') }}
+                </h2>
+              </div>
+              <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-illustration">
+                <i class="fas fa-book illustration-icon"></i>
+              </div>
+              <!-- Mode affichage détails -->
+              @if (showViewMode && selectedCours) {
+                <div class="view-details">
+                  <div class="detail-item">
+                    <div class="detail-label">Code:</div>
+                    <div class="detail-value">{{ selectedCours.code }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Intitulé:</div>
+                    <div class="detail-value">{{ selectedCours.intitule }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Classe:</div>
+                    <div class="detail-value">{{ selectedCours.classeNom || getClasseNom(selectedCours.classeId) }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Enseignant:</div>
+                    <div class="detail-value">{{ selectedCours.enseignantNom || getEnseignantNom(selectedCours.enseignantId) }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Volume Horaire CT:</div>
+                    <div class="detail-value">{{ selectedCours.vhCT }} heures</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Volume Horaire TD:</div>
+                    <div class="detail-value">{{ selectedCours.vhTD }} heures</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Volume Horaire TP:</div>
+                    <div class="detail-value">{{ selectedCours.vhTP }} heures</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Volume Horaire Restant CT:</div>
+                    <div class="detail-value">{{ selectedCours.restantVhCT }} heures</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Volume Horaire Restant TD:</div>
+                    <div class="detail-value">{{ selectedCours.restantVhTD }} heures</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Volume Horaire Restant TP:</div>
+                    <div class="detail-value">{{ selectedCours.restantVhTP }} heures</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Crédit:</div>
+                    <div class="detail-value">{{ selectedCours.credit }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Semestre:</div>
+                    <div class="detail-value">{{ selectedCours.semestre }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Progression:</div>
+                    <div class="detail-value">
+                      <div class="progress-container">
+                        <div class="progress-bar"
+                          [style.width.%]="getProgressPercentage(selectedCours)"
+                          [style.background-color]="getProgressColor(getProgressPercentage(selectedCours))">
+                        </div>
+                      </div>
+                      {{ getVolumeHoraireEffectue(selectedCours) }}/{{ getVolumeHoraireTotal(selectedCours) }} heures ({{ getProgressPercentage(selectedCours) | number:'1.0-0' }}%)
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" class="btn-cancel" (click)="closeForm()">
+                      <i class="fas fa-times"></i> Fermer
+                    </button>
+                    <button type="button" class="btn-submit" (click)="switchToEditMode()">
+                      <span class="btn-content">
+                        <i class="fas fa-edit"></i>
+                        <span>Modifier</span>
+                      </span>
+                      <span class="btn-effect"></span>
+                    </button>
+                  </div>
+                </div>
+              }
+              <!-- Mode édition ou création -->
+              @if (!showViewMode) {
+                <form [formGroup]="coursForm" (ngSubmit)="submitForm()" class="animated-form">
+                  <div class="form-group">
+                    <label for="code">Code</label>
+                    <div class="input-wrapper">
+                      <div class="input-container" [class.focused]="codeFocused">
+                        <i class="fas fa-code input-icon"></i>
+                        <input
+                          type="text"
+                          id="code"
+                          formControlName="code"
+                          placeholder="Entrez le code du cours"
+                          [ngClass]="{'input-error': formSubmitted && coursForm.get('code')?.invalid}"
+                          (focus)="codeFocused = true"
+                          (blur)="codeFocused = false"
+                          >
+                          <span class="input-highlight"></span>
+                        </div>
+                        @if (formSubmitted && coursForm.get('code')?.invalid) {
+                          <div class="error-message" [@fadeInOut]>
+                            <i class="fas fa-exclamation-circle"></i>
+                            @if (coursForm.get('code')?.errors?.['required']) {
+                              <span>Le code est obligatoire</span>
+                            }
+                          </div>
+                        }
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="intitule">Intitulé</label>
+                      <div class="input-wrapper">
+                        <div class="input-container" [class.focused]="intituleFocused">
+                          <i class="fas fa-tag input-icon"></i>
+                          <input
+                            type="text"
+                            id="intitule"
+                            formControlName="intitule"
+                            placeholder="Entrez l'intitulé du cours"
+                            [ngClass]="{'input-error': formSubmitted && coursForm.get('intitule')?.invalid}"
+                            (focus)="intituleFocused = true"
+                            (blur)="intituleFocused = false"
+                            >
+                            <span class="input-highlight"></span>
+                          </div>
+                          @if (formSubmitted && coursForm.get('intitule')?.invalid) {
+                            <div class="error-message" [@fadeInOut]>
+                              <i class="fas fa-exclamation-circle"></i>
+                              @if (coursForm.get('intitule')?.errors?.['required']) {
+                                <span>L'intitulé est obligatoire</span>
+                              }
+                            </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="vhCT">Volume Horaire CT</label>
+                          <div class="input-wrapper">
+                            <div class="input-container" [class.focused]="vhCTFocused">
+                              <i class="fas fa-clock input-icon"></i>
+                              <input
+                                type="number"
+                                id="vhCT"
+                                formControlName="vhCT"
+                                placeholder="Heures CT"
+                                [ngClass]="{'input-error': formSubmitted && coursForm.get('vhCT')?.invalid}"
+                                (focus)="vhCTFocused = true"
+                                (blur)="vhCTFocused = false"
+                                >
+                                <span class="input-highlight"></span>
+                              </div>
+                              @if (formSubmitted && coursForm.get('vhCT')?.invalid) {
+                                <div class="error-message" [@fadeInOut]>
+                                  <i class="fas fa-exclamation-circle"></i>
+                                  <span>Volume horaire CT invalide</span>
+                                </div>
+                              }
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="vhTD">Volume Horaire TD</label>
+                            <div class="input-wrapper">
+                              <div class="input-container" [class.focused]="vhTDFocused">
+                                <i class="fas fa-clock input-icon"></i>
+                                <input
+                                  type="number"
+                                  id="vhTD"
+                                  formControlName="vhTD"
+                                  placeholder="Heures TD"
+                                  [ngClass]="{'input-error': formSubmitted && coursForm.get('vhTD')?.invalid}"
+                                  (focus)="vhTDFocused = true"
+                                  (blur)="vhTDFocused = false"
+                                  >
+                                  <span class="input-highlight"></span>
+                                </div>
+                                @if (formSubmitted && coursForm.get('vhTD')?.invalid) {
+                                  <div class="error-message" [@fadeInOut]>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Volume horaire TD invalide</span>
+                                  </div>
+                                }
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="vhTP">Volume Horaire TP</label>
+                              <div class="input-wrapper">
+                                <div class="input-container" [class.focused]="vhTPFocused">
+                                  <i class="fas fa-clock input-icon"></i>
+                                  <input
+                                    type="number"
+                                    id="vhTP"
+                                    formControlName="vhTP"
+                                    placeholder="Heures TP"
+                                    [ngClass]="{'input-error': formSubmitted && coursForm.get('vhTP')?.invalid}"
+                                    (focus)="vhTPFocused = true"
+                                    (blur)="vhTPFocused = false"
+                                    >
+                                    <span class="input-highlight"></span>
+                                  </div>
+                                  @if (formSubmitted && coursForm.get('vhTP')?.invalid) {
+                                    <div class="error-message" [@fadeInOut]>
+                                      <i class="fas fa-exclamation-circle"></i>
+                                      <span>Volume horaire TP invalide</span>
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="credit">Crédit</label>
+                              <div class="input-wrapper">
+                                <div class="input-container" [class.focused]="creditFocused">
+                                  <i class="fas fa-star input-icon"></i>
+                                  <input
+                                    type="number"
+                                    id="credit"
+                                    formControlName="credit"
+                                    placeholder="Nombre de crédits"
+                                    [ngClass]="{'input-error': formSubmitted && coursForm.get('credit')?.invalid}"
+                                    (focus)="creditFocused = true"
+                                    (blur)="creditFocused = false"
+                                    >
+                                    <span class="input-highlight"></span>
+                                  </div>
+                                  @if (formSubmitted && coursForm.get('credit')?.invalid) {
+                                    <div class="error-message" [@fadeInOut]>
+                                      <i class="fas fa-exclamation-circle"></i>
+                                      <span>Crédit invalide</span>
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="classeId">Classe</label>
+                                <div class="input-wrapper">
+                                  <div class="input-container" [class.focused]="classeFocused">
+                                    <i class="fas fa-users input-icon"></i>
+                                    <select
+                                      id="classeId"
+                                      formControlName="classeId"
+                                      [ngClass]="{'input-error': formSubmitted && coursForm.get('classeId')?.invalid}"
+                                      (focus)="classeFocused = true"
+                                      (blur)="classeFocused = false"
+                                      >
+                                      <option value="">Sélectionnez une classe</option>
+                                      @for (classe of classes; track classe) {
+                                        <option [value]="classe.id">{{ classe.nom }}</option>
+                                      }
+                                    </select>
+                                    <span class="input-highlight"></span>
+                                  </div>
+                                  @if (formSubmitted && coursForm.get('classeId')?.invalid) {
+                                    <div class="error-message" [@fadeInOut]>
+                                      <i class="fas fa-exclamation-circle"></i>
+                                      <span>La classe est obligatoire</span>
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="enseignantId">Enseignant</label>
+                                <div class="input-wrapper">
+                                  <div class="input-container" [class.focused]="enseignantFocused">
+                                    <i class="fas fa-chalkboard-teacher input-icon"></i>
+                                    <select
+                                      id="enseignantId"
+                                      formControlName="enseignantId"
+                                      [ngClass]="{'input-error': formSubmitted && coursForm.get('enseignantId')?.invalid}"
+                                      (focus)="enseignantFocused = true"
+                                      (blur)="enseignantFocused = false"
+                                      >
+                                      <option value="">Sélectionnez un enseignant</option>
+                                      @for (enseignant of enseignants; track enseignant) {
+                                        <option [value]="enseignant.id">{{ enseignant.nom }} {{ enseignant.prenom }}</option>
+                                      }
+                                    </select>
+                                    <span class="input-highlight"></span>
+                                  </div>
+                                  @if (formSubmitted && coursForm.get('enseignantId')?.invalid) {
+                                    <div class="error-message" [@fadeInOut]>
+                                      <i class="fas fa-exclamation-circle"></i>
+                                      <span>L'enseignant est obligatoire</span>
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="semestre">Semestre</label>
+                                <div class="input-wrapper">
+                                  <div class="input-container" [class.focused]="semestreFocused">
+                                    <i class="fas fa-calendar-alt input-icon"></i>
+                                    <select
+                                      id="semestre"
+                                      formControlName="semestre"
+                                      [ngClass]="{'input-error': formSubmitted && coursForm.get('semestre')?.invalid}"
+                                      (focus)="semestreFocused = true"
+                                      (blur)="semestreFocused = false"
+                                      >
+                                      <option value="">Sélectionnez un semestre</option>
+                                      <option value="Semestre 1">Semestre 1</option>
+                                      <option value="Semestre 2">Semestre 2</option>
+                                      <option value="Semestre 3">Semestre 3</option>
+                                      <option value="Semestre 4">Semestre 4</option>
+                                      <option value="Semestre 5">Semestre 5</option>
+                                      <option value="Semestre 6">Semestre 6</option>
+                                    </select>
+                                    <span class="input-highlight"></span>
+                                  </div>
+                                  @if (formSubmitted && coursForm.get('semestre')?.invalid) {
+                                    <div class="error-message" [@fadeInOut]>
+                                      <i class="fas fa-exclamation-circle"></i>
+                                      <span>Le semestre est obligatoire</span>
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                              <div class="form-actions">
+                                <button type="button" class="btn-cancel" (click)="closeForm()">
+                                  <i class="fas fa-times"></i> Annuler
+                                </button>
+                                <button type="submit" class="btn-submit">
+                                  <span class="btn-content">
+                                    <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
+                                    <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
+                                  </span>
+                                  <span class="btn-effect"></span>
+                                </button>
+                              </div>
+                            </form>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>

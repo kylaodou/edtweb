@@ -1,3 +1,5 @@
+import './app/locale';
+import { provideZoneChangeDetection } from "@angular/core";
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
@@ -10,7 +12,7 @@ import { environment, firebaseConfig } from './app/environnement/environment';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes),
+    provideZoneChangeDetection(),provideRouter(routes),
     provideAnimations(),
     provideHttpClient(),
     provideFirebaseApp(() => initializeApp(firebaseConfig)), // 👈 initialise Firebase
