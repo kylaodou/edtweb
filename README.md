@@ -1,59 +1,65 @@
-# GestionEmploiTemps
+# EDT Web — Gestion des emplois du temps
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+Application web de gestion des emplois du temps d'un établissement d'enseignement supérieur.
+L'administration y gère les filières, classes, salles, cours, enseignants et étudiants, crée les
+séances et publie les emplois du temps ; enseignants, étudiants et parents les consultent.
 
-## Development server
+Elle s'appuie sur l'API [`apiEDT`](https://github.com/kylaodou/apiEDT). L'application mobile
+correspondante est [`modible_edt`](https://github.com/kylaodou/modible_edt).
 
-To start a local development server, run:
+## Fonctionnalités
 
-```bash
-ng serve
-```
+- **Comptes** : inscription, connexion avec code de vérification par e-mail, validation des comptes
+  par l'administration.
+- **Tableau de bord** avec statistiques (Chart.js).
+- **Référentiels** : filières, classes, salles, cours.
+- **Personnes** : enseignants, étudiants, utilisateurs, administration.
+- **Séances** : création des séances (cours, salle, enseignant, créneau).
+- **Emploi du temps** : affichage par classe et par semaine.
+- **Espaces dédiés** : enseignant, étudiant, parent.
+- Animations Lottie sur les écrans de connexion et d'inscription.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Stack technique
 
-## Code scaffolding
+- Angular 19 avec rendu côté serveur (Angular SSR, Express)
+- Bootstrap 5
+- Chart.js
+- Firebase
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Prérequis
 
-```bash
-ng generate component component-name
-```
+- Node.js 20+ et npm
+- Angular CLI 19
+- L'API `apiEDT` lancée sur http://localhost:8080
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Installation et lancement
 
 ```bash
-ng test
+git clone https://github.com/kylaodou/edtweb.git
+cd edtweb
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+L'application est disponible sur http://localhost:4200.
 
-For end-to-end (e2e) testing, run:
+## Configuration
+
+L'URL de l'API se règle dans `src/app/environnement/` :
+
+```ts
+apiUrl: 'http://localhost:8080/api'
+```
+
+## Build et rendu serveur
 
 ```bash
-ng e2e
+npm run build
+npm run serve:ssr:gestion_emploi_temps
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Le serveur Node sert alors l'application pré-rendue sur http://localhost:4000.
 
-## Additional Resources
+## Auteur
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+[@kylaodou](https://github.com/kylaodou)
