@@ -12,63 +12,87 @@
     </a>
 
     <!-- Menu Enseignant - accessible à tous -->
-    <a *ngIf="hasAccess('enseignants')" routerLink="/enseignants" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-chalkboard-teacher"></i> Enseignant
-    </a>
+    @if (hasAccess('enseignants')) {
+      <a routerLink="/enseignants" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-chalkboard-teacher"></i> Enseignant
+      </a>
+    }
 
     <!-- Menu Cours - accessible à tous -->
-    <a *ngIf="hasAccess('cours')" routerLink="/cours" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-book"></i> Cours
-    </a>
+    @if (hasAccess('cours')) {
+      <a routerLink="/cours" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-book"></i> Cours
+      </a>
+    }
 
     <!-- Menu Salle - restreint pour ADMINISTRATION -->
-    <a *ngIf="hasAccess('salles')" routerLink="/salles" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-door-open"></i> Salle
-    </a>
+    @if (hasAccess('salles')) {
+      <a routerLink="/salles" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-door-open"></i> Salle
+      </a>
+    }
 
     <!-- Menu Filière - restreint pour ADMINISTRATION -->
-    <a *ngIf="hasAccess('filieres')" routerLink="/filieres" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-graduation-cap"></i> Filière
-    </a>
+    @if (hasAccess('filieres')) {
+      <a routerLink="/filieres" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-graduation-cap"></i> Filière
+      </a>
+    }
 
     <!-- Menu Classes - accessible à tous -->
-    <a *ngIf="hasAccess('classes')" routerLink="/classes" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-graduation-cap"></i> Classes
-    </a>
+    @if (hasAccess('classes')) {
+      <a routerLink="/classes" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-graduation-cap"></i> Classes
+      </a>
+    }
 
     <!-- Menu Séances - accessible à tous -->
-    <a *ngIf="hasAccess('creation-seances')" routerLink="/creation-seances" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-calendar-plus"></i> Création des Séances
-    </a>
+    @if (hasAccess('creation-seances')) {
+      <a routerLink="/creation-seances" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-calendar-plus"></i> Création des Séances
+      </a>
+    }
 
-    <a *ngIf="hasAccess('emploi-du-temps')" routerLink="/emploi-du-temps" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-calendar-week"></i> Emploi du Temps
-    </a>
+    @if (hasAccess('emploi-du-temps')) {
+      <a routerLink="/emploi-du-temps" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-calendar-week"></i> Emploi du Temps
+      </a>
+    }
 
     <!-- Menu Étudiant - accessible à tous -->
-    <a *ngIf="hasAccess('etudiant')" routerLink="/etudiant" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-user-graduate"></i> Étudiant
-    </a>
+    @if (hasAccess('etudiant')) {
+      <a routerLink="/etudiant" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-user-graduate"></i> Étudiant
+      </a>
+    }
 
     <!-- Menu Administration - restreint pour ADMINISTRATION -->
-    <a *ngIf="hasAccess('administration')" routerLink="/administration" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-building"></i> Membre de l'administration
-    </a>
+    @if (hasAccess('administration')) {
+      <a routerLink="/administration" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-building"></i> Membre de l'administration
+      </a>
+    }
 
     <!-- Menu Comptes en attente - restreint pour ADMINISTRATION -->
-    <a *ngIf="hasAccess('validation-comptes')" routerLink="/validation-comptes" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-building"></i> Comptes en attentes
-    </a>
+    @if (hasAccess('validation-comptes')) {
+      <a routerLink="/validation-comptes" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-building"></i> Comptes en attentes
+      </a>
+    }
 
     <!-- Menu Utilisateurs - restreint pour ADMINISTRATION -->
-    <a *ngIf="hasAccess('utilisateurs')" routerLink="/utilisateurs" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-building"></i> Utilisateurs
-    </a>
+    @if (hasAccess('utilisateurs')) {
+      <a routerLink="/utilisateurs" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-building"></i> Utilisateurs
+      </a>
+    }
 
     <!-- Menu Parents - restreint pour ADMINISTRATION -->
-    <a *ngIf="hasAccess('parent')" routerLink="/parent" routerLinkActive="active" class="sparkle">
-      <i class="fas fa-building"></i> Parents
-    </a>
+    @if (hasAccess('parent')) {
+      <a routerLink="/parent" routerLinkActive="active" class="sparkle">
+        <i class="fas fa-building"></i> Parents
+      </a>
+    }
 
     <a href="javascript:void(0)" (click)="onLogoff()" class="sparkle">
       <i class="fas fa-sign-out-alt"></i> Déconnexion

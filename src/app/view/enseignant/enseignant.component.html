@@ -1,134 +1,134 @@
 <style>
   .filieres-stats {
-    display: flex;
-    gap: 12px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+  display: flex;
+  gap: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  .stat-card {
-    padding: 12px 16px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: white;
-    min-width: 120px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+.stat-card {
+padding: 12px 16px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+gap: 12px;
+color: white;
+min-width: 120px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .stat-icon i {
-    font-size: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.stat-icon i {
+font-size: 20px;
+background: rgba(255, 255, 255, 0.2);
+padding: 10px;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
 
-  .stat-info {
-    display: flex;
-    flex-direction: column;
-  }
+.stat-info {
+display: flex;
+flex-direction: column;
+}
 
-  .stat-value {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.2;
-  }
+.stat-value {
+font-size: 18px;
+font-weight: bold;
+line-height: 1.2;
+}
 
-  .stat-label {
-    font-size: 12px;
-    opacity: 0.9;
-  }
-  .btn-reset {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 25px 15px 21px;
-    border-radius: 24px;
-    border: none;
-    background: #3367d6;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow:
-      0 2px 4px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.4);
-    position: relative;
-    overflow: hidden;
-  }
+.stat-label {
+font-size: 12px;
+opacity: 0.9;
+}
+.btn-reset {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 15px 25px 15px 21px;
+border-radius: 24px;
+border: none;
+background: #3367d6;
+color: #fff;
+font-size: 1.2rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+box-shadow:
+0 2px 4px rgba(0,0,0,0.1),
+inset 0 1px 0 rgba(255,255,255,0.4);
+position: relative;
+overflow: hidden;
+}
 
-  .btn-reset::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+.btn-reset::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+opacity: 0;
+transition: opacity 0.3s ease;
+}
 
-  .btn-reset:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 4px 12px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.4);
-    background: linear-gradient(to right, #f1f3f5, #e9ecef);
-  }
+.btn-reset:hover {
+transform: translateY(-2px);
+box-shadow:
+0 4px 12px rgba(0,0,0,0.15),
+inset 0 1px 0 rgba(255,255,255,0.4);
+background: linear-gradient(to right, #f1f3f5, #e9ecef);
+}
 
-  td, th{
-    padding: 20px;
-  }
+td, th{
+padding: 20px;
+}
 
-  .btn-reset:hover::before {
-    opacity: 1;
-  }
+.btn-reset:hover::before {
+opacity: 1;
+}
 
-  .btn-reset:active {
-    transform: translateY(0);
-    box-shadow:
-      0 1px 3px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-  }
+.btn-reset:active {
+transform: translateY(0);
+box-shadow:
+0 1px 3px rgba(0,0,0,0.1),
+inset 0 1px 0 rgba(255,255,255,0.2);
+}
 
-  .btn-reset i.fas {
-    color: white;
-    background: linear-gradient(135deg, #ff7b00, #ff9500);
-    padding: 8px;
-    border-radius: 50%;
-    font-size: 13px;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-      0 2px 4px rgba(255, 123, 0, 0.3),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-    transition: all 0.4s ease;
-    z-index: 1;
-  }
+.btn-reset i.fas {
+color: white;
+background: linear-gradient(135deg, #ff7b00, #ff9500);
+padding: 8px;
+border-radius: 50%;
+font-size: 13px;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow:
+0 2px 4px rgba(255, 123, 0, 0.3),
+inset 0 1px 0 rgba(255,255,255,0.2);
+transition: all 0.4s ease;
+z-index: 1;
+}
 
-  .btn-reset:hover i.fas {
-    background: linear-gradient(135deg, #ff9500, #ffaa00);
-    transform: rotate(90deg);
-  }
+.btn-reset:hover i.fas {
+background: linear-gradient(135deg, #ff9500, #ffaa00);
+transform: rotate(90deg);
+}
 
-  .btn-reset span {
-    position: relative;
-    transition: transform 0.3s ease;
-  }
+.btn-reset span {
+position: relative;
+transition: transform 0.3s ease;
+}
 
-  .btn-reset:hover span {
-    transform: translateX(2px);
-  }
+.btn-reset:hover span {
+transform: translateX(2px);
+}
 </style>
 <div class="filiere-container">
   <div class="header-section">
@@ -150,430 +150,476 @@
         [(ngModel)]="searchText"
         placeholder="Rechercher un enseignant..."
         class="search-input"
-      >
-      <button *ngIf="searchText" class="clear-search" (click)="searchText = ''">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-
-    <div class="filter-options">
-      <select
-        [(ngModel)]="selectedSpecialite"
-        class="filter-select"
-        (change)="loadEnseignants()"
-      >
-        <option value="">Toutes les spécialités</option>
-        <option *ngFor="let specialite of specialites" [value]="specialite">{{ specialite }}</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="filieres-stats">
-    <div class="stat-card" style="background-color: #3367d6; color: white;">
-      <div class="stat-icon"><i class="fas fa-user-tie" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ enseignants.length }}</div>
-        <div class="stat-label">Enseignants</div>
-      </div>
-    </div>
-
-    <div class="stat-card" style="background-color: #4CAF50; color: white;">
-      <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ filteredEnseignants.length }}</div>
-        <div class="stat-label">Résultats</div>
-      </div>
-    </div>
-
-    <div class="stat-card" style="background-color: #ff7043; color: white;">
-      <div class="stat-icon"><i class="fas fa-graduation-cap" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ getTitreCount('Professeur') }}</div>
-        <div class="stat-label">Professeurs</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Message d'erreur API -->
-  <div class="error-message-container" *ngIf="errorMessage" [@fadeInOut]>
-    <div class="api-error-message">
-      <i class="fas fa-exclamation-circle"></i>
-      <span>{{ errorMessage }}</span>
-    </div>
-    <button class="btn-retry" (click)="loadEnseignants()">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réessayer</span>
-    </button>
-  </div>
-
-  <!-- Loading Spinner -->
-  <div class="loading-container" *ngIf="isLoading" [@fadeInOut]>
-    <div class="loading-spinner">
-      <div class="spinner-inner"></div>
-    </div>
-    <p class="loading-text">Chargement des enseignants...</p>
-  </div>
-
-  <!-- Empty State -->
-  <div class="empty-state" *ngIf="!isLoading && filteredEnseignants.length === 0 && !errorMessage" [@fadeInOut]>
-    <div class="empty-illustration">
-      <i class="fas fa-user-slash"></i>
-    </div>
-    <h3 class="empty-title">Aucun enseignant trouvé</h3>
-    <p class="empty-text">
-      {{ searchText || selectedSpecialite ? 'Aucun enseignant ne correspond à vos critères de recherche.' : 'Commencez par ajouter un nouvel enseignant!' }}
-    </p>
-    <button class="btn-add-filiere empty-button" (click)="openAddForm()" *ngIf="!searchText && !selectedSpecialite">
-      <i class="fas fa-plus-circle"></i>
-      <span>Ajouter un enseignant</span>
-    </button>
-    <button class="btn-reset empty-button" (click)="resetFilters()" *ngIf="searchText || selectedSpecialite">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réinitialiser les filtres</span>
-    </button>
-  </div>
-
-  <!-- Table View -->
-  <div class="table-container" *ngIf="!isLoading && filteredEnseignants.length > 0" [@fadeInOut]>
-    <table style="width: 100% !important;" class="filieres-table">
-      <thead>
-        <tr>
-          <th class="th-code">Matricule</th>
-          <th class="th-nom">Nom</th>
-          <th class="th-nom">Prénom</th>
-          <th class="th-type">Spécialité</th>
-          <th class="th-disponible">Titre</th>
-          <th class="th-actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let enseignant of filteredEnseignants; let i = index" [ngStyle]="getRowColor(i)" class="filiere-row">
-          <td class="td-code">{{ enseignant.matricule }}</td>
-          <td class="td-nom">{{ enseignant.nom }}</td>
-          <td class="td-nom">{{ enseignant.prenom }}</td>
-          <td class="td-type">
-            <span class="semestre-badge">{{ enseignant.specialite }}</span>
-          </td>
-          <td class="td-disponible">
-            <span class="disponible-badge" [ngClass]="{'disponible': enseignant.titre === 'Professeur', 'indisponible': enseignant.titre !== 'Professeur'}">
-              {{ enseignant.titre }}
-            </span>
-          </td>
-          <td class="td-actions">
-            <button class="btn-view action-btn" (click)="viewEnseignant(enseignant)" title="Voir les détails">
-              <i class="fas fa-eye"></i>
-            </button>
-            <button class="btn-edit action-btn" (click)="editEnseignant(enseignant)" title="Modifier cet enseignant">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="btn-delete action-btn" (click)="deleteEnseignant(enseignant)" title="Supprimer cet enseignant">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Formulaire (Modal) -->
-  <div class="modal-backdrop" *ngIf="showForm || showViewMode" [@fadeInOut]>
-    <div class="modal-wrapper" [@zoomIn]>
-      <div class="modal-container">
-        <div class="modal-header">
-          <div class="header-content">
-            <div class="header-icon">
-              <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
-            </div>
-            <h2 class="modal-title">
-              {{ showViewMode ? 'Détails de l\'enseignant' : (isEditMode ? 'Modifier un enseignant' : 'Ajouter un nouvel enseignant') }}
-            </h2>
-          </div>
-          <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+        >
+        @if (searchText) {
+          <button class="clear-search" (click)="searchText = ''">
             <i class="fas fa-times"></i>
           </button>
+        }
+      </div>
+
+      <div class="filter-options">
+        <select
+          [(ngModel)]="selectedSpecialite"
+          class="filter-select"
+          (change)="loadEnseignants()"
+          >
+          <option value="">Toutes les spécialités</option>
+          @for (specialite of specialites; track specialite) {
+            <option [value]="specialite">{{ specialite }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="filieres-stats">
+      <div class="stat-card" style="background-color: #3367d6; color: white;">
+        <div class="stat-icon"><i class="fas fa-user-tie" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ enseignants.length }}</div>
+          <div class="stat-label">Enseignants</div>
         </div>
+      </div>
 
-        <div class="modal-body">
-          <div class="form-illustration">
-            <i class="fas fa-user-tie illustration-icon"></i>
-          </div>
+      <div class="stat-card" style="background-color: #4CAF50; color: white;">
+        <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ filteredEnseignants.length }}</div>
+          <div class="stat-label">Résultats</div>
+        </div>
+      </div>
 
-          <!-- Mode affichage détails -->
-          <div *ngIf="showViewMode" class="view-details">
-            <div class="detail-item">
-              <div class="detail-label">Matricule:</div>
-              <div class="detail-value">{{ selectedEnseignant?.matricule }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Nom:</div>
-              <div class="detail-value">{{ selectedEnseignant?.nom }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Prénom:</div>
-              <div class="detail-value">{{ selectedEnseignant?.prenom }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Email:</div>
-              <div class="detail-value">{{ selectedEnseignant?.email }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Téléphone:</div>
-              <div class="detail-value">{{ selectedEnseignant?.telephone }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Sexe:</div>
-              <div class="detail-value">{{ selectedEnseignant?.sexe }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Spécialité:</div>
-              <div class="detail-value">{{ selectedEnseignant?.specialite }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Titre:</div>
-              <div class="detail-value">
-                <span class="disponible-badge" [ngClass]="{'disponible': selectedEnseignant?.titre === 'Professeur', 'indisponible': selectedEnseignant?.titre !== 'Professeur'}">
-                  {{ selectedEnseignant?.titre }}
-                </span>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" (click)="closeForm()">
-                <i class="fas fa-times"></i> Fermer
-              </button>
-              <button type="button" class="btn-submit" (click)="switchToEditMode()">
-                <span class="btn-content">
-                  <i class="fas fa-edit"></i>
-                  <span>Modifier</span>
-                </span>
-                <span class="btn-effect"></span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Mode édition ou création -->
-          <form [formGroup]="enseignantForm" (ngSubmit)="submitForm()" class="animated-form" *ngIf="!showViewMode">
-            <div style="gap: 10px; display: flex; flex-direction: row;">
-              <div class="form-group">
-                <label for="matricule">Matricule</label>
-                <div class="input-wrapper">
-                  <div class="input-container" [class.focused]="matriculeFocused">
-                    <i class="fas fa-hashtag input-icon"></i>
-                    <input
-                      type="text"
-                      id="matricule"
-                      formControlName="matricule"
-                      placeholder="Entrez le matricule"
-                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('matricule')?.invalid}"
-                      (focus)="matriculeFocused = true"
-                      (blur)="matriculeFocused = false"
-                    >
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && enseignantForm.get('matricule')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span *ngIf="enseignantForm.get('matricule')?.errors?.['required']">Le matricule est obligatoire</span>
-                    <span *ngIf="enseignantForm.get('matricule')?.errors?.['minlength']">Le matricule doit contenir au moins 1 caractère</span>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="sexe">Sexe</label>
-                <div class="input-wrapper">
-                  <div class="input-container chevron" [class.focused]="sexeFocused">
-                    <i class="fas fa-venus-mars input-icon"></i>
-                    <select
-                      id="sexe"
-                      formControlName="sexe"
-                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('sexe')?.invalid}"
-                      (focus)="sexeFocused = true"
-                      (blur)="sexeFocused = false"
-                    >
-                      <option value="">Sélectionnez le sexe</option>
-                      <option value="Homme">Homme</option>
-                      <option value="Femme">Femme</option>
-                    </select>
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && enseignantForm.get('sexe')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span *ngIf="enseignantForm.get('sexe')?.errors?.['required']">Le sexe est obligatoire</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div style="gap: 10px; display: flex; flex-direction: row;">
-              <div class="form-group">
-                <label for="nom">Nom</label>
-                <div class="input-wrapper">
-                  <div class="input-container" [class.focused]="nomFocused">
-                    <i class="fas fa-user input-icon"></i>
-                    <input
-                      type="text"
-                      id="nom"
-                      formControlName="nom"
-                      placeholder="Entrez le nom"
-                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('nom')?.invalid}"
-                      (focus)="nomFocused = true"
-                      (blur)="nomFocused = false"
-                    >
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && enseignantForm.get('nom')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span *ngIf="enseignantForm.get('nom')?.errors?.['required']">Le nom est obligatoire</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="prenom">Prénom</label>
-                <div class="input-wrapper">
-                  <div class="input-container" [class.focused]="prenomFocused">
-                    <i class="fas fa-user input-icon"></i>
-                    <input
-                      type="text"
-                      id="prenom"
-                      formControlName="prenom"
-                      placeholder="Entrez le prénom"
-                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('prenom')?.invalid}"
-                      (focus)="prenomFocused = true"
-                      (blur)="prenomFocused = false"
-                    >
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && enseignantForm.get('prenom')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span *ngIf="enseignantForm.get('prenom')?.errors?.['required']">Le prénom est obligatoire</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="gap: 10px; display: flex; flex-direction: row;">
-              <div class="form-group">
-                <label for="email">Email</label>
-                <div class="input-wrapper">
-                  <div class="input-container" [class.focused]="emailFocused">
-                    <i class="fas fa-envelope input-icon"></i>
-                    <input
-                      type="email"
-                      id="email"
-                      formControlName="email"
-                      placeholder="Entrez l'email"
-                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('email')?.invalid}"
-                      (focus)="emailFocused = true"
-                      (blur)="emailFocused = false"
-                    >
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && enseignantForm.get('email')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span *ngIf="enseignantForm.get('email')?.errors?.['required']">L'email est obligatoire</span>
-                    <span *ngIf="enseignantForm.get('email')?.errors?.['email']">Format d'email invalide</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="telephone">Téléphone</label>
-                <div class="input-wrapper">
-                  <div class="input-container" [class.focused]="telephoneFocused">
-                    <i class="fas fa-phone input-icon"></i>
-                    <input
-                      type="tel"
-                      id="telephone"
-                      formControlName="telephone"
-                      placeholder="Entrez le téléphone"
-                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('telephone')?.invalid}"
-                      (focus)="telephoneFocused = true"
-                      (blur)="telephoneFocused = false"
-                    >
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && enseignantForm.get('telephone')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span *ngIf="enseignantForm.get('telephone')?.errors?.['required']">Le téléphone est obligatoire</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
-            <div style=" gap: 10px; display: flex; flex-direction: row;">
-              <div class="form-group">
-                <label for="specialite">Spécialité</label>
-                <div class="input-wrapper">
-                  <div class="input-container chevron" [class.focused]="specialiteFocused">
-                    <i class="fas fa-book input-icon"></i>
-                    <select
-                      id="specialite"
-                      formControlName="specialite"
-                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('specialite')?.invalid}"
-                      (focus)="specialiteFocused = true"
-                      (blur)="specialiteFocused = false"
-                    >
-                      <option value="">Sélectionnez une spécialité</option>
-                      <option *ngFor="let specialite of specialites" [value]="specialite">{{ specialite }}</option>
-                    </select>
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && enseignantForm.get('specialite')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span *ngIf="enseignantForm.get('specialite')?.errors?.['required']">La spécialité est obligatoire</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="titre">Titre</label>
-                <div class="input-wrapper">
-                  <div class="input-container chevron" [class.focused]="titreFocused">
-                    <i class="fas fa-graduation-cap input-icon"></i>
-                    <select
-                      id="titre"
-                      formControlName="titre"
-                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('titre')?.invalid}"
-                      (focus)="titreFocused = true"
-                      (blur)="titreFocused = false"
-                    >
-                      <option value="">Sélectionnez un titre</option>
-                      <option value="Docteur">Docteur</option>
-                      <option value="Professeur">Professeur</option>
-                      <option value="Maître de conférences">Maître de conférences</option>
-                      <option value="Assistant">Assistant</option>
-                      <option value="Vacataire">Vacataire</option>
-                    </select>
-                    <span class="input-highlight"></span>
-                  </div>
-                  <div class="error-message" *ngIf="formSubmitted && enseignantForm.get('titre')?.invalid" [@fadeInOut]>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span *ngIf="enseignantForm.get('titre')?.errors?.['required']">Le titre est obligatoire</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" (click)="closeForm()">
-                <i class="fas fa-times"></i> Annuler
-              </button>
-              <button type="submit" class="btn-submit">
-                <span class="btn-content">
-                  <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
-                  <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
-                </span>
-                <span class="btn-effect"></span>
-              </button>
-            </div>
-          </form>
+      <div class="stat-card" style="background-color: #ff7043; color: white;">
+        <div class="stat-icon"><i class="fas fa-graduation-cap" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ getTitreCount('Professeur') }}</div>
+          <div class="stat-label">Professeurs</div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- Message d'erreur API -->
+    @if (errorMessage) {
+      <div class="error-message-container" [@fadeInOut]>
+        <div class="api-error-message">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
+        <button class="btn-retry" (click)="loadEnseignants()">
+          <i class="fas fa-sync-alt"></i>
+          <span>Réessayer</span>
+        </button>
+      </div>
+    }
+
+    <!-- Loading Spinner -->
+    @if (isLoading) {
+      <div class="loading-container" [@fadeInOut]>
+        <div class="loading-spinner">
+          <div class="spinner-inner"></div>
+        </div>
+        <p class="loading-text">Chargement des enseignants...</p>
+      </div>
+    }
+
+    <!-- Empty State -->
+    @if (!isLoading && filteredEnseignants.length === 0 && !errorMessage) {
+      <div class="empty-state" [@fadeInOut]>
+        <div class="empty-illustration">
+          <i class="fas fa-user-slash"></i>
+        </div>
+        <h3 class="empty-title">Aucun enseignant trouvé</h3>
+        <p class="empty-text">
+          {{ searchText || selectedSpecialite ? 'Aucun enseignant ne correspond à vos critères de recherche.' : 'Commencez par ajouter un nouvel enseignant!' }}
+        </p>
+        @if (!searchText && !selectedSpecialite) {
+          <button class="btn-add-filiere empty-button" (click)="openAddForm()">
+            <i class="fas fa-plus-circle"></i>
+            <span>Ajouter un enseignant</span>
+          </button>
+        }
+        @if (searchText || selectedSpecialite) {
+          <button class="btn-reset empty-button" (click)="resetFilters()">
+            <i class="fas fa-sync-alt"></i>
+            <span>Réinitialiser les filtres</span>
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Table View -->
+    @if (!isLoading && filteredEnseignants.length > 0) {
+      <div class="table-container" [@fadeInOut]>
+        <table style="width: 100% !important;" class="filieres-table">
+          <thead>
+            <tr>
+              <th class="th-code">Matricule</th>
+              <th class="th-nom">Nom</th>
+              <th class="th-nom">Prénom</th>
+              <th class="th-type">Spécialité</th>
+              <th class="th-disponible">Titre</th>
+              <th class="th-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (enseignant of filteredEnseignants; track enseignant; let i = $index) {
+              <tr [ngStyle]="getRowColor(i)" class="filiere-row">
+                <td class="td-code">{{ enseignant.matricule }}</td>
+                <td class="td-nom">{{ enseignant.nom }}</td>
+                <td class="td-nom">{{ enseignant.prenom }}</td>
+                <td class="td-type">
+                  <span class="semestre-badge">{{ enseignant.specialite }}</span>
+                </td>
+                <td class="td-disponible">
+                  <span class="disponible-badge" [ngClass]="{'disponible': enseignant.titre === 'Professeur', 'indisponible': enseignant.titre !== 'Professeur'}">
+                    {{ enseignant.titre }}
+                  </span>
+                </td>
+                <td class="td-actions">
+                  <button class="btn-view action-btn" (click)="viewEnseignant(enseignant)" title="Voir les détails">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn-edit action-btn" (click)="editEnseignant(enseignant)" title="Modifier cet enseignant">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-delete action-btn" (click)="deleteEnseignant(enseignant)" title="Supprimer cet enseignant">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <!-- Formulaire (Modal) -->
+    @if (showForm || showViewMode) {
+      <div class="modal-backdrop" [@fadeInOut]>
+        <div class="modal-wrapper" [@zoomIn]>
+          <div class="modal-container">
+            <div class="modal-header">
+              <div class="header-content">
+                <div class="header-icon">
+                  <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
+                </div>
+                <h2 class="modal-title">
+                  {{ showViewMode ? 'Détails de l\'enseignant' : (isEditMode ? 'Modifier un enseignant' : 'Ajouter un nouvel enseignant') }}
+                </h2>
+              </div>
+              <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-illustration">
+                <i class="fas fa-user-tie illustration-icon"></i>
+              </div>
+              <!-- Mode affichage détails -->
+              @if (showViewMode) {
+                <div class="view-details">
+                  <div class="detail-item">
+                    <div class="detail-label">Matricule:</div>
+                    <div class="detail-value">{{ selectedEnseignant?.matricule }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Nom:</div>
+                    <div class="detail-value">{{ selectedEnseignant?.nom }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Prénom:</div>
+                    <div class="detail-value">{{ selectedEnseignant?.prenom }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Email:</div>
+                    <div class="detail-value">{{ selectedEnseignant?.email }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Téléphone:</div>
+                    <div class="detail-value">{{ selectedEnseignant?.telephone }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Sexe:</div>
+                    <div class="detail-value">{{ selectedEnseignant?.sexe }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Spécialité:</div>
+                    <div class="detail-value">{{ selectedEnseignant?.specialite }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Titre:</div>
+                    <div class="detail-value">
+                      <span class="disponible-badge" [ngClass]="{'disponible': selectedEnseignant?.titre === 'Professeur', 'indisponible': selectedEnseignant?.titre !== 'Professeur'}">
+                        {{ selectedEnseignant?.titre }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" class="btn-cancel" (click)="closeForm()">
+                      <i class="fas fa-times"></i> Fermer
+                    </button>
+                    <button type="button" class="btn-submit" (click)="switchToEditMode()">
+                      <span class="btn-content">
+                        <i class="fas fa-edit"></i>
+                        <span>Modifier</span>
+                      </span>
+                      <span class="btn-effect"></span>
+                    </button>
+                  </div>
+                </div>
+              }
+              <!-- Mode édition ou création -->
+              @if (!showViewMode) {
+                <form [formGroup]="enseignantForm" (ngSubmit)="submitForm()" class="animated-form">
+                  <div style="gap: 10px; display: flex; flex-direction: row;">
+                    <div class="form-group">
+                      <label for="matricule">Matricule</label>
+                      <div class="input-wrapper">
+                        <div class="input-container" [class.focused]="matriculeFocused">
+                          <i class="fas fa-hashtag input-icon"></i>
+                          <input
+                            type="text"
+                            id="matricule"
+                            formControlName="matricule"
+                            placeholder="Entrez le matricule"
+                            [ngClass]="{'input-error': formSubmitted && enseignantForm.get('matricule')?.invalid}"
+                            (focus)="matriculeFocused = true"
+                            (blur)="matriculeFocused = false"
+                            >
+                            <span class="input-highlight"></span>
+                          </div>
+                          @if (formSubmitted && enseignantForm.get('matricule')?.invalid) {
+                            <div class="error-message" [@fadeInOut]>
+                              <i class="fas fa-exclamation-circle"></i>
+                              @if (enseignantForm.get('matricule')?.errors?.['required']) {
+                                <span>Le matricule est obligatoire</span>
+                              }
+                              @if (enseignantForm.get('matricule')?.errors?.['minlength']) {
+                                <span>Le matricule doit contenir au moins 1 caractère</span>
+                              }
+                            </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="sexe">Sexe</label>
+                        <div class="input-wrapper">
+                          <div class="input-container chevron" [class.focused]="sexeFocused">
+                            <i class="fas fa-venus-mars input-icon"></i>
+                            <select
+                              id="sexe"
+                              formControlName="sexe"
+                              [ngClass]="{'input-error': formSubmitted && enseignantForm.get('sexe')?.invalid}"
+                              (focus)="sexeFocused = true"
+                              (blur)="sexeFocused = false"
+                              >
+                              <option value="">Sélectionnez le sexe</option>
+                              <option value="Homme">Homme</option>
+                              <option value="Femme">Femme</option>
+                            </select>
+                            <span class="input-highlight"></span>
+                          </div>
+                          @if (formSubmitted && enseignantForm.get('sexe')?.invalid) {
+                            <div class="error-message" [@fadeInOut]>
+                              <i class="fas fa-exclamation-circle"></i>
+                              @if (enseignantForm.get('sexe')?.errors?.['required']) {
+                                <span>Le sexe est obligatoire</span>
+                              }
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                    <div style="gap: 10px; display: flex; flex-direction: row;">
+                      <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <div class="input-wrapper">
+                          <div class="input-container" [class.focused]="nomFocused">
+                            <i class="fas fa-user input-icon"></i>
+                            <input
+                              type="text"
+                              id="nom"
+                              formControlName="nom"
+                              placeholder="Entrez le nom"
+                              [ngClass]="{'input-error': formSubmitted && enseignantForm.get('nom')?.invalid}"
+                              (focus)="nomFocused = true"
+                              (blur)="nomFocused = false"
+                              >
+                              <span class="input-highlight"></span>
+                            </div>
+                            @if (formSubmitted && enseignantForm.get('nom')?.invalid) {
+                              <div class="error-message" [@fadeInOut]>
+                                <i class="fas fa-exclamation-circle"></i>
+                                @if (enseignantForm.get('nom')?.errors?.['required']) {
+                                  <span>Le nom est obligatoire</span>
+                                }
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="prenom">Prénom</label>
+                          <div class="input-wrapper">
+                            <div class="input-container" [class.focused]="prenomFocused">
+                              <i class="fas fa-user input-icon"></i>
+                              <input
+                                type="text"
+                                id="prenom"
+                                formControlName="prenom"
+                                placeholder="Entrez le prénom"
+                                [ngClass]="{'input-error': formSubmitted && enseignantForm.get('prenom')?.invalid}"
+                                (focus)="prenomFocused = true"
+                                (blur)="prenomFocused = false"
+                                >
+                                <span class="input-highlight"></span>
+                              </div>
+                              @if (formSubmitted && enseignantForm.get('prenom')?.invalid) {
+                                <div class="error-message" [@fadeInOut]>
+                                  <i class="fas fa-exclamation-circle"></i>
+                                  @if (enseignantForm.get('prenom')?.errors?.['required']) {
+                                    <span>Le prénom est obligatoire</span>
+                                  }
+                                </div>
+                              }
+                            </div>
+                          </div>
+                        </div>
+                        <div style="gap: 10px; display: flex; flex-direction: row;">
+                          <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-wrapper">
+                              <div class="input-container" [class.focused]="emailFocused">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input
+                                  type="email"
+                                  id="email"
+                                  formControlName="email"
+                                  placeholder="Entrez l'email"
+                                  [ngClass]="{'input-error': formSubmitted && enseignantForm.get('email')?.invalid}"
+                                  (focus)="emailFocused = true"
+                                  (blur)="emailFocused = false"
+                                  >
+                                  <span class="input-highlight"></span>
+                                </div>
+                                @if (formSubmitted && enseignantForm.get('email')?.invalid) {
+                                  <div class="error-message" [@fadeInOut]>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    @if (enseignantForm.get('email')?.errors?.['required']) {
+                                      <span>L'email est obligatoire</span>
+                                    }
+                                    @if (enseignantForm.get('email')?.errors?.['email']) {
+                                      <span>Format d'email invalide</span>
+                                    }
+                                  </div>
+                                }
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="telephone">Téléphone</label>
+                              <div class="input-wrapper">
+                                <div class="input-container" [class.focused]="telephoneFocused">
+                                  <i class="fas fa-phone input-icon"></i>
+                                  <input
+                                    type="tel"
+                                    id="telephone"
+                                    formControlName="telephone"
+                                    placeholder="Entrez le téléphone"
+                                    [ngClass]="{'input-error': formSubmitted && enseignantForm.get('telephone')?.invalid}"
+                                    (focus)="telephoneFocused = true"
+                                    (blur)="telephoneFocused = false"
+                                    >
+                                    <span class="input-highlight"></span>
+                                  </div>
+                                  @if (formSubmitted && enseignantForm.get('telephone')?.invalid) {
+                                    <div class="error-message" [@fadeInOut]>
+                                      <i class="fas fa-exclamation-circle"></i>
+                                      @if (enseignantForm.get('telephone')?.errors?.['required']) {
+                                        <span>Le téléphone est obligatoire</span>
+                                      }
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                            <div style=" gap: 10px; display: flex; flex-direction: row;">
+                              <div class="form-group">
+                                <label for="specialite">Spécialité</label>
+                                <div class="input-wrapper">
+                                  <div class="input-container chevron" [class.focused]="specialiteFocused">
+                                    <i class="fas fa-book input-icon"></i>
+                                    <select
+                                      id="specialite"
+                                      formControlName="specialite"
+                                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('specialite')?.invalid}"
+                                      (focus)="specialiteFocused = true"
+                                      (blur)="specialiteFocused = false"
+                                      >
+                                      <option value="">Sélectionnez une spécialité</option>
+                                      @for (specialite of specialites; track specialite) {
+                                        <option [value]="specialite">{{ specialite }}</option>
+                                      }
+                                    </select>
+                                    <span class="input-highlight"></span>
+                                  </div>
+                                  @if (formSubmitted && enseignantForm.get('specialite')?.invalid) {
+                                    <div class="error-message" [@fadeInOut]>
+                                      <i class="fas fa-exclamation-circle"></i>
+                                      @if (enseignantForm.get('specialite')?.errors?.['required']) {
+                                        <span>La spécialité est obligatoire</span>
+                                      }
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="titre">Titre</label>
+                                <div class="input-wrapper">
+                                  <div class="input-container chevron" [class.focused]="titreFocused">
+                                    <i class="fas fa-graduation-cap input-icon"></i>
+                                    <select
+                                      id="titre"
+                                      formControlName="titre"
+                                      [ngClass]="{'input-error': formSubmitted && enseignantForm.get('titre')?.invalid}"
+                                      (focus)="titreFocused = true"
+                                      (blur)="titreFocused = false"
+                                      >
+                                      <option value="">Sélectionnez un titre</option>
+                                      <option value="Docteur">Docteur</option>
+                                      <option value="Professeur">Professeur</option>
+                                      <option value="Maître de conférences">Maître de conférences</option>
+                                      <option value="Assistant">Assistant</option>
+                                      <option value="Vacataire">Vacataire</option>
+                                    </select>
+                                    <span class="input-highlight"></span>
+                                  </div>
+                                  @if (formSubmitted && enseignantForm.get('titre')?.invalid) {
+                                    <div class="error-message" [@fadeInOut]>
+                                      <i class="fas fa-exclamation-circle"></i>
+                                      @if (enseignantForm.get('titre')?.errors?.['required']) {
+                                        <span>Le titre est obligatoire</span>
+                                      }
+                                    </div>
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-actions">
+                              <button type="button" class="btn-cancel" (click)="closeForm()">
+                                <i class="fas fa-times"></i> Annuler
+                              </button>
+                              <button type="submit" class="btn-submit">
+                                <span class="btn-content">
+                                  <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
+                                  <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
+                                </span>
+                                <span class="btn-effect"></span>
+                              </button>
+                            </div>
+                          </form>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>

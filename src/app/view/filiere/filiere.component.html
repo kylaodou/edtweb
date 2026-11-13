@@ -1,134 +1,134 @@
 <style>
   .filieres-stats {
-    display: flex;
-    gap: 12px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+  display: flex;
+  gap: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  .stat-card {
-    padding: 12px 16px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: white;
-    min-width: 120px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+.stat-card {
+padding: 12px 16px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+gap: 12px;
+color: white;
+min-width: 120px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .stat-icon i {
-    font-size: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.stat-icon i {
+font-size: 20px;
+background: rgba(255, 255, 255, 0.2);
+padding: 10px;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
 
-  .stat-info {
-    display: flex;
-    flex-direction: column;
-  }
+.stat-info {
+display: flex;
+flex-direction: column;
+}
 
-  .stat-value {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 1.2;
-  }
+.stat-value {
+font-size: 18px;
+font-weight: bold;
+line-height: 1.2;
+}
 
-  .stat-label {
-    font-size: 12px;
-    opacity: 0.9;
-  }
-  .btn-reset {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 25px 15px 21px;
-    border-radius: 24px;
-    border: none;
-    background: #3367d6;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow:
-      0 2px 4px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.4);
-    position: relative;
-    overflow: hidden;
-  }
+.stat-label {
+font-size: 12px;
+opacity: 0.9;
+}
+.btn-reset {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 15px 25px 15px 21px;
+border-radius: 24px;
+border: none;
+background: #3367d6;
+color: #fff;
+font-size: 1.2rem;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+box-shadow:
+0 2px 4px rgba(0,0,0,0.1),
+inset 0 1px 0 rgba(255,255,255,0.4);
+position: relative;
+overflow: hidden;
+}
 
-  .btn-reset::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+.btn-reset::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0));
+opacity: 0;
+transition: opacity 0.3s ease;
+}
 
-  .btn-reset:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 4px 12px rgba(0,0,0,0.15),
-      inset 0 1px 0 rgba(255,255,255,0.4);
-    background: linear-gradient(to right, #f1f3f5, #e9ecef);
-  }
+.btn-reset:hover {
+transform: translateY(-2px);
+box-shadow:
+0 4px 12px rgba(0,0,0,0.15),
+inset 0 1px 0 rgba(255,255,255,0.4);
+background: linear-gradient(to right, #f1f3f5, #e9ecef);
+}
 
-  td, th{
-    padding: 20px;
-  }
+td, th{
+padding: 20px;
+}
 
-  .btn-reset:hover::before {
-    opacity: 1;
-  }
+.btn-reset:hover::before {
+opacity: 1;
+}
 
-  .btn-reset:active {
-    transform: translateY(0);
-    box-shadow:
-      0 1px 3px rgba(0,0,0,0.1),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-  }
+.btn-reset:active {
+transform: translateY(0);
+box-shadow:
+0 1px 3px rgba(0,0,0,0.1),
+inset 0 1px 0 rgba(255,255,255,0.2);
+}
 
-  .btn-reset i.fas {
-    color: white;
-    background: linear-gradient(135deg, #ff7b00, #ff9500);
-    padding: 8px;
-    border-radius: 50%;
-    font-size: 13px;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-      0 2px 4px rgba(255, 123, 0, 0.3),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-    transition: all 0.4s ease;
-    z-index: 1;
-  }
+.btn-reset i.fas {
+color: white;
+background: linear-gradient(135deg, #ff7b00, #ff9500);
+padding: 8px;
+border-radius: 50%;
+font-size: 13px;
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow:
+0 2px 4px rgba(255, 123, 0, 0.3),
+inset 0 1px 0 rgba(255,255,255,0.2);
+transition: all 0.4s ease;
+z-index: 1;
+}
 
-  .btn-reset:hover i.fas {
-    background: linear-gradient(135deg, #ff9500, #ffaa00);
-    transform: rotate(90deg);
-  }
+.btn-reset:hover i.fas {
+background: linear-gradient(135deg, #ff9500, #ffaa00);
+transform: rotate(90deg);
+}
 
-  .btn-reset span {
-    position: relative;
-    transition: transform 0.3s ease;
-  }
+.btn-reset span {
+position: relative;
+transition: transform 0.3s ease;
+}
 
-  .btn-reset:hover span {
-    transform: translateX(2px);
-  }
+.btn-reset:hover span {
+transform: translateX(2px);
+}
 </style>
 <div class="filiere-container">
   <div class="header-section">
@@ -150,248 +150,275 @@
         [(ngModel)]="searchText"
         placeholder="Rechercher une filière..."
         class="search-input"
-      >
-      <button *ngIf="searchText" class="clear-search" (click)="searchText = ''">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-
-    <button class="btn-reset" (click)="resetFilters()" *ngIf="searchText || selectedSemestre">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réinitialiser</span>
-    </button>
-  </div>
-
-  <div class="filieres-stats">
-    <div class="stat-card" style="background-color: #3367d6; color: white;">
-      <div class="stat-icon"><i class="fas fa-graduation-cap" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ filieres.length }}</div>
-        <div class="stat-label">Filières</div>
-      </div>
-    </div>
-
-    <div class="stat-card" style="background-color: #4CAF50; color: white;">
-      <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
-      <div class="stat-info">
-        <div class="stat-value">{{ filteredFilieres.length }}</div>
-        <div class="stat-label">Résultats</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Message d'erreur API -->
-  <div class="error-message-container" *ngIf="errorMessage" [@fadeInOut]>
-    <div class="api-error-message">
-      <i class="fas fa-exclamation-circle"></i>
-      <span>{{ errorMessage }}</span>
-    </div>
-    <button class="btn-retry" (click)="loadFilieres()">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réessayer</span>
-    </button>
-  </div>
-
-  <!-- Loading Spinner -->
-  <div class="loading-container" *ngIf="isLoading" [@fadeInOut]>
-    <div class="loading-spinner">
-      <div class="spinner-inner"></div>
-    </div>
-    <p class="loading-text">Chargement des filières...</p>
-  </div>
-
-  <!-- Empty State -->
-  <div class="empty-state" *ngIf="!isLoading && filteredFilieres.length === 0 && !errorMessage" [@fadeInOut]>
-    <div class="empty-illustration">
-      <i class="fas fa-university"></i>
-    </div>
-    <h3 class="empty-title">Aucune filière trouvée</h3>
-    <p class="empty-text">
-      {{ searchText || selectedSemestre ? 'Aucune filière ne correspond à vos critères de recherche.' : 'Commencez par ajouter une nouvelle filière!' }}
-    </p>
-    <button class="btn-add-filiere empty-button" (click)="openAddForm()" *ngIf="!searchText && !selectedSemestre">
-      <i class="fas fa-plus-circle"></i>
-      <span>Ajouter une filière</span>
-    </button>
-    <button class="btn-reset empty-button" (click)="resetFilters()" *ngIf="searchText || selectedSemestre">
-      <i class="fas fa-sync-alt"></i>
-      <span>Réinitialiser les filtres</span>
-    </button>
-  </div>
-
-  <!-- Table View -->
-  <div  class="table-container" *ngIf="!isLoading && filteredFilieres.length > 0" [@fadeInOut]>
-    <table style="width: 100% !important;" class="filieres-table">
-      <thead>
-        <tr>
-          <th class="th-code">Code</th>
-          <th class="th-nom">Nom de la filière</th>
-          <th class="th-semestre">Description</th>
-          <th class="th-actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let filiere of filteredFilieres; let i = index" [ngStyle]="getRowColor(i)" class="filiere-row">
-          <td class="td-code">{{ filiere.code }}</td>
-          <td class="td-nom">{{ truncateText(filiere.nom, 40) }}</td>
-          <td class="td-semestre">
-            <span class="semestre-badge">{{ truncateText(filiere.description, 50) }}</span>
-          </td>
-          <td class="td-actions">
-            <button class="btn-view action-btn" (click)="viewFiliere(filiere)" title="Voir cette filière">
-              <i class="fas fa-eye"></i>
-            </button>
-            <button class="btn-edit action-btn" (click)="editFiliere(filiere)" title="Modifier cette filière">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button class="btn-delete action-btn" (click)="deleteFiliere(filiere)" title="Supprimer cette filière">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Formulaire (Modal) -->
-  <div class="modal-backdrop" *ngIf="showForm || showViewMode" [@fadeInOut]>
-    <div class="modal-wrapper" [@zoomIn]>
-      <div class="modal-container">
-        <div class="modal-header">
-          <div class="header-content">
-            <div class="header-icon">
-              <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
-            </div>
-            <h2 class="modal-title">
-              {{ showViewMode ? 'Détails de la filière' : (isEditMode ? 'Modifier une filière' : 'Ajouter une nouvelle filière') }}
-            </h2>
-          </div>
-          <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+        >
+        @if (searchText) {
+          <button class="clear-search" (click)="searchText = ''">
             <i class="fas fa-times"></i>
           </button>
+        }
+      </div>
+
+      @if (searchText || selectedSemestre) {
+        <button class="btn-reset" (click)="resetFilters()">
+          <i class="fas fa-sync-alt"></i>
+          <span>Réinitialiser</span>
+        </button>
+      }
+    </div>
+
+    <div class="filieres-stats">
+      <div class="stat-card" style="background-color: #3367d6; color: white;">
+        <div class="stat-icon"><i class="fas fa-graduation-cap" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ filieres.length }}</div>
+          <div class="stat-label">Filières</div>
         </div>
+      </div>
 
-        <div class="modal-body">
-          <div class="form-illustration">
-            <i class="fas fa-graduation-cap illustration-icon"></i>
-          </div>
-
-          <!-- Mode affichage détails -->
-          <div *ngIf="showViewMode" class="view-details">
-            <div class="detail-item">
-              <div class="detail-label">Code:</div>
-              <div class="detail-value">{{ selectedFiliere?.code }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Nom de la filière:</div>
-              <div class="detail-value">{{ selectedFiliere?.nom }}</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Description:</div>
-              <div class="detail-value">{{ selectedFiliere?.description || 'Non défini' }}</div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" (click)="closeForm()">
-                <i class="fas fa-times"></i> Fermer
-              </button>
-              <button type="button" class="btn-submit" (click)="switchToEditMode()">
-                <span class="btn-content">
-                  <i class="fas fa-edit"></i>
-                  <span>Modifier</span>
-                </span>
-                <span class="btn-effect"></span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Mode édition ou création -->
-          <form [formGroup]="filiereForm" (ngSubmit)="submitForm()" class="animated-form" *ngIf="!showViewMode">
-            <div class="form-group">
-              <label for="nom">Nom de la filière</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="nomFocused">
-                  <i class="fas fa-tag input-icon"></i>
-                  <input
-                    type="text"
-                    id="nom"
-                    formControlName="nom"
-                    placeholder="Entrez le nom de la filière"
-                    [ngClass]="{'input-error': formSubmitted && filiereForm.get('nom')?.invalid}"
-                    (focus)="nomFocused = true"
-                    (blur)="nomFocused = false"
-                  >
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && filiereForm.get('nom')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span *ngIf="filiereForm.get('nom')?.errors?.['required']">Le nom est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="code">Code</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="codeFocused">
-                  <i class="fas fa-code input-icon"></i>
-                  <input
-                    type="text"
-                    id="code"
-                    formControlName="code"
-                    placeholder="Entrez le code de la filière"
-                    [ngClass]="{'input-error': formSubmitted && filiereForm.get('code')?.invalid}"
-                    (focus)="codeFocused = true"
-                    (blur)="codeFocused = false"
-                  >
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && filiereForm.get('code')?.invalid" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  <span *ngIf="filiereForm.get('code')?.errors?.['required']">Le code est obligatoire</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="nomSemestre">Description</label>
-              <div class="input-wrapper">
-                <div class="input-container" [class.focused]="semestreFocused">
-                  <i class="fas fa-calendar-alt input-icon"></i>
-                  <input
-                    type="text"
-                    id="nomSemestre"
-                    formControlName="nomSemestre"
-                    list="semestres-list"
-                    placeholder="Entrez la description"
-                    [ngClass]="{'input-error': formSubmitted && filiereForm.get('nomSemestre')?.invalid}"
-                    (focus)="semestreFocused = true"
-                    (blur)="semestreFocused = false"
-                  >
-                  <span class="input-highlight"></span>
-                </div>
-                <div class="error-message" *ngIf="formSubmitted && filiereForm.get('nomSemestre')?.errors?.['required']" [@fadeInOut]>
-                  <i class="fas fa-exclamation-circle"></i>
-                  La description est obligatoire
-                </div>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" (click)="closeForm()">
-                <i class="fas fa-times"></i> Annuler
-              </button>
-              <button type="submit" class="btn-submit">
-                <span class="btn-content">
-                  <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
-                  <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
-                </span>
-                <span class="btn-effect"></span>
-              </button>
-            </div>
-          </form>
+      <div class="stat-card" style="background-color: #4CAF50; color: white;">
+        <div class="stat-icon"><i class="fas fa-search" style="color: white;"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">{{ filteredFilieres.length }}</div>
+          <div class="stat-label">Résultats</div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- Message d'erreur API -->
+    @if (errorMessage) {
+      <div class="error-message-container" [@fadeInOut]>
+        <div class="api-error-message">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ errorMessage }}</span>
+        </div>
+        <button class="btn-retry" (click)="loadFilieres()">
+          <i class="fas fa-sync-alt"></i>
+          <span>Réessayer</span>
+        </button>
+      </div>
+    }
+
+    <!-- Loading Spinner -->
+    @if (isLoading) {
+      <div class="loading-container" [@fadeInOut]>
+        <div class="loading-spinner">
+          <div class="spinner-inner"></div>
+        </div>
+        <p class="loading-text">Chargement des filières...</p>
+      </div>
+    }
+
+    <!-- Empty State -->
+    @if (!isLoading && filteredFilieres.length === 0 && !errorMessage) {
+      <div class="empty-state" [@fadeInOut]>
+        <div class="empty-illustration">
+          <i class="fas fa-university"></i>
+        </div>
+        <h3 class="empty-title">Aucune filière trouvée</h3>
+        <p class="empty-text">
+          {{ searchText || selectedSemestre ? 'Aucune filière ne correspond à vos critères de recherche.' : 'Commencez par ajouter une nouvelle filière!' }}
+        </p>
+        @if (!searchText && !selectedSemestre) {
+          <button class="btn-add-filiere empty-button" (click)="openAddForm()">
+            <i class="fas fa-plus-circle"></i>
+            <span>Ajouter une filière</span>
+          </button>
+        }
+        @if (searchText || selectedSemestre) {
+          <button class="btn-reset empty-button" (click)="resetFilters()">
+            <i class="fas fa-sync-alt"></i>
+            <span>Réinitialiser les filtres</span>
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Table View -->
+    @if (!isLoading && filteredFilieres.length > 0) {
+      <div  class="table-container" [@fadeInOut]>
+        <table style="width: 100% !important;" class="filieres-table">
+          <thead>
+            <tr>
+              <th class="th-code">Code</th>
+              <th class="th-nom">Nom de la filière</th>
+              <th class="th-semestre">Description</th>
+              <th class="th-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (filiere of filteredFilieres; track filiere; let i = $index) {
+              <tr [ngStyle]="getRowColor(i)" class="filiere-row">
+                <td class="td-code">{{ filiere.code }}</td>
+                <td class="td-nom">{{ truncateText(filiere.nom, 40) }}</td>
+                <td class="td-semestre">
+                  <span class="semestre-badge">{{ truncateText(filiere.description, 50) }}</span>
+                </td>
+                <td class="td-actions">
+                  <button class="btn-view action-btn" (click)="viewFiliere(filiere)" title="Voir cette filière">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn-edit action-btn" (click)="editFiliere(filiere)" title="Modifier cette filière">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn-delete action-btn" (click)="deleteFiliere(filiere)" title="Supprimer cette filière">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <!-- Formulaire (Modal) -->
+    @if (showForm || showViewMode) {
+      <div class="modal-backdrop" [@fadeInOut]>
+        <div class="modal-wrapper" [@zoomIn]>
+          <div class="modal-container">
+            <div class="modal-header">
+              <div class="header-content">
+                <div class="header-icon">
+                  <i class="fas fa-{{ showViewMode ? 'eye' : (isEditMode ? 'edit' : 'plus-circle') }}"></i>
+                </div>
+                <h2 class="modal-title">
+                  {{ showViewMode ? 'Détails de la filière' : (isEditMode ? 'Modifier une filière' : 'Ajouter une nouvelle filière') }}
+                </h2>
+              </div>
+              <button class="modal-close-btn" (click)="closeForm()" aria-label="Fermer">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-illustration">
+                <i class="fas fa-graduation-cap illustration-icon"></i>
+              </div>
+              <!-- Mode affichage détails -->
+              @if (showViewMode) {
+                <div class="view-details">
+                  <div class="detail-item">
+                    <div class="detail-label">Code:</div>
+                    <div class="detail-value">{{ selectedFiliere?.code }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Nom de la filière:</div>
+                    <div class="detail-value">{{ selectedFiliere?.nom }}</div>
+                  </div>
+                  <div class="detail-item">
+                    <div class="detail-label">Description:</div>
+                    <div class="detail-value">{{ selectedFiliere?.description || 'Non défini' }}</div>
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" class="btn-cancel" (click)="closeForm()">
+                      <i class="fas fa-times"></i> Fermer
+                    </button>
+                    <button type="button" class="btn-submit" (click)="switchToEditMode()">
+                      <span class="btn-content">
+                        <i class="fas fa-edit"></i>
+                        <span>Modifier</span>
+                      </span>
+                      <span class="btn-effect"></span>
+                    </button>
+                  </div>
+                </div>
+              }
+              <!-- Mode édition ou création -->
+              @if (!showViewMode) {
+                <form [formGroup]="filiereForm" (ngSubmit)="submitForm()" class="animated-form">
+                  <div class="form-group">
+                    <label for="nom">Nom de la filière</label>
+                    <div class="input-wrapper">
+                      <div class="input-container" [class.focused]="nomFocused">
+                        <i class="fas fa-tag input-icon"></i>
+                        <input
+                          type="text"
+                          id="nom"
+                          formControlName="nom"
+                          placeholder="Entrez le nom de la filière"
+                          [ngClass]="{'input-error': formSubmitted && filiereForm.get('nom')?.invalid}"
+                          (focus)="nomFocused = true"
+                          (blur)="nomFocused = false"
+                          >
+                          <span class="input-highlight"></span>
+                        </div>
+                        @if (formSubmitted && filiereForm.get('nom')?.invalid) {
+                          <div class="error-message" [@fadeInOut]>
+                            <i class="fas fa-exclamation-circle"></i>
+                            @if (filiereForm.get('nom')?.errors?.['required']) {
+                              <span>Le nom est obligatoire</span>
+                            }
+                          </div>
+                        }
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="code">Code</label>
+                      <div class="input-wrapper">
+                        <div class="input-container" [class.focused]="codeFocused">
+                          <i class="fas fa-code input-icon"></i>
+                          <input
+                            type="text"
+                            id="code"
+                            formControlName="code"
+                            placeholder="Entrez le code de la filière"
+                            [ngClass]="{'input-error': formSubmitted && filiereForm.get('code')?.invalid}"
+                            (focus)="codeFocused = true"
+                            (blur)="codeFocused = false"
+                            >
+                            <span class="input-highlight"></span>
+                          </div>
+                          @if (formSubmitted && filiereForm.get('code')?.invalid) {
+                            <div class="error-message" [@fadeInOut]>
+                              <i class="fas fa-exclamation-circle"></i>
+                              @if (filiereForm.get('code')?.errors?.['required']) {
+                                <span>Le code est obligatoire</span>
+                              }
+                            </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="nomSemestre">Description</label>
+                        <div class="input-wrapper">
+                          <div class="input-container" [class.focused]="semestreFocused">
+                            <i class="fas fa-calendar-alt input-icon"></i>
+                            <input
+                              type="text"
+                              id="nomSemestre"
+                              formControlName="nomSemestre"
+                              list="semestres-list"
+                              placeholder="Entrez la description"
+                              [ngClass]="{'input-error': formSubmitted && filiereForm.get('nomSemestre')?.invalid}"
+                              (focus)="semestreFocused = true"
+                              (blur)="semestreFocused = false"
+                              >
+                              <span class="input-highlight"></span>
+                            </div>
+                            @if (formSubmitted && filiereForm.get('nomSemestre')?.errors?.['required']) {
+                              <div class="error-message" [@fadeInOut]>
+                                <i class="fas fa-exclamation-circle"></i>
+                                La description est obligatoire
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="form-actions">
+                          <button type="button" class="btn-cancel" (click)="closeForm()">
+                            <i class="fas fa-times"></i> Annuler
+                          </button>
+                          <button type="submit" class="btn-submit">
+                            <span class="btn-content">
+                              <i class="fas fa-{{ isEditMode ? 'save' : 'plus' }}"></i>
+                              <span>{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
+                            </span>
+                            <span class="btn-effect"></span>
+                          </button>
+                        </div>
+                      </form>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>

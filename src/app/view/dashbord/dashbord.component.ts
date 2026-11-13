@@ -1,4 +1,4 @@
-import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -17,7 +17,7 @@ import { Cours } from '../../model/cours';
 @Component({
   selector: 'app-dashbord',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, FormsModule,DatePipe, NgIf,NgFor],
+  imports: [RouterModule, ReactiveFormsModule, FormsModule, DatePipe],
   templateUrl: './dashbord.component.html',
   styleUrls: ['./dashbord.component.css']
 })

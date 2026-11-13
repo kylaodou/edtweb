@@ -2,11 +2,11 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-layout',
-  imports: [ReactiveFormsModule, RouterModule, CommonModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })

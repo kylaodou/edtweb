@@ -7,9 +7,11 @@
     </div>
     <div class="header-right">
       <!-- Welcome message displaying user's name and surname -->
-      <div class="welcome-message" *ngIf="userName && userSurname">
-        Bienvenue {{ userName }} {{ userSurname }}
-      </div>
+      @if (userName && userSurname) {
+        <div class="welcome-message">
+          Bienvenue {{ userName }} {{ userSurname }}
+        </div>
+      }
       <div class="current-date">
         {{ currentDate | date:'fullDate':'':'fr' }}
       </div>
@@ -100,10 +102,12 @@
         </div>
         <div class="chart-wrapper">
           <canvas id="roomUsageChart"></canvas>
-          <div class="loading-overlay" *ngIf="isLoading.charts">
-            <div class="spinner"></div>
-            <p>Chargement des données...</p>
-          </div>
+          @if (isLoading.charts) {
+            <div class="loading-overlay">
+              <div class="spinner"></div>
+              <p>Chargement des données...</p>
+            </div>
+          }
         </div>
       </div>
 
@@ -119,10 +123,12 @@
         </div>
         <div class="chart-wrapper">
           <canvas id="courseDistributionChart"></canvas>
-          <div class="loading-overlay" *ngIf="isLoading.charts">
-            <div class="spinner"></div>
-            <p>Chargement des données...</p>
-          </div>
+          @if (isLoading.charts) {
+            <div class="loading-overlay">
+              <div class="spinner"></div>
+              <p>Chargement des données...</p>
+            </div>
+          }
         </div>
       </div>
 
@@ -154,40 +160,46 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngIf="upcomingCourses.length === 0 && !isLoading.upcomingCourses">
-                <td colspan="7" class="empty-state">
-                  <div class="empty-message">
-                    <i class="fas fa-calendar-times"></i>
-                    <p>Aucun cours à venir pour la période sélectionnée</p>
-                  </div>
-                </td>
-              </tr>
-              <tr *ngFor="let course of upcomingCourses">
-                <td>{{ course.name }}</td>
-                <td>{{ course.teacher }}</td>
-                <td>{{ course.room }}</td>
-                <td>{{ course.date | date:'shortDate':'':'fr' }}</td>
-                <td>{{ course.time }}</td>
-                <td>
-                  <span [class]="'status-badge ' + course.statusClass">
-                    {{ course.status }}
-                  </span>
-                </td>
-                <td class="action-buttons">
-                  <button class="btn-icon edit">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button class="btn-icon delete">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
+              @if (upcomingCourses.length === 0 && !isLoading.upcomingCourses) {
+                <tr>
+                  <td colspan="7" class="empty-state">
+                    <div class="empty-message">
+                      <i class="fas fa-calendar-times"></i>
+                      <p>Aucun cours à venir pour la période sélectionnée</p>
+                    </div>
+                  </td>
+                </tr>
+              }
+              @for (course of upcomingCourses; track course) {
+                <tr>
+                  <td>{{ course.name }}</td>
+                  <td>{{ course.teacher }}</td>
+                  <td>{{ course.room }}</td>
+                  <td>{{ course.date | date:'shortDate':'':'fr' }}</td>
+                  <td>{{ course.time }}</td>
+                  <td>
+                    <span [class]="'status-badge ' + course.statusClass">
+                      {{ course.status }}
+                    </span>
+                  </td>
+                  <td class="action-buttons">
+                    <button class="btn-icon edit">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon delete">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              }
             </tbody>
           </table>
-          <div class="loading-overlay" *ngIf="isLoading.upcomingCourses">
-            <div class="spinner"></div>
-            <p>Chargement des cours...</p>
-          </div>
+          @if (isLoading.upcomingCourses) {
+            <div class="loading-overlay">
+              <div class="spinner"></div>
+              <p>Chargement des cours...</p>
+            </div>
+          }
         </div>
       </div>
 
@@ -213,26 +225,34 @@
           <div class="timetable-cell header">Vendredi</div>
 
           <!-- Lignes du tableau -->
-          <div *ngFor="let timeSlot of timeSlots" class="timetable-row">
-            <div class="timetable-cell time">
-              <div class="time-slot">{{ timeSlot.time }}</div>
-            </div>
-            <div *ngFor="let day of days"
-                 class="timetable-cell course"
-                 [class]="'course-' + getCourse(day, timeSlot.id)?.type">
-              <div *ngIf="getCourse(day, timeSlot.id) as course" class="course-content">
-                <div class="course-name">{{ course.name }}</div>
-                <div class="course-details">
-                  <span><i class="fas fa-user-tie"></i> {{ course.teacher }}</span>
-                  <span><i class="fas fa-door-open"></i> {{ course.room }}</span>
-                </div>
+          @for (timeSlot of timeSlots; track timeSlot) {
+            <div class="timetable-row">
+              <div class="timetable-cell time">
+                <div class="time-slot">{{ timeSlot.time }}</div>
               </div>
+              @for (day of days; track day) {
+                <div
+                  class="timetable-cell course"
+                  [class]="'course-' + getCourse(day, timeSlot.id)?.type">
+                  @if (getCourse(day, timeSlot.id); as course) {
+                    <div class="course-content">
+                      <div class="course-name">{{ course.name }}</div>
+                      <div class="course-details">
+                        <span><i class="fas fa-user-tie"></i> {{ course.teacher }}</span>
+                        <span><i class="fas fa-door-open"></i> {{ course.room }}</span>
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
             </div>
-          </div>
-          <div class="loading-overlay" *ngIf="isLoading.timetable">
-            <div class="spinner"></div>
-            <p>Chargement de l'emploi du temps...</p>
-          </div>
+          }
+          @if (isLoading.timetable) {
+            <div class="loading-overlay">
+              <div class="spinner"></div>
+              <p>Chargement de l'emploi du temps...</p>
+            </div>
+          }
         </div>
       </div>
     </div>
